@@ -1,0 +1,143 @@
+var render_image = "";
+var array_names = [];
+
+$(function(){
+	
+	$(".uploader").on("change", function(evt){
+		var id = $(this).parents('div').attr("id");
+		console.log(id);
+		if (validate_image(evt) == true) {
+			var files = evt.target.files;
+			var reader =  new FileReader();
+			reader.onloadend = function(e){
+				render_image_temporal(e.target.result, id);
+				render_image = e.target.result;
+			};
+			reader.readAsDataURL(files[0]);
+		};
+	});
+
+	$(".parent_image").on("click", ".crop_image", function(){
+		var parent_element_id = $(this).closest("div").parent().parent().parent().parent().parent().parent().attr("id");
+		parameters(parent_element_id);
+	});
+});
+
+function validate_image(evt){
+	var size = evt.target.files[0].size/1024;
+	var type = evt.target.files[0].type;
+
+	if (type == "image/jpeg" || type == "image/png") {
+		if (size <= 2048) {
+			return true;
+		} else{
+			alert("Please select an image more than small ");
+			return false;
+		};
+	} else{
+		alert("Please select an image file");
+		return false;
+	};
+};
+
+function render_image_temporal(url, parent_tag_id){
+	$.ajax({
+		url: "/crimagify/partial_cropper",
+		type: "POST",
+		data: { "parent": $("#parent").val(), "image": url, "parent_element_id" : parent_tag_id },
+		dataType: "script",
+		complete: function(event){
+			load_partial();
+		},
+		error: function(x,y,z){
+			console.log(y)
+		}
+	});	
+};
+
+function update_crop(coords){
+	$("#crop_x").val(coords.x);
+	$("#crop_y").val(coords.y);
+	$("#crop_w").val(coords.w);
+	$("#crop_h").val(coords.h);
+	//updatePreview(coords);
+};
+
+function updatePreview(coords){
+	$('#preview').css({
+		width: Math.round(100/coords.w * $('#cropbox').width()) + 'px',
+		height: Math.round(100/coords.h * $('#cropbox').height()) + 'px',
+		marginLeft: '-' + Math.round(100/coords.w * coords.x) + 'px',
+		marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'
+	});
+};
+
+function load_partial(){
+	var select = [];
+	var ratio;
+	var parent = $("#parent").val();
+	if (parent == "User") {
+		select = [0,0,100,100]
+		ratio = 1;		
+	} else{
+		select = [0,0,534,798]
+		ratio = 89/133;
+	};
+
+	if ($("#cropbox").length) {
+		$('#cropbox').Jcrop({
+		 	onChange: update_crop,
+		 	onSelect: update_crop,
+		 	setSelect: select,
+		 	aspectRatio: ratio,
+		 	boxWidth: 500,
+		 	boxHeight: 500
+		}, function(){
+			var api = this;
+			api.ui.holder.addClass('jcrop-dark');
+			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
+		});
+		$(".cancel_crop").on("click",function(e){
+			$("#cropper_div").hide("slow", function(){
+				$("#cropper_div").remove();
+			})
+			$(".uploader").val('');		
+		});
+	} else{
+		alert("el elemento no se encuentra en la pagina")
+	};	
+};
+
+function parameters(parent_tag_id){
+	array_names.push(parent_tag_id)
+
+	$.ajax({
+		url: "/crimagify/params_cropper",
+		type: "POST",
+		data: { "image": render_image, 
+						"parent_id": $("#parent_id").val(),
+						"crop_x": $("#crop_x").val(), 
+						"crop_y": $("#crop_y").val(), 
+						"crop_w": $("#crop_w").val(),
+						"crop_h": $("#crop_h").val(),
+						"parent": $("#parent").val(), 
+						"parent_element_id" : parent_tag_id
+		},
+		dataType: "script",
+		success: function(){
+			$("#"+parent_tag_id).find("#img_start").hide("slow", function(){});
+			$("#cropper_div").hide("slow", function(){
+				$("#cropper_div").remove();
+			})
+			$("#"+parent_tag_id).find("#uploader").val('');
+		},
+		error: function(a,b,c){
+			console.log("error a");
+			console.dir(a);
+			console.log("error b");
+			console.dir(b);
+			console.log("error c");
+			console.dir(c);
+		}
+	});
+};

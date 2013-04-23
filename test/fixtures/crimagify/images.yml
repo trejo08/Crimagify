@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  image: MyString
+  image_temporal: MyString
+  image_name: MyString
+  parent: 
+
+two:
+  image: MyString
+  image_temporal: MyString
+  image_name: MyString
+  parent: 

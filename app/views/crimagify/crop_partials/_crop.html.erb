@@ -1,0 +1,23 @@
+<div id="cropper_div">
+	<div class="cropper_container">
+		<div class="image_cropper">
+			<%= image_tag @params, :id => "cropbox" %>
+		
+		<!-- <div style="width:100px; height:100px; overflow:hidden">
+			<h4>Preview</h4>
+		  <%#= image_tag  @params, :id => "preview" %>
+		</div> -->
+			<% %w[x y w h].each do |attribute| %>
+				<%= hidden_field_tag "crop_#{attribute}" %>
+			<% end %>
+			<%= hidden_field_tag :cropping,{}, :value => true, :id => "temp_image" %>
+			<div class="actions">
+				<%= link_to "Cancel", "javascript:;", :remote => true, :class => "cancel_crop", :id => "cancel_crop" %>
+				<%= link_to "Crop Image", "javascript:;", :remote => true, :id => "crop_image", :class => "crop_image" %>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>

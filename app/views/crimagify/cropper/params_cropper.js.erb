@@ -1,0 +1,22 @@
+if ($("#<%=j @parent_element_id %>").find("#parent_image").length) {
+
+	if ($("#<%=j @parent_element_id %>").find("#image_profile").length) {
+		$("#<%=j @parent_element_id %>").find("#image_profile").remove();
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+		$("#<%=j @parent_element_id %>").find("#image_temporal_<%=j @parent_element_id %>").attr("value", "<%= @img[1] %>");
+		$("#id_images").attr("value", array_names);
+		$("#<%=j @parent_element_id %>").find("#<%=j @parent_element_id %>_crop_x").attr("value", "<%= @img[2] %>");
+		$("#<%=j @parent_element_id %>").find("#<%=j @parent_element_id %>_crop_y").attr("value", "<%= @img[3] %>");
+		$("#<%=j @parent_element_id %>").find("#<%=j @parent_element_id %>_crop_w").attr("value", "<%= @img[4] %>");
+		$("#<%=j @parent_element_id %>").find("#<%=j @parent_element_id %>_crop_h").attr("value", "<%= @img[5] %>");
+	} else{
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+		$("#<%=j @parent_element_id %>").find("#image_temporal_<%=j @parent_element_id %>").attr("value", "<%= @img[1] %>");
+		$("#id_images").attr("value", array_names);
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<input id='<%=j @parent_element_id %>_crop_x' name='<%=j @parent_element_id %>_crop_x' type='hidden' value='<%= @img[2] %>'>");
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<input id='<%=j @parent_element_id %>_crop_y' name='<%=j @parent_element_id %>_crop_y' type='hidden' value='<%= @img[3] %>'>");
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<input id='<%=j @parent_element_id %>_crop_w' name='<%=j @parent_element_id %>_crop_w' type='hidden' value='<%= @img[4] %>'>");
+		$("#<%=j @parent_element_id %>").find("#parent_image").append("<input id='<%=j @parent_element_id %>_crop_h' name='<%=j @parent_element_id %>_crop_h' type='hidden' value='<%= @img[5] %>'>");
+	};
+
+}

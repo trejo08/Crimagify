@@ -1,0 +1,11 @@
+<%
+	image_name = @img[7]
+	if @img.first == 0
+		image = @img_new
+	else
+		images = @img.first.crimagify_images.where("image_name=?", image_name)
+		image = images.first
+	end
+%>
+<%= image_name %><br>
+<%= image_tag image.image_temporal_url(:user) %>

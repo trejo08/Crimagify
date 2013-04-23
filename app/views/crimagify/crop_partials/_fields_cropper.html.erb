@@ -1,0 +1,21 @@
+<%
+  id_image ||= ''
+  url_image ||= ''
+  image_options ||= {}
+%>
+<%= url_image %>
+<fieldset>
+    <div id="<%= id_image %>">
+      <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "" %>
+      <li class="number input optional numeric stringish refresh_image" id="">
+        <%= label_tag :image %>
+        <div id="parent_image" class="parent_image" style="display:block;float:left"></div>
+        <%= image_tag url_image, image_options %>
+        <div class="clear"></div>
+      </li>
+      <li class="number input optional numeric stringish" id="product_image_input">
+        <%= label_tag :chose_image %>
+        <%= file_field_tag :image, :id => "uploader", :class => "uploader" %>
+      </li>
+    </div>
+</fieldset>

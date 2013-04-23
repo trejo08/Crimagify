@@ -1,0 +1,34 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <%#= hidden_field_tag :parent, {}, :value => "User", :id => "parent" %>
+  <%#= hidden_field_tag :parent_id, {}, :value => @user.id, :id => "parent_id" %>
+  <%= images_id(@user) %>
+  <%= image_cropper(@user, { image_name: "imgA", ratio: :user }, { :id => "img_start" }) %><br/>
+  <%= image_cropper(@user, { image_name: "imgB", ratio: :user }, { :id => "img_start" }) %><br/>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
