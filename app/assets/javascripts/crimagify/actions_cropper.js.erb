@@ -1,6 +1,7 @@
 var render_image = "";
 var array_names = [];
-
+var algo = <%= CRIMAGIFY['User'] %>
+console.dir(algo);
 $(function(){
 	
 	$(".uploader").on("change", function(evt){
@@ -49,10 +50,10 @@ function render_image_temporal(url, parent_tag_id){
 	$.ajax({
 		url: "/crimagify/partial_cropper",
 		type: "POST",
-		data: { "image": url, "parent_element_id" : parent_tag_id },
+		data: { "image": url, "parent_element_id" : parent_tag_id, "parent" : $("#parent").val() },
 		dataType: "script",
 		complete: function(event){
-			load_partial();
+			load_partial(parent_tag_id);
 		},
 		error: function(x,y,z){
 			console.log(x);
@@ -78,11 +79,12 @@ function updatePreview(coords){
 		marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'
 	});
 };
-
-function load_partial(){
+function load_partial(parent_tag_id){
 	var select = [];
 	var ratio;
 	var parent = $("#parent").val();
+	console.log(parent)
+	console.dir("<%= CRIMAGIFY %>")
 	// if (parent == "User") {
 		select = [0,0,100,100]
 		ratio = 1;		

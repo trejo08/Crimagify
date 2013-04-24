@@ -48,7 +48,7 @@ module Crimagify
       item = item.to_sym
       version item do
         process :crop
-      end    
+      end
     end
 
     ################ ORIGINAL  

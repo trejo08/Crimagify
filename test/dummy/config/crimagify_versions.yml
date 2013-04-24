@@ -2,11 +2,11 @@
 User:
   imgA:
     big:
-      width: '534'
-      height: '798'
+      width: '800'
+      height: '700'
     user:
-      width: '400'
-      height: '400'
+      width: '50'
+      height: '50'
 
   imgB:
     big:
@@ -54,11 +54,11 @@ User:
 Product:
   imgA:
     big:
-      width: '534'
-      height: '798'
+      width: '800'
+      height: '700'
     user:
-      width: '400'
-      height: '400'
+      width: '50'
+      height: '50'
 
   imgB:
     big:

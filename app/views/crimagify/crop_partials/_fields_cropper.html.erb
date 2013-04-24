@@ -3,7 +3,8 @@
   url_image ||= ''
   image_options ||= {}
 %>
-<%= url_image %>
+<%= url_image %><br>
+<%= image_options %>
 <fieldset>
     <div id="<%= id_image %>" class="global_parent">
       <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "" %>

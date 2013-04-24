@@ -2,6 +2,7 @@ module Crimagify
   module ApplicationHelper
 
   	def image_cropper(object, options, image_options = {})
+  		image_options[:class] = "#{image_options[:class]} imag_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
 			if img == []
 				url_image = "rails.png"
