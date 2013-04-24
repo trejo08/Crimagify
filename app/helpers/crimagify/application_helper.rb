@@ -11,11 +11,10 @@ module Crimagify
 		end
 		def images_id(object)
 			html = ""
-			html << 
-			puts object.class.name
-			hidden_field_tag :parent, nil, :value => "#{object.class.name}", :id => "parent"
-			hidden_field_tag :parent_id, nil, :value => object.id, :id => "parent_id"
-			hidden_field_tag :id_images, nil, :value => ""
+			html << content_tag(:input, nil, :id => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
+			html << content_tag(:input, nil, :id => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
+			html << content_tag(:input, nil, :id => :id_images, :name => :id_images, :type => :hidden, :value => "")
+			return raw html
 		end
   end
 end

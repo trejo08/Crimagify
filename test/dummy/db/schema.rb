@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423164431) do
+ActiveRecord::Schema.define(:version => 20130424155649) do
 
   create_table "crimagify_images", :force => true do |t|
     t.string   "image",          :default => "", :null => false
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20130423164431) do
   end
 
   add_index "crimagify_images", ["parent_id"], :name => "index_crimagify_images_on_parent_id"
+
+  create_table "products", :force => true do |t|
+    t.string   "name",        :default => "", :null => false
+    t.string   "description", :default => "", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

@@ -18,6 +18,7 @@ $(function(){
 	});
 
 	$(".parent_image").on("click", ".crop_image", function(){
+		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
 		var parent_element_id = $(this).closest("div").parent().parent().parent().parent().parent().parent().attr("id");
 		parameters(parent_element_id);
 	});

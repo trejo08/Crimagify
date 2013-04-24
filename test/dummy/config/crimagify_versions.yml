@@ -50,3 +50,20 @@ User:
     user:
       width: '600'
       height: '600'
+
+Product:
+  imgA:
+    big:
+      width: '534'
+      height: '798'
+    user:
+      width: '400'
+      height: '400'
+
+  imgB:
+    big:
+      width: '57'
+      height: '59'
+    user:
+      width: '600'
+      height: '600'

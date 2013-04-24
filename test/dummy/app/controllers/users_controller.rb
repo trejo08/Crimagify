@@ -43,29 +43,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @error = true
-    id_array = params[:id_images].split(",")
 
     respond_to do |format|
       if @user.save
-        id_array.map { |image_name|  
-          path = params["image_temporal_#{image_name}"]
-          if !(path.to_s == "") && File.exist?(path.to_s)
-            img = Crimagify::ImageFunctions::save_new_image(path.to_s, 
-                                               params["#{image_name}_crop_x"], 
-                                               params["#{image_name}_crop_y"], 
-                                               params["#{image_name}_crop_w"], 
-                                               params["#{image_name}_crop_h"], 
-                                               params[:parent], 
-                                               @user.id, 
-                                               image_name, 
-                                               false)
-            img.save!
-            img.crop_avatar_real          
-          end
-          @error = false
-          format.html { redirect_to @user, notice: 'User was successfully created.' }
-          format.json { render json: @user, status: :created, location: @user }
-        }
+        Crimagify::ImageFunctions::create_new_images(@user,params)
+        @error = false
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -77,45 +61,15 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-    @user.update_attributes(params[:user])
-    id_array = params[:id_images].split(",")
-
-    id_array.map { |image_name|
-      path = params["image_temporal_#{image_name}"]
-      if !(path.to_s == "") && File.exist?(path.to_s)
-        image = @user.crimagify_images.where("image_name=?",image_name)
-        if !(image == [])
-          image.map { |img|
-            img.update_attributes(:image => File.open(path.to_s),
-                                  :crop_x => params["#{image_name}_crop_x"],
-                                  :crop_y => params["#{image_name}_crop_y"],
-                                  :crop_w => params["#{image_name}_crop_w"],
-                                  :crop_h => params["#{image_name}_crop_h"])
-            img.crop_avatar_real
-          }
-        else
-          img = Crimagify::ImageFunctions::save_new_image(path.to_s, 
-                                               params["#{image_name}_crop_x"], 
-                                               params["#{image_name}_crop_y"], 
-                                               params["#{image_name}_crop_w"], 
-                                               params["#{image_name}_crop_h"], 
-                                               params[:parent], 
-                                               @user.id, 
-                                               image_name, 
-                                               false)
-          img.save!
-          img.crop_avatar_real
-        end
-      end
-    }
     respond_to do |format|
-      # if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user])
+        Crimagify::ImageFunctions::update_images(@user, params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
-      # else
-        # format.html { render action: "edit" }
-        # format.json { render json: @user.errors, status: :unprocessable_entity }
-      # end
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 

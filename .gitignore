@@ -1,3 +1,7 @@
+test/dummy/public/uploads
+test/dummy/public/uploads/*
+test/dummy/app/assets/images/tmps_cropper
+test/dummy/tmp/cache
 *.DS_Store
 *.rbc
 *.sassc
@@ -15,3 +19,4 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+*/server.pid

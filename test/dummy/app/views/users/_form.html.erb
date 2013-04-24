@@ -23,11 +23,11 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
-  <%#= hidden_field_tag :parent, {}, :value => "User", :id => "parent" %>
-  <%#= hidden_field_tag :parent_id, {}, :value => @user.id, :id => "parent_id" %>
+  <!--StartCropperImagesSection-->
   <%= images_id(@user) %>
   <%= image_cropper(@user, { image_name: "imgA", ratio: :user }, { :id => "img_start" }) %><br/>
   <%= image_cropper(@user, { image_name: "imgB", ratio: :user }, { :id => "img_start" }) %><br/>
+  <!--StartCropperImagesSection-->
   <div class="actions">
     <%= f.submit %>
   </div>
