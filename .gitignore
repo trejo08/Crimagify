@@ -1,7 +1,7 @@
-test/dummy/public/uploads
-test/dummy/public/uploads/*
-test/dummy/app/assets/images/tmps_cropper
-test/dummy/tmp/cache
+#Engine
+Gemfile.lock
+.rvmrc
+*/.bundle
 *.DS_Store
 *.rbc
 *.sassc
@@ -20,3 +20,17 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 */server.pid
+
+#test dummy app
+test/dummy/.sass-cache
+test/dummy/app/assets/images/tmps_cropper
+test/dummy/db/*.sqlite3
+test/dummy/db/schema.rb
+test/dummy/log/*.log
+test/dummy/public/assets
+test/dummy/public/uploads
+test/dummy/public/uploads/*
+
+test/dummy/tmp/*
+test/dummy/tmp/restart.txt
+

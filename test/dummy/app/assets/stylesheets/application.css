@@ -10,6 +10,5 @@
  *
  *= require_self
  *= require crimagify/application
- *= require crimagify/cropper
  *= require_tree .
  */

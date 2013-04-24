@@ -37,7 +37,11 @@ module Crimagify
 	    array_versions.each do |name_size|
 	    	size_image = name_size.to_sym
 	    	define_method("#{name_size}") do
-	    		image_url(size_image) rescue ""
+	    		image = image_url(size_image) rescue ""
+	    		if image == ""
+	    			image = "rails.png"
+	    		end
+	    		return image
 	    	end
 	    end
 	  end

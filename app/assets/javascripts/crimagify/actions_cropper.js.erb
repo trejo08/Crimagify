@@ -4,22 +4,26 @@ var array_names = [];
 $(function(){
 	
 	$(".uploader").on("change", function(evt){
-		var id = $(this).parents('div').attr("id");
-		console.log(id);
+		//this variable is used for identify on what section pu the resultant image
+		var id = $(this).parents('div.global_parent').attr("id");
+
 		if (validate_image(evt) == true) {
 			var files = evt.target.files;
 			var reader =  new FileReader();
+
 			reader.onloadend = function(e){
 				render_image_temporal(e.target.result, id);
 				render_image = e.target.result;
 			};
+
 			reader.readAsDataURL(files[0]);
+
 		};
 	});
 
 	$(".parent_image").on("click", ".crop_image", function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
-		var parent_element_id = $(this).closest("div").parent().parent().parent().parent().parent().parent().attr("id");
+		var parent_element_id = $(this).parents('div.global_parent').attr("id");
 		parameters(parent_element_id);
 	});
 });
@@ -45,13 +49,15 @@ function render_image_temporal(url, parent_tag_id){
 	$.ajax({
 		url: "/crimagify/partial_cropper",
 		type: "POST",
-		data: { "parent": $("#parent").val(), "image": url, "parent_element_id" : parent_tag_id },
+		data: { "image": url, "parent_element_id" : parent_tag_id },
 		dataType: "script",
 		complete: function(event){
 			load_partial();
 		},
 		error: function(x,y,z){
-			console.log(y)
+			console.log(x);
+			console.log(y);
+			console.log(z);
 		}
 	});	
 };
@@ -61,7 +67,7 @@ function update_crop(coords){
 	$("#crop_y").val(coords.y);
 	$("#crop_w").val(coords.w);
 	$("#crop_h").val(coords.h);
-	//updatePreview(coords);
+	updatePreview(coords);
 };
 
 function updatePreview(coords){
@@ -77,13 +83,13 @@ function load_partial(){
 	var select = [];
 	var ratio;
 	var parent = $("#parent").val();
-	if (parent == "User") {
+	// if (parent == "User") {
 		select = [0,0,100,100]
 		ratio = 1;		
-	} else{
-		select = [0,0,534,798]
-		ratio = 89/133;
-	};
+	// } else{
+		// select = [0,0,534,798]
+		// ratio = 89/133;
+	// };
 
 	if ($("#cropbox").length) {
 		$('#cropbox').Jcrop({
@@ -126,7 +132,7 @@ function parameters(parent_tag_id){
 		},
 		dataType: "script",
 		success: function(){
-			$("#"+parent_tag_id).find("#img_start").hide("slow", function(){});
+			$("#"+parent_tag_id).find(".img_start").hide("slow", function(){});
 			$("#cropper_div").hide("slow", function(){
 				$("#cropper_div").remove();
 			})

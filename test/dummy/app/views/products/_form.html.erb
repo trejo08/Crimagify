@@ -21,8 +21,8 @@
   </div>
   <!--StartCropperImagesSection-->
   <%= images_id(@product) %>
-  <%= image_cropper(@product, { image_name: "imgA", ratio: :user }, { :id => "img_start" }) %><br/>
-  <%= image_cropper(@product, { image_name: "imgB", ratio: :user }, { :id => "img_start" }) %><br/>
+  <%= image_cropper(@product, { image_name: "imgA", ratio: :user }, { :class => "img_start" }) %><br/>
+  <%= image_cropper(@product, { image_name: "imgB", ratio: :user }, { :class => "img_start" }) %><br/>
   <!--StartCropperImagesSection-->
   <div class="actions">
     <%= f.submit %>

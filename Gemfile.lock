@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    crimagify (0.0.1)
+    crimagify (0.0.2)
       carrierwave (~> 0.8.0)
       rails (~> 3.2.12)
       rmagick (~> 2.13.1)

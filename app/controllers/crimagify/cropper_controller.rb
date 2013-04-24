@@ -3,7 +3,6 @@ module Crimagify
   class CropperController < ApplicationController
   	#================================================================CropperAjaxActions================================================================#
     def partial_cropper
-      puts "entro a la accion"
       @params = params[:image]
       @parent_element_id = params[:parent_element_id]
     end
