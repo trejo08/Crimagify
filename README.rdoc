@@ -30,12 +30,14 @@ Add to your controller:
     #For Action Create:
     if @object.save
     	Crimagify::ImageFunctions::create_new_images(@object, params)
+    end
     ...
 
     ...
     #For Action Update:
     id @object.update_attributes(params[:object])
     	Crimagify::ImageFunctions::update_images(@object, params)
+    end
     ...
 
 Add to application.js:<tt>//= require crimagify/application</tt>
