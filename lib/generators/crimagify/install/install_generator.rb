@@ -11,7 +11,6 @@ module Crimagify
 
 			def copy_migrations
 				rake "crimagify:install:migrations"
-				Crimagify::Engine.load_seed
 			end
 		end
 	end

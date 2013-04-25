@@ -2,8 +2,9 @@ module Crimagify
   module ApplicationHelper
 
   	def image_cropper(object, options, image_options = {})
-  		image_options[:class] = "#{image_options[:class]} imag_start"
+  		image_options[:class] = "#{image_options[:class]} img_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
+			version_name = options[:ratio]
 			if img == []
 				url_image = "rails.png"
 			else
@@ -12,7 +13,7 @@ module Crimagify
 			if url_image == ""
 				url_image = "rails.png"
 			end
-			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options })
+			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name })
 		end
 
 		def images_id(object)

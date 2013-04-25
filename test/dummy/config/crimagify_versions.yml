@@ -10,8 +10,8 @@ User:
 
   imgB:
     big:
-      width: '57'
-      height: '59'
+      width: '600'
+      height: '300'
     user:
       width: '600'
       height: '600'
@@ -62,8 +62,19 @@ Product:
 
   imgB:
     big:
-      width: '57'
-      height: '59'
+      width: '600'
+      height: '300'
     user:
       width: '600'
+      height: '600'
+
+  imgC:
+    big:
+      width: '600'
+      height: '300'
+    user:
+      width: '600'
+      height: '600'
+    gigant:
+      width: '300'
       height: '600'
