@@ -41,3 +41,7 @@ Manage your model images with RMagick and CarrierWave.
 <tt><% end %></tt>
 
 This project rocks and uses MIT-LICENSE.
+
+To run the tests:
+
+    $ rake
