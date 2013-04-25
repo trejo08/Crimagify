@@ -27,13 +27,9 @@ Add to your controller:
 			#For Action Update:
 			Crimagify::ImageFunctions::update_images(@object, params)
 
-Add to application.js:
-	
-		//= require crimagify/application
+Add to application.js:<tt>//= require crimagify/application</tt>
 
-Add to application.css:
-	
-		*= require crimagify/application
+Add to application.css:<tt>*= require crimagify/application</tt>
 
 Add to your form view:
 
