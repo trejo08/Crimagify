@@ -32,8 +32,12 @@ Manage your model images with RMagick and CarrierWave.
 
 1. Add to your form view:
 
-    rake
+    
     <%= form_for(@object) do |f| %>
+    ...
+    <%= images_id(@object) %>
+    <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>
+    <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %>
 
 Add to View:
 
