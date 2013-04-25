@@ -27,14 +27,6 @@ Manage your model images with RMagick and CarrierWave.
 <tt>Crimagify::ImageFunctions::update_images(@object, params)</tt>	
 
 9. Add to application.js: <tt>//= require crimagify/application</tt>
-10. Add to application.js:
-    
-    //= require crimagify/application
-
-
-10. Add to application.css:
-    
-    *= require crimagify/application
 
 10. Add to application.css: <tt>*= require crimagify/application</tt>
 
