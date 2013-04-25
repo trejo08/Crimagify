@@ -14,12 +14,14 @@ Manage your model images with RMagick and CarrierWave.
 1. Add to your routes.rb: <tt>mount Crimagify::Engine => "/crimagify", :as => "crimagify"</tt>
 2. Add to your model:
 
+		
 		extend Crimagify::DinamicImageMethods
 		has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 		build_methods_images
 
 3. Add to your controller:
 
+		
 		#For Action Create
 		Crimagify::ImageFunctions::create_new_images(@object, params)
 
@@ -28,10 +30,12 @@ Manage your model images with RMagick and CarrierWave.
 
 4. Add to application.js:
 
+		
 		//= require crimagify/application
 
 5. Add to application.css:
 
+		
 		*= require crimagify/application
 
 6. Add to your form view:
