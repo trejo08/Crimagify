@@ -27,6 +27,11 @@ Add to your controller:
 
     
     ...
+    #For Action Create:
+    Crimagify::ImageFunctions::create_new_images(@object, params)
+
+    #For Action Update:
+    Crimagify::ImageFunctions::update_images(@object, params)
     extend Crimagify::DinamicImageMethods
     has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
     build_methods_images
