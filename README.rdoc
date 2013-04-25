@@ -21,10 +21,8 @@ Manage your model images with RMagick and CarrierWave.
 
 3. Add to your controller:
 
-		
 		#For Action Create
 		Crimagify::ImageFunctions::create_new_images(@object, params)
-
 		#For Action Update
 		Crimagify::ImageFunctions::update_images(@object, params)
 
