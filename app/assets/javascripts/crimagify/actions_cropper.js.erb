@@ -104,16 +104,12 @@ function load_partial(parent_tag_id, name_version){
 	var max_width_box = '<%= ENV["MAX_WIDTH_BOX_CROPPER"] %>'
 	var max_height_box = '<%= ENV["MAX_HEIGHT_BOX_CROPPER"] %>'
 
-	console.log("primero: width_box: "+max_width_box+"\nheight_box: "+max_height_box);
-
 	if (max_width_box == "") {
 		max_width_box = 500;
 	};
 	if (max_height_box == "") {
 		max_height_box = 500;
 	};
-
-	console.log("despues: width_box: "+max_width_box+"\nheight_box: "+max_height_box);
 
 	select = [0,0,ratio_vals['width'],ratio_vals['height']]
 	ratio = ratio_vals['width']/ratio_vals['height']
