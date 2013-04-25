@@ -3,7 +3,7 @@
 Manage your model images with RMagick and CarrierWave.
 
 == Installation
-1. Add to your Gemfile: <tt>gem 'crimagify', :git => 'git@github.com/trejo08/crimagify.git'</tt>
+1. Add to your Gemfile: <tt>gem 'crimagify'</tt>
 2. Run <tt>Bundle</tt>
 3. Execute: <tt>rails generate crimagify:install</tt>
 4. Run migrations: <tt>rake db:migrate</tt>

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Crimagify::VERSION
   s.authors     = ["Juan Trejo"]
   s.email       = ["trejocola@gmail.com"]
-  s.homepage    = "http://www.greenmediaagency.com"
+  s.homepage    = "https://github.com/trejo08/Crimagify"
   s.summary     = "Manage your model images with RMagick and CarrierWave"
   s.description = "Manage your model images with RMagick and CarrierWave"
 
