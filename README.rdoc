@@ -12,8 +12,17 @@ Manage your model images with RMagick and CarrierWave.
 
 == Implementacion
 Add to your routes.rb: <tt>mount Crimagify::Engine => "/crimagify", :as => "crimagify"</tt>
+
 Add to your model:
 
+    
+    <%= form_for(@object) do |f| %>
+    ...
+    <%= images_id(@object) %>
+    <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>
+    <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %>
+    ...
+    <% end %>
 		
 		extend Crimagify::DinamicImageMethods
 		has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
