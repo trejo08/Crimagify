@@ -20,14 +20,11 @@ Manage your model images with RMagick and CarrierWave.
 </tt>
 
 8. Add to your controller:
+#For Action Create
+<tt>Crimagify::ImageFunctions::create_new_images(@object, params)</tt>
 
-	<tt>
-		#For Action Create
-		Crimagify::ImageFunctions::create_new_images(@object, params)
-
-		#For Action Update
-		Crimagify::ImageFunctions::update_images(@object, params)
-	</tt>
+#For Action Update
+<tt>Crimagify::ImageFunctions::update_images(@object, params)</tt>	
 
 9. Add to application.js: <tt>//= require crimagify/application</tt>
 
@@ -36,11 +33,11 @@ Manage your model images with RMagick and CarrierWave.
 11. Add to View:
 
 <tt><%= form_for(@object) do |f| %></tt>
-		<tt>...</tt>
-		<tt><%= images_id(@object) %></tt>
-		<tt><%= images_cropper(@object, { image_name: "imgA", ratio: :big}) %></tt>
-		<tt><%= images_cropper(@object, { image_name: "imgB", ratio: :small}) %></tt>
-		<tt>...</tt>
+<tt>...</tt>
+<tt><%= images_id(@object) %></tt>
+<tt><%= images_cropper(@object, { image_name: "imgA", ratio: :big}) %></tt>
+<tt><%= images_cropper(@object, { image_name: "imgB", ratio: :small}) %></tt>
+<tt>...</tt>
 <tt><% end %></tt>
 
 This project rocks and uses MIT-LICENSE.
