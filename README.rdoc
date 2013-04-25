@@ -30,6 +30,10 @@ Manage your model images with RMagick and CarrierWave.
 
 10. Add to application.css: <tt>*= require crimagify/application</tt>
 
+To run the tests:
+
+    rake
+
 Add to View:
 
 		$ <%= form_for(@object) do |f| %>
