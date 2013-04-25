@@ -21,20 +21,18 @@ Add to your model:
 
 Add to your controller:
 
-			#For Action Create
+			#For Action Create:
 			Crimagify::ImageFunctions::create_new_images(@object, params)
 
-			#For Action Update
+			#For Action Update:
 			Crimagify::ImageFunctions::update_images(@object, params)
 
 Add to application.js:
-
-		
+	
 		//= require crimagify/application
 
 Add to application.css:
-
-		
+	
 		*= require crimagify/application
 
 Add to your form view:
