@@ -44,4 +44,3 @@ Manage your model images with RMagick and CarrierWave.
     <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %>
     ...
     <% end %>
-
