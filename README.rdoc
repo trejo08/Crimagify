@@ -27,10 +27,18 @@ Manage your model images with RMagick and CarrierWave.
 <tt>Crimagify::ImageFunctions::update_images(@object, params)</tt>	
 
 9. Add to application.js: <tt>//= require crimagify/application</tt>
+10. Add to application.js:
+    
+    //= require crimagify/application
+
+
+10. Add to application.css:
+    
+    *= require crimagify/application
 
 10. Add to application.css: <tt>*= require crimagify/application</tt>
 
-1. Add to your form view:
+11. Add to your form view:
 
     
     <%= form_for(@object) do |f| %>
@@ -38,17 +46,6 @@ Manage your model images with RMagick and CarrierWave.
     <%= images_id(@object) %>
     <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>
     <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %>
+    ...
+    <% end %>
 
-Add to View:
-
-		$ <%= form_for(@object) do |f| %>
-		$ ...
-		$ <%= images_id(@object) %>
-		$ <%= images_cropper(@object, { image_name: "imgA", ratio: :big}) %>
-		$ <%= images_cropper(@object, { image_name: "imgB", ratio: :small}) %>
-		$ ...
-		$ <% end %>
-
-To run the tests:
-
-    $ rake
