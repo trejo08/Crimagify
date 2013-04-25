@@ -10,7 +10,7 @@ Manage your model images with RMagick and CarrierWave.
 5. Run seeds: <tt>rake db:seed</tt>
 ----
 
-== Implementacion
+== Implementation
 Add to your routes.rb: <tt>mount Crimagify::Engine => "/crimagify", :as => "crimagify"</tt>
 
 Add to your model:
