@@ -32,15 +32,13 @@ Manage your model images with RMagick and CarrierWave.
 
 11. Add to View:
 
-<tt><%= form_for(@object) do |f| %></tt>
-<tt>...</tt>
-<tt><%= images_id(@object) %></tt>
-<tt><%= images_cropper(@object, { image_name: "imgA", ratio: :big}) %></tt>
-<tt><%= images_cropper(@object, { image_name: "imgB", ratio: :small}) %></tt>
-<tt>...</tt>
-<tt><% end %></tt>
-
-This project rocks and uses MIT-LICENSE.
+		<%= form_for(@object) do |f| %>
+		...
+		<%= images_id(@object) %>
+		<%= images_cropper(@object, { image_name: "imgA", ratio: :big}) %>
+		<%= images_cropper(@object, { image_name: "imgB", ratio: :small}) %>
+		...
+		<% end %>
 
 To run the tests:
 
