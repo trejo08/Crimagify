@@ -4,8 +4,6 @@
   image_options ||= {}
   version_name ||= {}
 %>
-<%= url_image %><br>
-<%= image_options %>
 <fieldset>
     <div id="<%= id_image %>" class="global_parent" name="<%= version_name %>">
       <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "" %>
