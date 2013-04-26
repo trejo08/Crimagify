@@ -44,6 +44,17 @@ Add to application.js:<tt>//= require crimagify/application</tt>
 
 Add to application.css:<tt>*= require crimagify/application</tt>
 
+Edit the file config/crimagify_versions.yml with the format, adding models that use images:
+
+    
+    <%= form_for(@object) do |f| %>
+    ...
+    <%= images_id(@object) %>
+    <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>   #The attributes "imgA" and :big or :small are defined 
+    <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %> #into file config/crimagify_versions.yml generated for the gem
+    ...
+    <% end %>
+    
 Add to your form view:
 
     
