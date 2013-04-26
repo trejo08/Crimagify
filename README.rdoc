@@ -44,7 +44,7 @@ Add to application.js:<tt>//= require crimagify/application</tt>
 
 Add to application.css:<tt>*= require crimagify/application</tt>
 
-Edit the file config/crimagify_versions.yml with the format, adding models that use images:
+Edit the file config/crimagify_versions.yml with the format mantaining the same ratio for all versions in each blocks, adding models that use images:
 
     
     User:
