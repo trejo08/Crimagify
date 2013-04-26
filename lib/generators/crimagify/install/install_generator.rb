@@ -6,7 +6,7 @@ module Crimagify
 
 			def copy_config_file
 				copy_file "crimagify_versions.yml", "config/crimagify_versions.yml"
-				copy_file "crimagify_settings.yml", "config/crimagify_sestings.yml"
+				copy_file "crimagify_settings.yml", "config/crimagify_settings.yml"
 			end
 
 			def copy_migrations

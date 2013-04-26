@@ -1,4 +1,5 @@
 #THis file is for configurate the env_variables of the functionability of the gem
+PREVIEW_IMAGE_CROPPED: user
 MAX_SIZE: 0.5
 # MAX_WIDTH_BOX_CROPPER: 200
 # MAX_HEIGHT_BOX_CROPPER: 200
