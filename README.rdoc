@@ -50,7 +50,7 @@ Add to your form view:
     <%= form_for(@object) do |f| %>
     ...
     <%= images_id(@object) %>
-    <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>   #The attributes "imgA" and :big are defined 
+    <%= image_cropper(@object, { image_name: "imgA", ratio: :big}) %>   #The attributes "imgA" and :big or :small are defined 
     <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %> #into file config/crimagify_versions.yml generated for the gem
     ...
     <% end %>
