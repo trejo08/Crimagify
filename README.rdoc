@@ -67,8 +67,6 @@ Edit the file config/crimagify_versions.yml with the format, adding models that 
             big:
                 width: 600
                 height: 300
-    ...
-    <% end %>
 
 Add to your form view:
 
