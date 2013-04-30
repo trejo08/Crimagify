@@ -25,34 +25,16 @@ $(function(){
         console.dir($('.image_temporal',element_last));
         var new_array = $('.image_temporal',element_last);
 
-        for (var i = 0; i < $('.image_temporal',element_last).length; i++) {
-            console.log($(i).attr('class'))
-        };
-        // var name_old_1 = $('.image_temporal.image_imgA', element_last).attr('name')
-        // var name_new_1 = '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + name_old_1 + ']'
-        // $('.image_temporal.image_imgA', element_last).attr('name', name_new_1);
-        // var name_old_2 = $('.image_temporal.image_imgB', element_last).attr('name')
-        // var name_new_2 = '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + name_old_2 + ']'
-        // $('.image_temporal.image_imgB', element_last).attr('name', name_new_2);
-
-
-        // var image_temporal_name = $('div.fieldset:last').find('.image_temporal:first').attr('name');
-        // $('div.fieldset:last').find('.image_temporal:first').attr('name', '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + image_temporal_name + ']');
-
-
-        // image_temporal_name = $('div.fieldset:last').find('.image_temporal:first').attr('name');
-        // $('div.fieldset:last').find('.image_temporal:first').attr('name', '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + image_temporal_name + ']');
-
-
-        // for (var i = $('.image_temporal').length-1; i >= $('.image_temporal').length-2 && i <= $('.image_temporal').length; i++) {
-        //     // console.log($('.image_temporal').length);
-        //     var name_image_temporal = $('.image_temporal').attr('name');
-        //     $('.image_temporal')[i].attr('name', '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + name_image_temporal + ']');
-        //     console.log(i)
-        //     if (i==$('.image_temporal').length-1) {
-        //         break;
-        //     };
+        // for (var i = 0; i < $('.image_temporal',element_last).length; i++) {
+        //     console.log($(i).attr('class'))
         // };
+        var name_old_1 = $('.image_temporal.image_imgA', element_last).attr('name')
+        var name_new_1 = '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + name_old_1 + ']'
+        $('.image_temporal.image_imgA', element_last).attr('name', name_new_1);
+        
+        var name_old_2 = $('.image_temporal.image_imgB', element_last).attr('name')
+        var name_new_2 = '' + parent_object + '[' + parent_attributes + '_attributes][' + time + '][' + name_old_2 + ']'
+        $('.image_temporal.image_imgB', element_last).attr('name', name_new_2);
 
     });
 		
