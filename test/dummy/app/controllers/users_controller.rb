@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @user.products.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +42,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    puts params.inspect
     @user = User.new(params[:user])
     @error = true
 

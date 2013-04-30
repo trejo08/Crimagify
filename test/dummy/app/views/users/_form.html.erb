@@ -24,13 +24,12 @@
     <%= f.text_field :email %>
   </div>
   <!--StartCropperImagesSection-->
+  <b><h3><legend>Products</legend></h3></b>
+
   <%= f.fields_for :products do |product| %>
     <%= render 'product_fields', f: product %>
   <% end %>
-  <%= link_to_add_fields "Add Product", f, :products %>
-  <%= images_id(@user) %>
-  <%= image_cropper(@user, { image_name: "imgA", ratio: :user }, { :class => "img_start" }) %><br/>
-  <%= image_cropper(@user, { image_name: "imgB", ratio: :user }, { :class => "img_start" }) %><br/>
+  <%= link_to_add_fields "Add Product", f, :products %>  
   <!--StartCropperImagesSection-->
   <div class="actions">
     <%= f.submit %>

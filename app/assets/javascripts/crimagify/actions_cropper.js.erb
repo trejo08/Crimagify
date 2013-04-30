@@ -3,7 +3,7 @@
 	array_json = CRIMAGIFY_ENV.to_json
 %>
 
-var ajstring = '<%= array_json %>'
+var ajstring = '<%= array_json %>';
 var ajson = JSON.parse(ajstring);
 //========================================================================================
 var render_image = "";
@@ -34,12 +34,12 @@ $(function(){
 
 	$(".parent_image").on("click", ".crop_image", function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
-		var parent_element_id = $(this).parents('div.global_parent').attr("id");
+		var parent_element_id = $(this).parents('div.global_parent').attr("id");		
 		parameters(parent_element_id);
 	});
 });
 
-function validate_image(evt){
+function validate_image(evt,callback){
 	var size = evt.target.files[0].size/1024;
 	var type = evt.target.files[0].type;
 	var max_size = '<%= ENV["MAX_SIZE"] %>'
