@@ -1,0 +1,8 @@
+if ($("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:name_version] %>").length) {	
+	if (!($("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:name_version] %>").find("#cropper_div").length)) {
+		console.log("<%=j @params[:image] %>");
+		$("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:name_version] %>").find(".parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => @params %>");
+	};	
+} else{
+	console.log("por favor agregue el elemento")
+};

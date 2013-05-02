@@ -1,8 +1,8 @@
 module Crimagify
-  module ApplicationHelper
+	module ApplicationHelper
 
-  	def image_cropper(object, options, image_options = {})
-  		image_options[:class] = "#{image_options[:class]} img_start"
+	  	def image_cropper(object, options, image_options = {})
+			image_options[:class] = "#{image_options[:class]} img_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
 			version_name = options[:ratio]
 			if img == []
@@ -25,7 +25,7 @@ module Crimagify
 		end
 
 		def nested_image_cropper(object, options, image_options = {})
-  		image_options[:class] = "#{image_options[:class]} img_start"
+			image_options[:class] = "#{image_options[:class]} img_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
 			version_name = options[:ratio]
 			if img == []
@@ -48,18 +48,17 @@ module Crimagify
 		end
 
 		def link_to_add_fields(name, f, association)
-	    new_object = f.object.send(association).klass.new
-	    #data variables
-	    parent_object = f.object.class.name.underscore
-	    id = new_object.object_id
-	    tag_parent = association.to_s
+		  new_object = f.object.send(association).klass.new
+		  #data variables
+		  parent_object = f.object.class.name.underscore
+		  id = new_object.object_id
+		  tag_parent = association.to_s
 
-	    fields = f.fields_for(association, new_object, child_index: id) do |builder|
-	      render(association.to_s.singularize + "_fields", f: builder)
-	    end
-	    
-	    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), parent: tag_parent, parentobject: parent_object})
-	  end
-
-  end
+		  fields = f.fields_for(association, new_object, child_index: id) do |builder|
+		    render(association.to_s.singularize + "_fields", f: builder)
+		  end
+		    
+		  link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", ""), parent: tag_parent, parentobject: parent_object})
+		end
+	end
 end

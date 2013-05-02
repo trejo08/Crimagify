@@ -1,7 +1,7 @@
-if ($("#<%=j @parent_element_id %>").find("#parent_image").length) {
-	if (!($("#<%=j @parent_element_id %>").find("#cropper_div").length)) {
-		
-		$("#<%=j @parent_element_id %>").find("#parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => @params %>");
+if ($("#<%=j @params[:parent_element_id] %>").find(".parent_image").length) {
+	if (!($("#<%=j @params[:parent_element_id] %>").find("#cropper_div").length)) {
+
+		$("#<%=j @params[:parent_element_id] %>").find(".parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => '@params' %>");
 	};	
 } else{
 	console.log("por favor agregue el elemento")
