@@ -1,28 +1,30 @@
-<div class="fieldset">
+<div class="fieldset_crimagify_nested">
 	<fieldset>
-	<div>
-		<ul>
-			<li>
-				<%= f.label :name %>
-			</li>
-			<li>
-				<%= f.text_field :name %><br>
-			</li>
-		</ul>	
-	</div>
-	<div>
-		<ul>
-			<li>
-				<%= f.label :description %>
-			</li>
-			<li>
-				<%= f.text_field :description %><br>
-			</li>
-		</ul>	
-	</div>
-</fieldset>
-<%= nested_images_id(f.object) %>
-<%= nested_image_cropper(f.object, { image_name: "imgA", ratio: :user }, { :class => "img_start" }) %>
-<%= nested_image_cropper(f.object, { image_name: "imgB", ratio: :user }, { :class => "img_start" }) %>
-<hr>
+		<div>
+			<ul>
+				<li>
+					<%= f.label :name %>
+				</li>
+				<li>
+					<%= f.text_field :name %><br>
+				</li>
+			</ul>	
+		</div>
+		<div>
+			<ul>
+				<li>
+					<%= f.label :description %>
+				</li>
+				<li>
+					<%= f.text_field :description %><br>
+				</li>
+			</ul>	
+		</div>
+	</fieldset>
+	<%= nested_images_id(f.object) %>
+	<%= nested_image_cropper(f.object, { image_name: "imgA", ratio: :user }, { :class => "img_start" }) %>
+	<%= nested_image_cropper(f.object, { image_name: "imgB", ratio: :user }, { :class => "img_start" }) %>
+	<hr>
 </div>
+
+

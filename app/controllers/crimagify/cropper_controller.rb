@@ -3,8 +3,18 @@ module Crimagify
   class CropperController < ApplicationController
   	#================================================================CropperAjaxActions================================================================#
     def partial_cropper
-      @params = params[:image]
-      @parent_element_id = params[:parent_element_id]
+      @params = {
+        :image => params[:image],
+        :parent_element_id => params[:parent_element_id]
+      }
+    end
+
+    def partial_nested_cropper
+      @params = {
+        :image => params[:image],
+        :parent_element_id => params[:parent_element_id],
+        :name_version => params[:name_version]
+      }
     end
 
     def params_cropper
