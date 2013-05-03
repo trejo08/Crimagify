@@ -237,7 +237,6 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 function parameters($crop){
 	var $parent_tag = $crop.closest(".global_parent");
 	var parent_tag_id = $parent_tag.attr("id")==undefined?$parent_tag.data("img"):$parent_tag.attr("id");
-	console.log(parent_tag_id);
 	var data = {};
 	if($parent_tag.closest(".fieldset_crimagify_nested").length){
 		data = {"image": render_image, 
@@ -268,11 +267,9 @@ function parameters($crop){
 		data: data,
 		dataType: "script",
 		success: function(){
-			$("#"+parent_tag_id).find(".img_start").hide("slow", function(){});
 			$("#cropper_div").hide("slow", function(){
 				$("#cropper_div").remove();
-			});
-			$("#"+parent_tag_id).find("#uploader").val('');
+			});			
 		},
 		error: function(a,b,c){
 			console.log("error a");

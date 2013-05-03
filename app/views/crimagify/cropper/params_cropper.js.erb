@@ -1,5 +1,5 @@
-<% if @img.has_key?(:parent_fieldset)  %>
-	console.dir($.parseJSON("<%=j @img.to_json.html_safe %>"));	
+console.dir($.parseJSON("<%=j @img.to_json.html_safe %>"));	
+<% if @img.has_key?(:parent_fieldset)  %>	
 	if ($("#<%=j @img[:parent_fieldset] %>").find(".<%=j @img[:parent_element_id] %>").find(".parent_image").length) {
 		var $fieldset = $("#<%=j @img[:parent_fieldset] %>");
 		var data = {
@@ -7,44 +7,53 @@
 			parentobject: $fieldset.closest(".nested_crimagify_images").data("parentobject"),
 			parent: $fieldset.closest(".nested_crimagify_images").data("parent")
 		};
-		if ($fieldset.find("#image_profile").length) {
-			$("#<%=j @img[:parent_element_id] %>").find("#image_profile").remove();
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
-			$("#id_images").attr("value", array_names);
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_x").attr("value", "<%= @img[:crop_x] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_y").attr("value", "<%= @img[:crop_y] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
-		} else{
-			$fieldset.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
-			$fieldset.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
+		var $areaImg = $fieldset.find(".<%=j @img[:parent_element_id] %>");
+		if ($areaImg.find(".image_profile").length) {
+			$areaImg.find(".image_profile").remove();
+			$areaImg.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+			$areaImg.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
 			$fieldset.find(".id_images").attr("value", array_names);
-			$fieldset.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_x' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
-			$fieldset.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_y' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
-			$fieldset.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_w' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
-			$fieldset.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_h' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_h]' type='hidden' value='<%= @img[:crop_h] %>'>");
+			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_x").attr("value", "<%= @img[:crop_x] %>");
+			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_y").attr("value", "<%= @img[:crop_y] %>");
+			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
+			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
+		} else{
+			$areaImg.find(".img_start").hide("slow", function(){});			
+			$areaImg.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+			$areaImg.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
+			$areaImg.find(".id_images").attr("value", array_names);
+			$areaImg.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_x' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
+			$areaImg.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_y' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
+			$areaImg.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_w' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
+			$areaImg.find(".parent_image").append("<input class='<%=j @img[:parent_element_id] %>_crop_h' name='"+data.parentobject+"["+data.parent+"_attributes]["+data.time+"][<%=j @img[:parent_element_id] %>_crop_h]' type='hidden' value='<%= @img[:crop_h] %>'>");
 		}
+		$areaImg.find(".nested_uploader").val('');
 	}
 <% else %>
-	if ($("#<%=j @img[:parent_element_id] %>").find("#parent_image").length) {
-		if ($("#<%=j @img[:parent_element_id] %>").find("#image_profile").length) {
-			$("#<%=j @img[:parent_element_id] %>").find("#image_profile").remove();
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
+	var $parent = $("#<%=j @img[:parent_element_id] %>");	
+	if ($parent.find("#parent_image").length) {
+		if ($parent.find(".image_profile").length) {
+			$parent.find(".image_profile").remove();
+			$parent.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+			$parent.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_x").attr("value", "<%= @img[:crop_x] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_y").attr("value", "<%= @img[:crop_y] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
+			$parent.find("#<%=j @img[:parent_element_id] %>_crop_x").attr("value", "<%= @img[:crop_x] %>");
+			$parent.find("#<%=j @img[:parent_element_id] %>_crop_y").attr("value", "<%= @img[:crop_y] %>");
+			$parent.find("#<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
+			$parent.find("#<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
 		} else{
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
-			$("#<%=j @img[:parent_element_id] %>").find("#image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
+			$parent.find(".img_start").hide("slow", function(){});	
+			$parent.find("#parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
+			$parent.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='<%=j @img[:parent_element_id] %>_crop_x' type='hidden' value='<%= @img[:crop_x] %>'>");
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='<%=j @img[:parent_element_id] %>_crop_y' type='hidden' value='<%= @img[:crop_y] %>'>");
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='<%=j @img[:parent_element_id] %>_crop_w' type='hidden' value='<%= @img[:crop_w] %>'>");
-			$("#<%=j @img[:parent_element_id] %>").find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='<%=j @img[:parent_element_id] %>_crop_h' type='hidden' value='<%= @img[:crop_h] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='<%=j @img[:parent_element_id] %>_crop_x' type='hidden' value='<%= @img[:crop_x] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='<%=j @img[:parent_element_id] %>_crop_y' type='hidden' value='<%= @img[:crop_y] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='<%=j @img[:parent_element_id] %>_crop_w' type='hidden' value='<%= @img[:crop_w] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='<%=j @img[:parent_element_id] %>_crop_h' type='hidden' value='<%= @img[:crop_h] %>'>");
 		}
+		$parent.find("#uploader").val('');
 	}
 <% end %>
+
+
+
