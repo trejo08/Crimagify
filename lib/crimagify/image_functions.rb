@@ -1,7 +1,7 @@
 module Crimagify
 	module ImageFunctions
 
-		def write_tmp_image(image, parent_id, parent_type, image_name)
+		def write_tmp_image(image, parent_id, parent_type, image_name, parent_fieldset = nil)
 		    require 'base64'
 		    image_encoded = image.split(",")      
 		    extension = image_encoded[0].split("/")[1].split(";")[0]
@@ -9,7 +9,15 @@ module Crimagify
 		    today = Time.now
 		    generate_name = "#{today.strftime("%Y-%m-%d")}-#{parent_type}-#{image_name}-#{parent_id}"
 
-		    path = "#{Rails.root}/app/assets/images/tmps_cropper/#{parent_type}/image_temporal/#{parent_id}/#{image_name}"
+		    path = nil
+		    if parent_fieldset.nil?
+		    	path = "#{Rails.root}/app/assets/images/tmps_cropper/#{parent_type}/image_temporal/#{parent_id}/#{image_name}"
+		    else
+		    	path = "#{Rails.root}/app/assets/images/tmps_cropper/#{parent_type}/image_temporal/#{parent_id}/#{parent_fieldset}/#{image_name}"
+		    end
+
+		    puts "ruta creada para guardar"
+		    puts path
 
 		    if !File.exist?(path)
 		      FileUtils.mkdir_p(path)
@@ -26,10 +34,10 @@ module Crimagify
 			if !(parent_id.to_i == 0)
 				parent_model = parent.constantize
 				data = parent_model.find(parent_id.to_i)
-	    else
-	      data = 0
-	    end
-	    return data
+		    else
+		      data = 0
+		    end
+		    return data
 		end
 
 		def save_new_image(path, x, y, w, h, parent_type, parent_id, image_name, temporal)

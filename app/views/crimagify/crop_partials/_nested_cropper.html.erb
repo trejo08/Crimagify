@@ -6,7 +6,7 @@
 %>
 <fieldset>
   <div data-img="<%= id_image %>" class="global_parent <%= id_image %>" name="<%= version_name %>">
-    <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "", :name => "image_temporal_#{id_image}", :class => "image_temporal image_#{id_image}" %>
+    <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "", :name => "image_temporal_#{id_image}", :class => "image_temporal image_temporal_#{id_image}" %>
     <li class="number input optional numeric stringish refresh_image">
       <%= label_tag :image %><br>
       <div class="parent_image" style="display:block;float:left"></div>

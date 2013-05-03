@@ -236,12 +236,20 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 
 function parameters($crop){
 	var $parent_tag = $crop.closest(".global_parent");
-	var parent_tag_id = $parent_tag.attr("id");
-	console.log($("#parent_id").val());
+	var parent_tag_id = $parent_tag.attr("id")==undefined?$parent_tag.data("img"):$parent_tag.attr("id");
+	console.log(parent_tag_id);
 	var data = {};
-	var url_partial = null;
 	if($parent_tag.closest(".fieldset_crimagify_nested").length){
-
+		data = {"image": render_image, 
+				"parent_id": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent_id").val(),
+				"crop_x": $("#crop_x").val(), 
+				"crop_y": $("#crop_y").val(), 
+				"crop_w": $("#crop_w").val(),
+				"crop_h": $("#crop_h").val(),
+				"parent": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent").val(), 
+				"parent_element_id" : parent_tag_id,
+				"parent_fieldset": $parent_tag.closest(".fieldset_crimagify_nested").attr("id")
+		};
 	}else{
 		data = {"image": render_image, 
 				"parent_id": $("#parent_id").val(),
@@ -253,10 +261,9 @@ function parameters($crop){
 				"parent_element_id" : parent_tag_id
 		};
 		array_names.push(parent_tag_id);
-		url_partial = "/crimagify/params_cropper";
 	}	
 	$.ajax({
-		url: url_partial,
+		url: "/crimagify/params_cropper",
 		type: "POST",
 		data: data,
 		dataType: "script",

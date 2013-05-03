@@ -1,11 +1,13 @@
 <%
 	preview = ENV['PREVIEW_IMAGE_CROPPED']
 	preview = preview.to_sym
-	image_name = @img[7]
-	if @img.first == 0
+	image_name = @img[:parent_element_id]
+
+	puts @img.first.inspect
+	if @img[:data_parent] == 0
 		image = @img_new
 	else
-		images = @img.first.crimagify_images.where("image_name=?", image_name)
+		images = @img[:data_parent].crimagify_images.where("image_name=?", image_name)
 		image = images.first
 	end
 %>
