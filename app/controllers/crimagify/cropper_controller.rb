@@ -13,7 +13,7 @@ module Crimagify
       @params = {
         :image => params[:image],
         :parent_element_id => params[:parent_element_id],
-        :name_version => params[:name_version]
+        :type_img => params[:type_img]
       }
     end
 
@@ -69,6 +69,10 @@ module Crimagify
       else
         puts "No existe el directorio: #{@image_generated}"
       end      
+    end
+
+    def params_nested_cropper
+      
     end
   end
 end
