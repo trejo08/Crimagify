@@ -10,61 +10,58 @@ var render_image = "";
 var array_names = [];
 
 $(function(){
+
+	// Events only for crimagify without nested models
 	$(".uploader").on("change", function(evt){
 		//this variable is used for identify on what section pu the resultant image
-		var id = $(this).parents('div.global_parent').attr("id");
-		var name_version = $(this).parents('div.global_parent').attr("name");
-
+		var $this = $(this);
+		var parent_element_id = $this.closest('.global_parent').attr("id");
+		var name_version = $this.closest('.global_parent').attr("name");
 		if (validate_image(evt) == true) {
-			var files = evt.target.files;
 			var reader =  new FileReader();
-
 			reader.onloadend = function(e){
-				render_image_temporal(e.target.result, id, name_version);
+				render_image_temporal(e.target.result, parent_element_id, name_version);
 				render_image = e.target.result;
 			};
-
-			reader.readAsDataURL(files[0]);
+			reader.readAsDataURL(evt.target.files[0]);
 		}else{
-			$(this).val('');
+			$this.val('');
 		};
 	});
 
+	// Events only for crimagify with nested models
 	$(".nested_crimagify_images").on("change",".nested_uploader",function(evt){
 		$this = $(this);
 		var $cropper =  $("#cropper_div");
+		// TYPE: user, big, small, etc
 		var name_version = $this.closest(".global_parent").attr("name");
-		var type_img = $this.closest(".global_parent").data("img");
+		// SECTION CROPPER: imgaA, imgB, imgC, etc
+		var parent_element_type = $this.closest(".global_parent").data("img");
+		// ID FIELDSET
 		var parent_tag_id = $this.closest(".fieldset_crimagify_nested").attr("id");
-
 		if($cropper.length){
 			$cropper.fadeOut(1000, function(){
 				$cropper.remove();
-				if (validate_image(evt) == true) {
-					var files = evt.target.files;
+				if (validate_image(evt) == true) {					
 					var reader =  new FileReader();
-
 					reader.onloadend = function(e){
-						render_image_temporal_nested(e.target.result,parent_tag_id,name_version,type_img);
+						render_image_temporal_nested(e.target.result,parent_tag_id,name_version,parent_element_type);
 						render_image = e.target.result;
 					};
 
-					reader.readAsDataURL(files[0]);
+					reader.readAsDataURL(evt.target.files[0]);
 				}else{
 					$this.val('');
 				};
 			});
 		}else{
 			if (validate_image(evt) == true) {
-				var files = evt.target.files;
 				var reader =  new FileReader();
-
-				reader.onloadend = function(e){
-					render_image_temporal_nested(e.target.result,parent_tag_id,name_version,type_img);
+				reader.onloadend = function(e){					
+					render_image_temporal_nested(e.target.result,parent_tag_id,name_version,parent_element_type);
 					render_image = e.target.result;
 				};
-
-				reader.readAsDataURL(files[0]);
+				reader.readAsDataURL(evt.target.files[0]);
 			}else{
 				$this.val('');
 			};
@@ -79,17 +76,16 @@ $(function(){
 		$(".nested_uploader").val('');			
 	});
 
-	$(".parent_image").on("click", ".crop_image", function(){
+	$(".parent_image").on("click",".crop_image",function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
-		var parent_element_id = $(this).parents('div.global_parent').attr("id");		
-		parameters(parent_element_id);
+		parameters($(this));
 	});
 	
-	$(".nested_crimagify_images").on("click", ".crop_image", function(){
-		var parent_element_id = $(this).closest('.global_parent').data("img");
-		console.log(parent_element_id);
-		//parameters(parent_element_id);
-    });
+	// $(".nested_crimagify_images").on("click", ".crop_image", function(){
+	// 	var parent_element_id = $(this).closest('.global_parent').data("img");
+	// 	console.log(parent_element_id);
+	// 	//parameters(parent_element_id);
+ //    });
 });
 
 
@@ -120,7 +116,7 @@ function render_image_temporal_nested(url, parent_tag_id, name_version, type_img
 	$.ajax({
 		url: "/crimagify/partial_nested_cropper",
 		type: "POST",
-		data: { "image": url, "parent_element_id" : parent_tag_id, "name_version":type_img },
+		data: { "image": url, "parent_element_id" : parent_tag_id, "type_img":type_img },
 		dataType: "script",
 		complete: function(event){
 			load_partial_nested(parent_tag_id, name_version, type_img);
@@ -133,14 +129,14 @@ function render_image_temporal_nested(url, parent_tag_id, name_version, type_img
 	});
 }
 
-function render_image_temporal(url, parent_tag_id, name_version){
+function render_image_temporal(url, parent_element_id, name_version){
 	$.ajax({
 		url: "/crimagify/partial_cropper",
 		type: "POST",
-		data: { "image": url, "parent_element_id" : parent_tag_id },
+		data: { "image": url, "parent_element_id" : parent_element_id },
 		dataType: "script",
 		complete: function(event){
-			load_partial(parent_tag_id, name_version);
+			load_partial(parent_element_id, name_version);
 		},
 		error: function(x,y,z){
 			console.log(x);
@@ -206,24 +202,21 @@ function load_partial(parent_tag_id, name_version){
 
 function load_partial_nested(parent_tag_id, name_version, type_img){
 	var select = [];
-	var ratio;
-	var parent = $("#"+parent_tag_id).find(".parent").val();	
-	var ratio_vals = ajson[parent][type_img][name_version]
-	var max_width_box = '<%= ENV["MAX_WIDTH_BOX_CROPPER"] %>'
-	var max_height_box = '<%= ENV["MAX_HEIGHT_BOX_CROPPER"] %>'
-
+	var parent = $("#"+parent_tag_id).find(".parent").val();
+	var ratio_vals = ajson[parent][type_img][name_version];
+	var max_width_box = '<%= ENV["MAX_WIDTH_BOX_CROPPER"] %>';
+	var max_height_box = '<%= ENV["MAX_HEIGHT_BOX_CROPPER"] %>';
 	if (max_width_box == "") {
 		max_width_box = 500;
-	};
+	}
 	if (max_height_box == "") {
 		max_height_box = 500;
-	};
+	}
+	select = [0,0,ratio_vals.width,ratio_vals.height];
+	var ratio = ratio_vals.width/ratio_vals.height;
 
-	select = [0,0,ratio_vals['width'],ratio_vals['height']];
-	ratio = ratio_vals['width']/ratio_vals['height'];
-
-	if ($(".cropbox").length) {
-		$('.cropbox').Jcrop({
+	if ($("#cropper_div").find(".cropbox").length) {
+		$("#cropper_div").find(".cropbox").Jcrop({
 		 	onChange: update_crop,
 		 	onSelect: update_crop,
 		 	setSelect: select,
@@ -241,28 +234,44 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 	};
 };
 
-function parameters(parent_tag_id){
-	array_names.push(parent_tag_id)
-
+function parameters($crop){
+	var $parent_tag = $crop.closest(".global_parent");
+	var parent_tag_id = $parent_tag.attr("id")==undefined?$parent_tag.data("img"):$parent_tag.attr("id");
+	console.log(parent_tag_id);
+	var data = {};
+	if($parent_tag.closest(".fieldset_crimagify_nested").length){
+		data = {"image": render_image, 
+				"parent_id": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent_id").val(),
+				"crop_x": $("#crop_x").val(), 
+				"crop_y": $("#crop_y").val(), 
+				"crop_w": $("#crop_w").val(),
+				"crop_h": $("#crop_h").val(),
+				"parent": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent").val(), 
+				"parent_element_id" : parent_tag_id,
+				"parent_fieldset": $parent_tag.closest(".fieldset_crimagify_nested").attr("id")
+		};
+	}else{
+		data = {"image": render_image, 
+				"parent_id": $("#parent_id").val(),
+				"crop_x": $("#crop_x").val(), 
+				"crop_y": $("#crop_y").val(), 
+				"crop_w": $("#crop_w").val(),
+				"crop_h": $("#crop_h").val(),
+				"parent": $("#parent").val(), 
+				"parent_element_id" : parent_tag_id
+		};
+		array_names.push(parent_tag_id);
+	}	
 	$.ajax({
 		url: "/crimagify/params_cropper",
 		type: "POST",
-		data: { "image": render_image, 
-						"parent_id": $("#parent_id").val(),
-						"crop_x": $("#crop_x").val(), 
-						"crop_y": $("#crop_y").val(), 
-						"crop_w": $("#crop_w").val(),
-						"crop_h": $("#crop_h").val(),
-						"parent": $("#parent").val(), 
-						"parent_element_id" : parent_tag_id
-		},
+		data: data,
 		dataType: "script",
 		success: function(){
-
 			$("#"+parent_tag_id).find(".img_start").hide("slow", function(){});
 			$("#cropper_div").hide("slow", function(){
 				$("#cropper_div").remove();
-			})
+			});
 			$("#"+parent_tag_id).find("#uploader").val('');
 		},
 		error: function(a,b,c){

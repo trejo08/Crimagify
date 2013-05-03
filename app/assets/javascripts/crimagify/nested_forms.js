@@ -1,9 +1,11 @@
 $(function(){
 
     var $frmCrimagify = $(".nested_crimagify_images");
-    $frmCrimagify.find(".fieldset_crimagify_nested").attr("id", "nested_" + getTime());
+    
     if($frmCrimagify.find(".fieldset_crimagify_nested").length == 1){
         setAttributesNames($frmCrimagify);
+    }else if($frmCrimagify.find(".fieldset_crimagify_nested").length > 1) {
+        $frmCrimagify.find(".fieldset_crimagify_nested").attr("id", "nested_" + getTime());
     }
 
     // function for add fields
@@ -43,6 +45,7 @@ function getTime(){
 
 function setAttributesNames($form){
     var $fieldset = $form.find(".fieldset_crimagify_nested");
+    $fieldset.attr("id","nested_0");
     $fieldset.find(".parent").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent]");
     $fieldset.find(".parent_id").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent_id]");
     $fieldset.find(".id_images").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][id_images]");

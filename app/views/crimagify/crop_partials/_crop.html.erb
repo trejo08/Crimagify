@@ -1,13 +1,7 @@
-
 <div id="cropper_div">
 	<div class="cropper_container">
 		<div class="image_cropper">
-			<%# if !@params.has_key?("image") %>
-				<%#= image_tag @params, :id => "cropbox" %>
-			<%# else %>
-				<%# puts "entro a la opcion que deberia de ser para nested" %>
-				<%= image_tag @params[:image], :class => "cropbox", :id => "cropbox" %>
-			<%# end %>		
+			<%= image_tag @params[:image], :class => "cropbox", :id => "cropbox" %>			
 			<% %w[x y w h].each do |attribute| %>
 				<%= hidden_field_tag "crop_#{attribute}" %>
 			<% end %>
