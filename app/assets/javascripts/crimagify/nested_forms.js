@@ -22,8 +22,8 @@ $(function(){
         //console.log($('div.fieldset:last'))
         var element_last = $('div.fieldset:last');
 
-        console.dir($('.image_temporal',element_last));
-        var new_array = $('.image_temporal',element_last);
+        console.dir($('.image_temporal', element_last));
+        var new_array = $('.image_temporal', element_last);
 
         // for (var i = 0; i < $('.image_temporal',element_last).length; i++) {
         //     console.log($(i).attr('class'))
