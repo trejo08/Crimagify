@@ -11,5 +11,4 @@
 		image = images.first
 	end
 %>
-<%= image_name %><br>
-<%= image_tag image.image_temporal_url(preview) %>
+<%= image_tag image.image_temporal_url(preview), :class => "image_profile" %>
