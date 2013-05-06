@@ -24,7 +24,6 @@ module Crimagify
       if params[:parent_fieldset].blank?
         @img[:path_image] = ImageFunctions::write_tmp_image(params[:image], params[:parent_id].to_i, params[:parent], @img[:parent_element_id])
       else
-        puts "yyyyyyyyy"
         @img[:parent_fieldset] = params[:parent_fieldset]
         @img[:path_image] = ImageFunctions::write_tmp_image(params[:image], params[:parent_id].to_i, params[:parent], @img[:parent_element_id], params[:parent_fieldset])
       end 

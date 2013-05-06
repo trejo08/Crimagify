@@ -1,8 +1,9 @@
+
 if ($("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:type_img] %>").length) {	
 	if (!($("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:type_img] %>").find("#cropper_div").length)) {
-		console.log("<%=j @params[:image] %>");
+		// console.log("<%=j @params[:image] %>");
 		$("#<%=j @params[:parent_element_id] %>").find(".<%=j @params[:type_img] %>").find(".parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => @params %>");
 	};	
 } else{
-	//console.log("por favor agregue el elemento")
+	// console.log("por favor agregue el elemento")
 };

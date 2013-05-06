@@ -5,7 +5,23 @@ $(function(){
     if($frmCrimagify.find(".fieldset_crimagify_nested").length == 1){
         setAttributesNames($frmCrimagify);
     }else if($frmCrimagify.find(".fieldset_crimagify_nested").length > 1) {
-        $frmCrimagify.find(".fieldset_crimagify_nested").attr("id", "nested_" + getTime());
+        $this = $frmCrimagify;
+        var $fieldset = $frmCrimagify.find(".fieldset_crimagify_nested")
+        for (var i = 0; i<$fieldset.length;i++){
+            console.log(i)
+            var $new_fieldset = $($fieldset[i]);
+            $new_fieldset.attr("id", "nested_"+i);
+            $new_fieldset.attr("id","nested_" + i);
+            $new_fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent]');
+            $new_fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent_id]');
+            $new_fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][id_images]');
+            var imagesTemporal = $new_fieldset.find(".image_temporal");
+            for(var j = 0; j<imagesTemporal.length;j++){
+                var $inputImage = $(imagesTemporal[j]);
+                var nameOld = $inputImage.attr("name");
+                $inputImage.attr('name',$this.data('parentobject') + '[' + $this.data('parent') + '_attributes][' + i + ']['+nameOld+']');
+            }
+        }            
     }
 
     // function for add fields
@@ -28,7 +44,6 @@ $(function(){
             $inputImage.attr('name',$this.data('parentobject') + '[' + $this.data('parent') + '_attributes][' + time + ']['+nameOld+']');
         }
     });
-		
 
     //function for remove fields
     $frmCrimagify.on("click", ".remove_fields", function(event){
@@ -39,6 +54,7 @@ $(function(){
     });
     
 });
+
 function getTime(){
     return new Date().getTime();
 }
