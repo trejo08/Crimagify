@@ -7,15 +7,15 @@
 <fieldset>
   <div data-img="<%= id_image %>" class="global_parent <%= id_image %>" name="<%= version_name %>">
     <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "", :name => "image_temporal_#{id_image}", :class => "image_temporal image_temporal_#{id_image}" %>
-    <li class="number input optional numeric stringish refresh_image">
-      <%= label_tag :image %><br>
-      <div class="parent_image" style="display:block;float:left"></div>
-      <%= image_tag url_image, image_options %>
-      <div class="clear"></div>
-    </li>
-    <li class="number input optional numeric stringish" id="product_image_input">
-      <%= label_tag :chose_image %><br>
-      <%= file_field_tag :image, :id => "nested_uploader", :class => "nested_uploader" %>
-    </li>
+      <div class="number input optional numeric stringish refresh_image">
+        <%= label_tag :image %><br>
+        <div class="parent_image"></div>
+        <%= image_tag url_image, image_options %>
+        <div class="clear"></div>
+      </div>
+      <div class="number input optional numeric stringish" id="product_image_input">
+        <%= label_tag :chose_image %><br>
+        <%= file_field_tag :image, :id => "nested_uploader", :class => "nested_uploader" %>
+      </div>
   </div>
 </fieldset>

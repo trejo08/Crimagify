@@ -264,6 +264,7 @@
         });
       }
       return trk;
+      console.log(trk);
     }
     //}}}
 
@@ -783,6 +784,7 @@
           position: 'absolute',
           backgroundColor: options.shadeColor||options.bgColor
         }).appendTo(holder);
+
       }
       function enableShade() {
         if (!enabled) {
@@ -1437,6 +1439,7 @@
       disableCrop();
       var img = new Image();
       img.onload = function () {
+        console.log(options.boxWidth+"  "+options.boxHeight)
         var iw = img.width;
         var ih = img.height;
         var bw = options.boxWidth;
@@ -1672,8 +1675,8 @@
 
     shade: null,
 
-    boxWidth: 0,
-    boxHeight: 0,
+    boxWidth: 800,
+    boxHeight: 800,
     boundary: 2,
     fadeTime: 400,
     animationDelay: 20,
@@ -1688,6 +1691,7 @@
     onSelect: function () {},
     onDblClick: function () {},
     onRelease: function () {}
+    
   };
 
   // }}}

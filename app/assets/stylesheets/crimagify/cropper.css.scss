@@ -1,7 +1,10 @@
 @import 'mixin.css.scss';
+div.parent_image,
 div#parent_image{
 	position:relative !important;
 	z-index:500 !important;
+	float:left;
+	display:block;
 }
 div#cropper_div{
 	position: absolute !important;
@@ -18,7 +21,7 @@ div#cropper_div{
 			//@include boxShadow(0px 0px 6px,#222) !important;
 			z-index: 1000 !important;
 			@include dropShadow();
-			border:1px solid #777 !important;
+			//border:1px solid #777 !important;
 			padding:10px !important;
 			z-index:10 !important;
 			position:relative !important;
@@ -28,13 +31,13 @@ div#cropper_div{
 			background:#FFF !important;
 			padding:10px !important;
 			margin-top:0 !important;
-			border:1px solid #777 !important;
-			border-top:none !important;
+			//border:1px solid #777 !important;
+			//border-top:none !important;
 			@include rounded(0 0 3px 3px);
 			//@include boxShadow(1px 4px 6px,#666) !important;
 			position:absolute !important;
-			right:-1px !important;
-			bottom:-57px !important;
+			right:0px !important;
+			bottom:-61px !important;
 			z-index:15 !important;
 			a{
 				text-decoration:none !important;

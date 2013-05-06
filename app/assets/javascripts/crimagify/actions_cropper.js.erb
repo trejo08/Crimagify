@@ -213,6 +213,7 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 	if (max_height_box == "") {
 		max_height_box = 500;
 	}
+	console.log(max_width_box+"   "+max_height_box)
 	select = [0,0,ratio_vals.width,ratio_vals.height];
 	var ratio = ratio_vals.width/ratio_vals.height;
 
@@ -226,7 +227,7 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 		 	boxHeight: max_height_box
 		}, function(){
 			var api = this;
-			api.ui.holder.addClass('jcrop-dark');
+			//api.ui.holder.addClass('jcrop-dark');
 			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
 		});
 		

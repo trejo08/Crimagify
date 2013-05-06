@@ -8,15 +8,15 @@
 <fieldset>
     <div id="<%= id_image %>" class="global_parent" name="<%= version_name %>">
       <%= hidden_field_tag "image_temporal_#{id_image}", {}, :class => "image_temporal", :value => "" %>
-      <li class="number input optional numeric stringish refresh_image">
+      <div class="number input optional numeric stringish refresh_image">
         <%= label_tag :image %><br>
         <div id="parent_image" class="parent_image" style="display:block;float:left"></div>
         <%= image_tag url_image, image_options %>
         <div class="clear"></div>
-      </li>
-      <li class="number input optional numeric stringish" id="product_image_input">
+      </div>
+      <div class="number input optional numeric stringish" id="product_image_input">
         <%= label_tag :chose_image %><br>
         <%= file_field_tag :image, :id => "uploader", :class => "uploader" %>
-      </li>
+      </div>
     </div>
 </fieldset>
