@@ -89,24 +89,77 @@ module Crimagify
 			end			
 		end
 
-		def create_new_images(object, params)
-			id_array = params[:id_images].split(",")
-			id_array.map { |image_name|
-				path = params["image_temporal_#{image_name}"]
-				if !(path.to_s == "") && File.exist?(path.to_s)
-					img = save_new_image(path.to_s,
-															 params["#{image_name}_crop_x"],
-															 params["#{image_name}_crop_y"],
-															 params["#{image_name}_crop_w"],
-															 params["#{image_name}_crop_h"],
-															 object.class.name,
-															 object.id,
-															 image_name,
-															 false)
-					img.save!
-					img.crop_avatar_real
-				end
-			}
+		def create_new_images(object, params, nested = false)
+			if nested
+				params.each do |key, value|
+					parent = value[:parent]
+					parent_id = value[:parent_id]
+					save_parent_values = value
+					value = value.freeze
+					puts value.to_yaml
+					id_array = []
+					value.each do |key|
+						name = key[0].split("_")
+						if /img/.match(key[0]) || /parent/.match(key[0]) || /image/.match(key[0])
+							save_parent_values.delete(key[0].to_sym)
+							puts "borre uno, y el valor dela variable value es: #{value.to_yaml}"
+						end
+						if name.length.to_i == 3 && "#{name[0]}_#{name[1]}" == "image_temporal"
+							id_array << name[2].to_s
+						end
+					end
+
+					save_parent_values["#{object.class.name.underscore}_id"] = object.id
+					parent_class = parent.constantize
+					save_parent = parent_class.new(save_parent_values)
+
+					if save_parent.save
+						puts "este es el parent_id: #{save_parent.id}"
+						puts value.to_yaml
+						id_array.map { |image_name| 
+							puts "esta recorriendo la imagen: #{image_name}"
+							puts value["image_temporal_#{image_name}".to_sym]
+
+							path = value["image_temporal_#{image_name}".to_sym]
+							if path.to_s != "" && File.exist?(path.to_s)
+								puts "encontro la imagen en temporales"
+								img = save_new_image(path.to_s,
+													 value["#{image_name}_crop_x"],
+													 value["#{image_name}_crop_y"],
+													 value["#{image_name}_crop_w"],
+													 value["#{image_name}_crop_h"],
+													 save_parent.class.name,
+													 save_parent.id,
+													 image_name,
+													 false)
+								puts "logro llenar la funcion de preparar el guardar"
+								img.save!
+								puts "guardo sin problemas"
+								img.crop_avatar_real
+								puts "se cropeo bien la imagen"
+							end
+						}
+					end					
+				end				
+			else
+				id_array = params[:id_images].split(",")
+				id_array.map { |image_name|
+					path = params["image_temporal_#{image_name}"]
+					if !(path.to_s == "") && File.exist?(path.to_s)
+						img = save_new_image(path.to_s,
+											 params["#{image_name}_crop_x"],
+											 params["#{image_name}_crop_y"],
+											 params["#{image_name}_crop_w"],
+											 params["#{image_name}_crop_h"],
+											 object.class.name,
+											 object.id,
+											 image_name,
+											 false)
+						img.save!
+						img.crop_avatar_real
+					end
+				}
+			end			
 		end
 	end
 end

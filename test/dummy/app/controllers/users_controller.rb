@@ -42,15 +42,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    #separando los atributos que no se necesitan al inicio de la operacion
+
     products = params[:user][:products_attributes]
     params[:user].delete(:products_attributes)
-    @user = User.new(params[:user])
 
+    @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
         
-        # Crimagify::ImageFunctions::create_new_images(@user,params)
-
+        Crimagify::ImageFunctions::create_new_images(@user,products, true)
 
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }

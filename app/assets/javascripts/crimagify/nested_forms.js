@@ -56,10 +56,3 @@ function setAttributesNames($form){
         $inputImage.attr('name',$form.data('parentobject')+'['+$form.data('parent')+'_attributes]['+0+']['+nameOld+']');
     }
 }
-
-
-
-
-
-
-
