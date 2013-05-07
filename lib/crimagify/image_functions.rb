@@ -16,9 +16,6 @@ module Crimagify
 		    	path = "#{Rails.root}/app/assets/images/tmps_cropper/#{parent_type}/image_temporal/#{parent_id}/#{parent_fieldset}/#{image_name}"
 		    end
 
-		    puts "ruta creada para guardar"
-		    puts path
-
 		    if !File.exist?(path)
 		      FileUtils.mkdir_p(path)
 		    end
@@ -120,14 +117,9 @@ module Crimagify
 			else
 				if params[:id_images] != ""
 					id_array = params[:id_images].split(",")
-
 					id_array.map { |image_name|
-						puts "parametro USL #{params["image_temporal_#{image_name}"]}"
 						path = params["image_temporal_#{image_name}"]
-						puts "este es el pat: #{path}"
-						puts "existe: #{File.exist?(path.to_s)}"
 						if !(path.to_s == "") && File.exist?(path.to_s)
-							puts " actualizando"
 							image = object.crimagify_images.where("image_name=?", image_name)
 							if !(image == [])
 								image.map { |img|  
@@ -139,7 +131,6 @@ module Crimagify
 									img.crop_avatar_real
 								}
 							else
-								puts "creando"
 								img = save_new_image(path,
 
 													 params["#{image_name}_crop_x"],
@@ -210,9 +201,7 @@ module Crimagify
 					end					
 				end				
 			else
-				puts "entro bien a esta opcion"
 				id_array = params[:id_images].split(",")
-				puts id_array
 				id_array.map { |image_name|
 					path = params["image_temporal_#{image_name}"]
 					if !(path.to_s == "") && File.exist?(path.to_s)
