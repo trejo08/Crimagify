@@ -5,6 +5,9 @@ module Crimagify
 			image_options[:class] = "#{image_options[:class]} img_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
 			version_name = options[:ratio]
+			if options[:label_title].nil?
+				options[:label_title] == "Image"
+			end
 			if img == []
 				url_image = "rails.png"
 			else
@@ -13,7 +16,7 @@ module Crimagify
 			if url_image == ""
 				url_image = "rails.png"
 			end
-			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name })
+			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name, label_title: options[:label_title] })
 		end
 
 		def images_id(object)
@@ -28,6 +31,9 @@ module Crimagify
 			image_options[:class] = "#{image_options[:class]} img_start"
 			img = object.crimagify_images.where("image_name=?", options[:image_name])
 			version_name = options[:ratio]
+			if options[:label_title].nil?
+				options[:label_title] == "Image"
+			end
 			if img == []
 				if ENV['DEFAULT_IMAGE'].nil?
 					url_image = "crimagify/no_selected.png"
@@ -45,7 +51,7 @@ module Crimagify
 				end
 			end
 			puts "esto tiene la variable ENV_IMAGE #{ENV['DEFAULT_IMAGE']}"
-			render(:partial => "crimagify/crop_partials/nested_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name })
+			render(:partial => "crimagify/crop_partials/nested_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name, label_title: options[:label_title] })
 		end
 
 		def nested_images_id(object)
