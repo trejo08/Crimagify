@@ -64,13 +64,21 @@ module Crimagify
 
 					value.each do |key|
 						name = key[0].split("_")
-						if /img/.match(key[0]) || /parent/.match(key[0]) || /image/.match(key[0])
-							save_parent_values.delete(key[0].to_sym)
-						end
 						if name.length.to_i == 3 && "#{name[0]}_#{name[1]}" == "image_temporal"
 							id_array << name[2].to_s
 						end
+						id_array.each do |image_name|
+							if key[0].match(image_name)
+								save_parent_values.delete(key[0].to_sym)
+							end
+						end					
 					end
+					
+					save_parent_values.delete(:parent)
+					save_parent_values.delete(:parent_id)
+					save_parent_values.delete(:id_images)
+					save_parent_values.delete(:id)
+					save_parent_values.delete(:_destroy)
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
@@ -154,14 +162,22 @@ module Crimagify
 					id_array = []
 
 					value.each do |key|
-						name = key[0].split("_")
-						if /img/.match(key[0]) || /parent/.match(key[0]) || /image/.match(key[0])
-							save_parent_values.delete(key[0].to_sym)
-						end
+						name = key[0].split("_")						
 						if name.length.to_i == 3 && "#{name[0]}_#{name[1]}" == "image_temporal"
 							id_array << name[2].to_s
 						end
+						id_array.each do |image_name|
+							if key[0].match(image_name)
+								save_parent_values.delete(key[0].to_sym)
+							end
+						end
 					end
+					save_parent_values.delete(:parent)
+					save_parent_values.delete(:parent_id)
+					save_parent_values.delete(:id_images)
+					save_parent_values.delete(:id)
+					save_parent_values.delete(:_destroy)
+
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
