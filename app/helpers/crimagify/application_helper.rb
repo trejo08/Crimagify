@@ -9,13 +9,13 @@ module Crimagify
 				options[:label_title] == "Image"
 			end
 			if img == []
-				url_image = "rails.png"
+				url_image = "rails.jpg"
 			else
 				url_image = img.first.image_url(options[:ratio]).to_s rescue ""
 			end
 			if url_image == ""
 				if ENV['DEFAULT_IMAGE'].nil?
-					url_image = "crimagify/no_selected_image.png"
+					url_image = "crimagify/no_selected_image.jpg"
 				else
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end
@@ -40,7 +40,7 @@ module Crimagify
 			end
 			if img == []
 				if ENV['DEFAULT_IMAGE'].nil?
-					url_image = "crimagify/no_selected_image.png"
+					url_image = "crimagify/no_selected_image.jpg"
 				else
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end						
@@ -49,7 +49,7 @@ module Crimagify
 			end
 			if url_image == ""
 				if ENV['DEFAULT_IMAGE'].nil?
-					url_image = "crimagify/no_selected.png"
+					url_image = "crimagify/no_selected.jpg"
 				else
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end
