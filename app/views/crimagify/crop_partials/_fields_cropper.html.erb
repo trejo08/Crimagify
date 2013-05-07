@@ -5,7 +5,7 @@
   version_name ||= {}
 
 %>
-<fieldset>
+<div class="crimagify_item">
     <div id="<%= id_image %>" class="global_parent" name="<%= version_name %>">
       <%= hidden_field_tag "image_temporal_#{id_image}", {}, :class => "image_temporal", :value => "" %>
       <div class="number input optional numeric stringish refresh_image">
@@ -19,4 +19,4 @@
         <%= file_field_tag :image, :id => "uploader", :class => "uploader" %>
       </div>
     </div>
-</fieldset>
+</div>
