@@ -77,6 +77,8 @@ module Crimagify
 					save_parent_values.delete(:parent)
 					save_parent_values.delete(:parent_id)
 					save_parent_values.delete(:id_images)
+					save_parent_values.delete(:id)
+					save_parent_values.delete(:_destroy)
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
@@ -173,6 +175,8 @@ module Crimagify
 					save_parent_values.delete(:parent)
 					save_parent_values.delete(:parent_id)
 					save_parent_values.delete(:id_images)
+					save_parent_values.delete(:id)
+					save_parent_values.delete(:_destroy)
 
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
