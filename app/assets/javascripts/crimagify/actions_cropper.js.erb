@@ -67,7 +67,7 @@ $(function(){
 			};
 		}		
 	});
-
+	/*===== Cancel Crop ======*/
 	$(".nested_crimagify_images").on("click",".cancel_crop",function(evt){
 		evt.preventDefault();
 		$("#cropper_div").hide("slow", function(){
@@ -75,18 +75,24 @@ $(function(){
 		});
 		$(".nested_uploader").val('');			
 	});
-
-	// $(".parent_image").on("click",".crop_image",function(){
+	$("#cancel_crop").on("click",function(evt){
+		evt.preventDefault();
+		$("#cropper_div").hide("slow", function(){
+			$("#cropper_div").remove();
+		});
+		$(".nested_uploader").val('');			
+	});
+	/*====== Crop Image ========*/
+	
 	$(".nested_crimagify_images").on("click",".crop_image",function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
 		parameters($(this));
 	});
-	
-	// $(".nested_crimagify_images").on("click", ".crop_image", function(){
-	// 	var parent_element_id = $(this).closest('.global_parent').data("img");
-	// 	console.log(parent_element_id);
-	// 	//parameters(parent_element_id);
- //    });
+
+	$("#crop_image").on("click",function(){
+		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
+		parameters($(this));
+	});
 });
 
 
