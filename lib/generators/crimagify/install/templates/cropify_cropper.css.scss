@@ -1,4 +1,4 @@
-@import 'mixin.css.scss';
+@import 'cropify_mixin.css.scss';
 div#parent_image{
 	position:relative !important;
 	z-index:500 !important;
@@ -66,3 +66,4 @@ div#cropper_div{
 .refresh_image{
 	position: relative !important;
 }
+

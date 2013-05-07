@@ -1,17 +1,25 @@
 module Crimagify
 	module ApplicationHelper
 
-	  	def image_cropper(object, options, image_options = {})
-			image_options[:class] = "#{image_options[:class]} img_start"
-			img = object.crimagify_images.where("image_name=?", options[:image_name])
-			version_name = options[:ratio]
-			if img == []
-				url_image = "rails.png"
-			else
-				url_image = img.first.image_url(options[:ratio]).to_s rescue ""
-			end
+  	def image_cropper(object, options, image_options = {})
+  		image_options[:class] = "#{image_options[:class]} img_start"
+  		img = object.crimagify_images.where("image_name=?", options[:image_name])
+  		version_name = options[:ratio]
+  		if img == []
+  			if ENV['DEFAULT_IMAGE'].nil?
+  				url_image = "crimagify/no_selected.png"
+  			else
+  				url_image = ENV['DEFAULT_IMAGE'].to_s
+  			end
+  		else
+  			url_image = img.first.image_url(options[:ratio]).to_s rescue ""
+  		end
 			if url_image == ""
-				url_image = "rails.png"
+				if ENV['DEFAULT_IMAGE'].nil?
+					url_image = "crimagify/no_selected_image.png"
+				else
+					url_image = ENV['DEFAULT_IMAGE'].to_s
+				end
 			end
 			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name })
 		end
@@ -30,7 +38,7 @@ module Crimagify
 			version_name = options[:ratio]
 			if img == []
 				if ENV['DEFAULT_IMAGE'].nil?
-					url_image = "crimagify/no_selected.png"
+					url_image = "crimagify/no_selected_image.png"
 				else
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end						
@@ -44,7 +52,6 @@ module Crimagify
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end
 			end
-			puts "esto tiene la variable ENV_IMAGE #{ENV['DEFAULT_IMAGE']}"
 			render(:partial => "crimagify/crop_partials/nested_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name })
 		end
 
