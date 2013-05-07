@@ -9,7 +9,7 @@ module Crimagify
 				options[:label_title] == "Image"
 			end
 			if img == []
-				url_image = "rails.jpg"
+				url_image = "crimagify/no_selected_image.jpg"
 			else
 				url_image = img.first.image_url(options[:ratio]).to_s rescue ""
 			end

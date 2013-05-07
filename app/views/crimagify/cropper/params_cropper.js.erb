@@ -31,7 +31,6 @@
 <% else %>
 	var $parent = $("#<%=j @img[:parent_element_id] %>");	
 	if ($parent.find(".parent_image").length) {
-		console.log(true);
 		if ($parent.find(".image_profile").length) {
 			$parent.find(".image_profile").remove();
 			$parent.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");

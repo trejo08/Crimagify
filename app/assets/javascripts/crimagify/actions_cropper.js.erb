@@ -13,17 +13,19 @@ $(function(){
 
 	// Events only for crimagify without nested models
 	$(".uploader").on("change", function(evt){
-		//this variable is used for identify on what section pu the resultant image
 		var $this = $(this);
+		var $cropper =  $("#cropper_div");
 		var parent_element_id = $this.closest('.global_parent').attr("id");
 		var name_version = $this.closest('.global_parent').attr("name");
-		var $cropper =  $("#cropper_div");
+		
 		/**/
 		if($cropper.length){
-			$cropper.fadeOut(1000, function(){
+			$cropper.hide('slow', function(){
 				//$cropper.closest('div.global_parent').find('.uploader').val('');
-				$cropper.remove();
-				$this.val('');
+				$cropper.hide('slow', function(){
+					$cropper.remove();
+				});
+				
 				if (validate_image(evt) == true) {
 					var reader =  new FileReader();
 					reader.onloadend = function(e){
@@ -62,7 +64,6 @@ $(function(){
 		var parent_tag_id = $this.closest(".fieldset_crimagify_nested").attr("id");
 		if($cropper.length){
 			$cropper.fadeOut(1000, function(){
-				//$cropper.closest('div.global_parent').find('.uploader').val('');
 				$cropper.remove();
 				if (validate_image(evt) == true) {					
 					var reader =  new FileReader();
@@ -241,7 +242,6 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 	if (max_height_box == "") {
 		max_height_box = 500;
 	}
-	console.log(max_width_box+"   "+max_height_box)
 	select = [0,0,ratio_vals.width,ratio_vals.height];
 	var ratio = ratio_vals.width/ratio_vals.height;
 
