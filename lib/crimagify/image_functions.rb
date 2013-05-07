@@ -122,28 +122,34 @@ module Crimagify
 					id_array = params[:id_images].split(",")
 
 					id_array.map { |image_name|
+						puts "parametro USL #{params["image_temporal_#{image_name}"]}"
 						path = params["image_temporal_#{image_name}"]
+						puts "este es el pat: #{path}"
+						puts "existe: #{File.exist?(path.to_s)}"
 						if !(path.to_s == "") && File.exist?(path.to_s)
+							puts " actualizando"
 							image = object.crimagify_images.where("image_name=?", image_name)
 							if !(image == [])
 								image.map { |img|  
 									img.update_attributes(:image => File.open(path.to_s),
-																				:crop_x => params["#{image_name}_crop_x"],
-																				:crop_y => params["#{image_name}_crop_y"],
-																				:crop_w => params["#{image_name}_crop_w"],
-																				:crop_h => params["#{image_name}_crop_h"])
+														  :crop_x => params["#{image_name}_crop_x"],
+														  :crop_y => params["#{image_name}_crop_y"],
+														  :crop_w => params["#{image_name}_crop_w"],
+														  :crop_h => params["#{image_name}_crop_h"])
 									img.crop_avatar_real
 								}
 							else
+								puts "creando"
 								img = save_new_image(path,
-																		 params["#{image_name}_crop_x"],
-																		 params["#{image_name}_crop_y"],
-																		 params["#{image_name}_crop_w"],
-																		 params["#{image_name}_crop_h"],
-																		 object.class.name,
-																		 object.id,
-																		 image_name,
-																		 false)
+
+													 params["#{image_name}_crop_x"],
+													 params["#{image_name}_crop_y"],
+													 params["#{image_name}_crop_w"],
+													 params["#{image_name}_crop_h"],
+													 object.class.name,
+													 object.id,
+													 image_name,
+													 false)
 								img.save!
 								img.crop_avatar_real
 							end
@@ -204,7 +210,9 @@ module Crimagify
 					end					
 				end				
 			else
+				puts "entro bien a esta opcion"
 				id_array = params[:id_images].split(",")
+				puts id_array
 				id_array.map { |image_name|
 					path = params["image_temporal_#{image_name}"]
 					if !(path.to_s == "") && File.exist?(path.to_s)

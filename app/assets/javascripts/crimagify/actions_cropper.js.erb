@@ -17,17 +17,38 @@ $(function(){
 		var $this = $(this);
 		var parent_element_id = $this.closest('.global_parent').attr("id");
 		var name_version = $this.closest('.global_parent').attr("name");
-		if (validate_image(evt) == true) {
-			var reader =  new FileReader();
-			reader.onloadend = function(e){
-				render_image_temporal(e.target.result, parent_element_id, name_version);
-				render_image = e.target.result;
-			};
-			reader.readAsDataURL(evt.target.files[0]);
+		var $cropper =  $("#cropper_div");
+		/**/
+		if($cropper.length){
+			$cropper.fadeOut(1000, function(){
+				//$cropper.closest('div.global_parent').find('.uploader').val('');
+				$cropper.remove();
+				$this.val('');
+				if (validate_image(evt) == true) {
+					var reader =  new FileReader();
+					reader.onloadend = function(e){
+						render_image_temporal(e.target.result, parent_element_id, name_version);
+						render_image = e.target.result;
+					};
+					reader.readAsDataURL(evt.target.files[0]);
+				}else{
+					$this.val('');
+				};
+			});
 		}else{
-			$this.val('');
-		};
-	});
+			if (validate_image(evt) == true) {
+				var reader =  new FileReader();
+				reader.onloadend = function(e){
+					render_image_temporal(e.target.result, parent_element_id, name_version);
+					render_image = e.target.result;
+				};
+				reader.readAsDataURL(evt.target.files[0]);
+			}else{
+				$this.val('');
+			};
+		}	
+		/**/
+	});	
 
 	// Events only for crimagify with nested models
 	$(".nested_crimagify_images").on("change",".nested_uploader",function(evt){
@@ -41,6 +62,7 @@ $(function(){
 		var parent_tag_id = $this.closest(".fieldset_crimagify_nested").attr("id");
 		if($cropper.length){
 			$cropper.fadeOut(1000, function(){
+				//$cropper.closest('div.global_parent').find('.uploader').val('');
 				$cropper.remove();
 				if (validate_image(evt) == true) {					
 					var reader =  new FileReader();
@@ -75,12 +97,12 @@ $(function(){
 		});
 		$(".nested_uploader").val('');			
 	});
-	$("#cancel_crop").on("click",function(evt){
+	$(".parent_image").on("click",'.cancel_crop',function(evt){
 		evt.preventDefault();
 		$("#cropper_div").hide("slow", function(){
 			$("#cropper_div").remove();
 		});
-		$(".nested_uploader").val('');			
+		$(".uploader").val('');			
 	});
 	/*====== Crop Image ========*/
 	
@@ -89,7 +111,7 @@ $(function(){
 		parameters($(this));
 	});
 
-	$("#crop_image").on("click",function(){
+	$(".parent_image").on("click",'.crop_image',function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
 		parameters($(this));
 	});
@@ -268,7 +290,8 @@ function parameters($crop){
 				"parent_element_id" : parent_tag_id
 		};
 		array_names.push(parent_tag_id);
-	}	
+	}
+	console.dir(array_names);
 	$.ajax({
 		url: "/crimagify/params_cropper",
 		type: "POST",
