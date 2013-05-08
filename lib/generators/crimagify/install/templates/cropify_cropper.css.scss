@@ -1,13 +1,37 @@
 @import 'cropify_mixin.css.scss';
-div#parent_image{
-	position:relative !important;
-	z-index:500 !important;
-}
+
+div.crimagify_item{
+	display:block;
+	label{
+		display:block;
+	}
+	label.crimagify_label{
+		font-size:14px;
+		font-weight:bold;
+		line-height:25px;
+	}
+	div.crimagify_clear{
+		clear:both;
+	}
+	div.crimagify_parent_image{
+		position:relative;
+	}
+	div.crimagify_container{
+		div.crimagify_parent_image{
+
+		}
+		div.crimagify_default_image{
+
+		}
+		div.crimagify_otions{
+
+		}
+	}//div.crimagify_container
+}//div.crimagify_item
 div#cropper_div{
 	position: absolute !important;
 	top: 0 !important;
 	left: 0 !important;
-	//display: none !important;
 	padding:0 0 85px 0 !important;
 	z-index:500 !important;
 	div.cropper_container{
@@ -28,12 +52,10 @@ div#cropper_div{
 			background:#FFF !important;
 			padding:10px !important;
 			margin-top:0 !important;
-			border:1px solid #777 !important;
-			border-top:none !important;
 			@include rounded(0 0 3px 3px);
 			//@include boxShadow(1px 4px 6px,#666) !important;
 			position:absolute !important;
-			right:-1px !important;
+			right:0px !important;
 			bottom:-57px !important;
 			z-index:15 !important;
 			a{
