@@ -13,6 +13,9 @@ div.crimagify_item{
 		font-weight:bold;
 		line-height:25px;
 	}
+	div.crimagify_parent_image{
+		position:relative;
+	}
 }
 div#cropper_div{
 	position: absolute !important;
@@ -39,12 +42,10 @@ div#cropper_div{
 			background:#FFF !important;
 			padding:10px !important;
 			margin-top:0 !important;
-			border:1px solid #777 !important;
-			border-top:none !important;
 			@include rounded(0 0 3px 3px);
 			//@include boxShadow(1px 4px 6px,#666) !important;
 			position:absolute !important;
-			right:-1px !important;
+			right:0px !important;
 			bottom:-57px !important;
 			z-index:15 !important;
 			a{
