@@ -79,40 +79,76 @@ module Crimagify
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
-					save_parent = parent_class.find(parent_id)
-
-					if save_parent.update_attributes(save_parent_values)
-						if id_array != []
-							id_array.map { |image_name|  
-								path = value["image_temporal_#{image_name}"]
-								if path.to_s != "" && File.exist?(path.to_s)
-									image = save_parent.crimagify_images.where("image_name=?", image_name)
-									if image != []
-										image.map { |img|  
-											img.update_attributes(:image => File.open(path.to_s),
-																						:crop_x => value["#{image_name}_crop_x"],
-																						:crop_y => value["#{image_name}_crop_y"],
-																						:crop_w => value["#{image_name}_crop_w"],
-																						:crop_h => value["#{image_name}_crop_h"])
+					if parent_id = ''
+						save_parent = parent_class.new(save_parent_values)
+						if save_parent.save
+							if id_array != []
+								id_array.map { |image_name|  
+									path = value["image_temporal_#{image_name}"]
+									if path.to_s != "" && File.exist?(path.to_s)
+										image = save_parent.crimagify_images.where("image_name=?", image_name)
+										if image != []
+											image.map { |img|  
+												img.update_attributes(:image => File.open(path.to_s),
+																							:crop_x => value["#{image_name}_crop_x"],
+																							:crop_y => value["#{image_name}_crop_y"],
+																							:crop_w => value["#{image_name}_crop_w"],
+																							:crop_h => value["#{image_name}_crop_h"])
+												img.crop_avatar_real
+											}
+										else
+											img = save_new_image(path,
+																					 value["#{image_name}_crop_x"],
+																					 value["#{image_name}_crop_y"],
+																					 value["#{image_name}_crop_w"],
+																					 value["#{image_name}_crop_h"],
+																					 save_parent.class.name,
+																					 save_parent.id,
+																					 image_name,
+																					 false)
+											img.save!
 											img.crop_avatar_real
-										}
-									else
-										img = save_new_image(path,
-																				 value["#{image_name}_crop_x"],
-																				 value["#{image_name}_crop_y"],
-																				 value["#{image_name}_crop_w"],
-																				 value["#{image_name}_crop_h"],
-																				 save_parent.class.name,
-																				 save_parent.id,
-																				 image_name,
-																				 false)
-										img.save!
-										img.crop_avatar_real
+										end
 									end
-								end
-							}
-						end						
+								}
+							end						
+						end
+					else
+						save_parent = parent_class.find(parent_id)
+						if save_parent.update_attributes(save_parent_values)
+							if id_array != []
+								id_array.map { |image_name|  
+									path = value["image_temporal_#{image_name}"]
+									if path.to_s != "" && File.exist?(path.to_s)
+										image = save_parent.crimagify_images.where("image_name=?", image_name)
+										if image != []
+											image.map { |img|  
+												img.update_attributes(:image => File.open(path.to_s),
+																							:crop_x => value["#{image_name}_crop_x"],
+																							:crop_y => value["#{image_name}_crop_y"],
+																							:crop_w => value["#{image_name}_crop_w"],
+																							:crop_h => value["#{image_name}_crop_h"])
+												img.crop_avatar_real
+											}
+										else
+											img = save_new_image(path,
+																					 value["#{image_name}_crop_x"],
+																					 value["#{image_name}_crop_y"],
+																					 value["#{image_name}_crop_w"],
+																					 value["#{image_name}_crop_h"],
+																					 save_parent.class.name,
+																					 save_parent.id,
+																					 image_name,
+																					 false)
+											img.save!
+											img.crop_avatar_real
+										end
+									end
+								}
+							end						
+						end
 					end
+					
 				end
 			else
 				if params[:id_images] != ""
