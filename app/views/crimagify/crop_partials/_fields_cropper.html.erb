@@ -4,19 +4,27 @@
   image_options ||= {}
   version_name ||= {}
   label_title ||= "Image"
+  choose_text ||= "Choose image"
 %>
 <div class="crimagify_item">
     <div id="<%= id_image %>" class="global_parent" name="<%= version_name %>">
       <%= hidden_field_tag "image_temporal_#{id_image}", {}, :class => "image_temporal", :value => "" %>
-      <div class="number input optional numeric stringish refresh_image">
-        <label class="crimagify_label"><%= label_title %></label><br/>
-        <div id="parent_image" class="parent_image" style="display:block;float:left"></div>
-        <%= image_tag url_image, image_options %>
+      <label class="crimagify_label"><%= label_title %></label>
+      <div class="crimagify_container">
+        <div id="parent_image" class="parent_image crimagify_parent_image" style="display:block;float:left"></div>
+        <div class="crimagify_default_image">
+          <span>
+            <%= image_tag url_image, image_options %>
+          </span>
+        </div>
+        <div class="crimagify_otions">
+            <label class="crimagify_otions">
+              <%= choose_text %>
+            </label>
+            <%= file_field_tag :image, :id => "uploader", :class => "uploader" %>
+        </div>
+          
         <div class="clear"></div>
-      </div>
-      <div class="number input optional numeric stringish" id="product_image_input">
-        <%= label_tag :chose_image %><br>
-        <%= file_field_tag :image, :id => "uploader", :class => "uploader" %>
       </div>
     </div>
 </div>

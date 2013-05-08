@@ -3,6 +3,17 @@ div#parent_image{
 	position:relative !important;
 	z-index:500 !important;
 }
+div.crimagify_item{
+	display:block;
+	label{
+		display:block;
+	}
+	label.crimagify_label{
+		font-size:14px;
+		font-weight:bold;
+		line-height:25px;
+	}
+}
 div#cropper_div{
 	position: absolute !important;
 	top: 0 !important;
