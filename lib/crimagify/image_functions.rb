@@ -54,6 +54,11 @@ module Crimagify
 		def update_images(object, params = {}, nested = false)
 			if nested
 				params.each do |key, value|
+					if value[:_destroy] == 'false'
+						destroy_attribute = false
+					else
+						destroy_attribute = true
+					end
 					parent = value[:parent]
 					parent_id = value[:parent_id]
 					save_parent_values = value.clone
@@ -79,7 +84,7 @@ module Crimagify
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
-					if parent_id == '' && value[:_destroy] == "false"
+					if parent_id == '' && destroy_attribute == false
 						save_parent = parent_class.new(save_parent_values)
 						if save_parent.save
 							if id_array != []
@@ -115,7 +120,7 @@ module Crimagify
 						end
 					else
 						object_parent_image = parent_class.find(parent_id)
-						if value[:_destroy] == '1'
+						if destroy_attribute
 							object_parent_image.destroy
 						else							
 							if object_parent_image.update_attributes(save_parent_values)
