@@ -15,6 +15,8 @@ $(function(){
             $new_fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent]');
             $new_fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent_id]');
             $new_fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][id_images]');
+            // $new_fieldset.find(".remove").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][_destroy]');
+            // $fieldset.find(".remove").removeAttr("id");
             var imagesTemporal = $new_fieldset.find(".image_temporal");
             for(var j = 0; j<imagesTemporal.length;j++){
                 var $inputImage = $(imagesTemporal[j]);
@@ -37,6 +39,8 @@ $(function(){
         $fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent]');
         $fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent_id]');
         $fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][id_images]');
+        // $fieldset.find(".remove").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][_destroy]');
+        // $fieldset.find(".remove").removeAttr("id");
         var imagesTemporal = $fieldset.find(".image_temporal");
         for(var i = 0; i<imagesTemporal.length;i++){
             var $inputImage = $(imagesTemporal[i]);
@@ -61,10 +65,14 @@ function getTime(){
 
 function setAttributesNames($form){
     var $fieldset = $form.find(".fieldset_crimagify_nested");
+    // var $remove = $fieldset.find(".remove")
+    // for(var r = 0; r)
     $fieldset.attr("id","nested_0");
     $fieldset.find(".parent").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent]");
     $fieldset.find(".parent_id").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent_id]");
     $fieldset.find(".id_images").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][id_images]");
+    // $fieldset.find(".remove").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][_destroy]");
+    // $fieldset.find(".remove").removeAttr("id");
     var imagesTemporal = $fieldset.find(".image_temporal");
     for(var i = 0; i<imagesTemporal.length;i++){
         var $inputImage = $(imagesTemporal[i]);
