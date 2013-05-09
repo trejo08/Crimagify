@@ -8,7 +8,6 @@ $(function(){
         $this = $frmCrimagify;
         var $fieldset = $frmCrimagify.find(".fieldset_crimagify_nested")
         for (var i = 0; i<$fieldset.length;i++){
-            console.log(i)
             var $new_fieldset = $($fieldset[i]);
             $new_fieldset.attr("id", "nested_"+i);
             $new_fieldset.attr("id","nested_" + i);
