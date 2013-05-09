@@ -70,6 +70,8 @@ module Crimagify
 							end
 						end					
 					end
+
+					puts "este es el valor de _destroy #{value[:_destroy]}"
 					
 					save_parent_values.delete(:parent)
 					save_parent_values.delete(:parent_id)
@@ -115,7 +117,7 @@ module Crimagify
 						end
 					else
 						object_parent_image = parent_class.find(parent_id)
-						if value[:_destroy]
+						if value[:_destroy] == 1
 							object_parent_image.destroy
 						else							
 							if object_parent_image.update_attributes(save_parent_values)
