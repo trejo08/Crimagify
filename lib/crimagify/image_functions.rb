@@ -81,7 +81,7 @@ module Crimagify
 
 					save_parent_values["#{object.class.name.underscore}_id"] = object.id
 					parent_class = parent.constantize
-					if parent_id == ''
+					if parent_id == '' && value[:_destroy] == "false"
 						save_parent = parent_class.new(save_parent_values)
 						if save_parent.save
 							if id_array != []
