@@ -66,6 +66,9 @@ div#cropper_div{
 				margin:0 10px 0 0  !important;
 				float:right !important;
 			}
+			a.actions_links{
+
+			}
 			a#crop_image{
 				color:#FFFFFF !important;
 				padding:7px 10px !important;
@@ -79,6 +82,9 @@ div#cropper_div{
 				@include boxShadow(1px 1px 4px,#000);
 				margin:0 !important;
 			}
+			img.loader_image{
+				display:none;
+			}
 		}
 	}
 }
@@ -88,4 +94,3 @@ div#cropper_div{
 .refresh_image{
 	position: relative !important;
 }
-
