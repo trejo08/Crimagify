@@ -109,11 +109,15 @@ $(function(){
 	$(".nested_crimagify_images").on("click",".crop_image",function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
 		parameters($(this));
+		$('a.actions_links').hide();
+		$(this).next('img.loader_image').show();
 	});
 
 	$(".parent_image").on("click",'.crop_image',function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
 		parameters($(this));
+		$('a.actions_links').hide();
+		$(this).next('img.loader_image').show();
 	});
 });
 
@@ -334,9 +338,11 @@ function parameters($crop){
 		data: data,
 		dataType: "script",
 		success: function(){
-			$("#cropper_div").hide("slow", function(){
-				$("#cropper_div").remove();
-			});			
+			setTimeout(function() {
+				$("#cropper_div").hide("slow", function(){
+					$("#cropper_div").remove();
+				});	
+			}, 600);
 		},
 		error: function(a,b,c){
 			console.log("error a");
@@ -345,6 +351,8 @@ function parameters($crop){
 			console.dir(b);
 			console.log("error c");
 			console.dir(c);
+			$('a.actions_links').hide();
+			$('a.actions_links').next('img.loader_image').show();
 		}
 	});
 };

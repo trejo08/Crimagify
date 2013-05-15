@@ -17,7 +17,7 @@
 			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
 			$areaImg.find(".<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
 		} else{
-			$areaImg.find(".img_start").hide("slow", function(){});			
+			$areaImg.find(".img_start").parents('div.crimagify_default_image').hide("slow", function(){});			
 			$areaImg.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
 			$areaImg.find(".image_temporal_<%=j @img[:parent_element_id] %>").attr("value", "<%= @img[:path_image] %>");
 			$areaImg.find(".id_images").attr("value", array_names);
@@ -41,7 +41,7 @@
 			$parent.find("#<%=j @img[:parent_element_id] %>_crop_w").attr("value", "<%= @img[:crop_w] %>");
 			$parent.find("#<%=j @img[:parent_element_id] %>_crop_h").attr("value", "<%= @img[:crop_h] %>");
 		} else{
-			$parent.find(".img_start").hide("slow", function(){});	
+			$parent.find(".img_start").parents('div.crimagify_default_image').hide("slow", function(){});	
 			$parent.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
 			$parent.find(".image_temporal").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
