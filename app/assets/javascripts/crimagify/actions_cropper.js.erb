@@ -11,14 +11,14 @@ var array_names = [];
 
 $(function(){
 
+	/*
 	// Events only for crimagify without nested models
-	$(".uploader").on("change", function(evt){
+	$("body").on("change",".uploader", function(evt){
 		var $this = $(this);
 		var $cropper =  $("#cropper_div");
 		var parent_element_id = $this.closest('.global_parent').attr("id");
 		var name_version = $this.closest('.global_parent').attr("name");
 		
-		/**/
 		if($cropper.length){
 			$cropper.hide('slow', function(){
 				//$cropper.closest('div.global_parent').find('.uploader').val('');
@@ -49,8 +49,7 @@ $(function(){
 				$this.val('');
 			};
 		}	
-		/**/
-	});	
+	});*/	
 
 	// Events only for crimagify with nested models
 	$(".nested_crimagify_images").on("change",".nested_uploader",function(evt){
@@ -117,6 +116,44 @@ $(function(){
 		parameters($(this));
 	});
 });
+
+function normal_uploader_crimagify(element){
+	var $this = $(element);
+	var $cropper =  $("#cropper_div");
+	var parent_element_id = $this.closest('.global_parent').attr("id");
+	var name_version = $this.closest('.global_parent').attr("name");
+		
+	if($cropper.length){
+		$cropper.hide('slow', function(){
+			//$cropper.closest('div.global_parent').find('.uploader').val('');
+			$cropper.hide('slow', function(){
+				$cropper.remove();
+			});
+			
+			if (validate_image(evt) == true) {
+				var reader =  new FileReader();
+				reader.onloadend = function(e){
+					render_image_temporal(e.target.result, parent_element_id, name_version);
+					render_image = e.target.result;
+				};
+				reader.readAsDataURL(evt.target.files[0]);
+			}else{
+				$this.val('');
+			};
+		});
+	}else{
+		if (validate_image(evt) == true) {
+			var reader =  new FileReader();
+			reader.onloadend = function(e){
+				render_image_temporal(e.target.result, parent_element_id, name_version);
+				render_image = e.target.result;
+			};
+			reader.readAsDataURL(evt.target.files[0]);
+		}else{
+			$this.val('');
+		};
+	}
+}
 
 
 function validate_image(evt,callback){
