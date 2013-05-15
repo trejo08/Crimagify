@@ -11,7 +11,7 @@ var array_names = [];
 
 $(function(){
 
-	/*
+	
 	// Events only for crimagify without nested models
 	$("body").on("change",".uploader", function(evt){
 		var $this = $(this);
@@ -49,7 +49,7 @@ $(function(){
 				$this.val('');
 			};
 		}	
-	});*/	
+	});
 
 	// Events only for crimagify with nested models
 	$(".nested_crimagify_images").on("change",".nested_uploader",function(evt){
@@ -120,7 +120,7 @@ $(function(){
 		$(this).next('img.loader_image').show();
 	});
 });
-
+/*
 function normal_uploader_crimagify(evt){
 	var $this = $(this);
 	var $cropper =  $("#cropper_div");
@@ -158,7 +158,7 @@ function normal_uploader_crimagify(evt){
 		};
 	}
 }
-
+*/
 
 function validate_image(evt,callback){
 	var size = evt.target.files[0].size/1024;
