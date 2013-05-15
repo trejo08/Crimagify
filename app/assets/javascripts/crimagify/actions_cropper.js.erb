@@ -121,8 +121,8 @@ $(function(){
 	});
 });
 
-function normal_uploader_crimagify(element){
-	var $this = $(element);
+function normal_uploader_crimagify(evt){
+	var $this = $(this);
 	var $cropper =  $("#cropper_div");
 	var parent_element_id = $this.closest('.global_parent').attr("id");
 	var name_version = $this.closest('.global_parent').attr("name");
