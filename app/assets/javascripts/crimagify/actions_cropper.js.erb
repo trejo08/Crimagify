@@ -11,23 +11,40 @@ var array_names = [];
 
 $(function(){
 
-	$body = $('body');
+	$body = $('body');	
 
-	
 	// Events only for crimagify without nested models
 	$body.on("change",".uploader", function(evt){
 		var $this = $(this);
+		var $div_closest = $this.closest('.global_parent');
 		var $cropper =  $("#cropper_div");
-		var parent_element_id = $this.closest('.global_parent').attr("id");
-		var name_version = $this.closest('.global_parent').attr("name");
-		
-		if($cropper.length){
-			$cropper.hide('slow', function(){
-				//$cropper.closest('div.global_parent').find('.uploader').val('');
+		var parent_element_id = $div_closest.attr("id");
+		var name_version = $div_closest.attr("name");
+
+		$div_closest.find('.crimagify_inputs').hide();
+		$div_closest.find('.crimagify_loader').show();
+		setTimeout(function(){
+			if($cropper.length){
 				$cropper.hide('slow', function(){
-					$cropper.remove();
+					//$cropper.closest('div.global_parent').find('.uploader').val('');
+					$cropper.hide('slow', function(){
+						$cropper.remove();
+					});
+					
+					if (validate_image(evt) == true) {
+						var reader =  new FileReader();
+						reader.onloadend = function(e){
+							render_image_temporal(e.target.result, parent_element_id, name_version);
+							render_image = e.target.result;
+						};
+						reader.readAsDataURL(evt.target.files[0]);
+					}else{
+						$div_closest.find('.crimagify_inputs').show();
+						$div_closest.find('.crimagify_loader').hide();
+						$this.val('');
+					};
 				});
-				
+			}else{
 				if (validate_image(evt) == true) {
 					var reader =  new FileReader();
 					reader.onloadend = function(e){
@@ -36,74 +53,85 @@ $(function(){
 					};
 					reader.readAsDataURL(evt.target.files[0]);
 				}else{
+					$div_closest.find('.crimagify_inputs').show();
+					$div_closest.find('.crimagify_loader').hide();
 					$this.val('');
 				};
-			});
-		}else{
-			if (validate_image(evt) == true) {
-				var reader =  new FileReader();
-				reader.onloadend = function(e){
-					render_image_temporal(e.target.result, parent_element_id, name_version);
-					render_image = e.target.result;
-				};
-				reader.readAsDataURL(evt.target.files[0]);
-			}else{
-				$this.val('');
-			};
-		}	
+			}
+		}, 1000);			
 	});
 
 	// Events only for crimagify with nested models
 	$(".nested_crimagify_images").on("change",".nested_uploader",function(evt){
 		$this = $(this);
 		var $cropper =  $("#cropper_div");
+		var $div_closest = $this.closest('.global_parent');
 		// TYPE: user, big, small, etc
-		var name_version = $this.closest(".global_parent").attr("name");
+		var name_version = $div_closest.attr("name");
 		// SECTION CROPPER: imgaA, imgB, imgC, etc
-		var parent_element_type = $this.closest(".global_parent").data("img");
+		var parent_element_type = $div_closest.data("img");
 		// ID FIELDSET
 		var parent_tag_id = $this.closest(".fieldset_crimagify_nested").attr("id");
-		if($cropper.length){
-			$cropper.fadeOut(1000, function(){
-				$cropper.remove();
-				if (validate_image(evt) == true) {					
+
+		$div_closest.find('.crimagify_inputs').hide();
+		$div_closest.find('.crimagify_loader').show();
+
+		setTimeout(function(){
+			if($cropper.length){
+				$cropper.fadeOut(1000, function(){
+					$cropper.remove();
+					if (validate_image(evt) == true) {					
+						var reader =  new FileReader();
+						reader.onloadend = function(e){
+							render_image_temporal_nested(e.target.result,parent_tag_id,name_version,parent_element_type);
+							render_image = e.target.result;
+						};
+						reader.readAsDataURL(evt.target.files[0]);
+					}else{
+						$div_closest.find('.crimagify_inputs').show();
+						$div_closest.find('.crimagify_loader').hide();
+						$this.val('');
+					};
+				});
+			}else{
+				if (validate_image(evt) == true) {
 					var reader =  new FileReader();
-					reader.onloadend = function(e){
+					reader.onloadend = function(e){					
 						render_image_temporal_nested(e.target.result,parent_tag_id,name_version,parent_element_type);
 						render_image = e.target.result;
 					};
-
 					reader.readAsDataURL(evt.target.files[0]);
 				}else{
+					$div_closest.find('.crimagify_inputs').show();
+					$div_closest.find('.crimagify_loader').hide();
 					$this.val('');
 				};
-			});
-		}else{
-			if (validate_image(evt) == true) {
-				var reader =  new FileReader();
-				reader.onloadend = function(e){					
-					render_image_temporal_nested(e.target.result,parent_tag_id,name_version,parent_element_type);
-					render_image = e.target.result;
-				};
-				reader.readAsDataURL(evt.target.files[0]);
-			}else{
-				$this.val('');
-			};
-		}		
+			}
+		}, 1000)
+			
 	});
 	/*===== Cancel Crop ======*/
 	$body.on("click",".cancel_crop",function(evt){
 		evt.preventDefault();
+		var $this = $(this);
+		var $div_closest = $this.closest('.global_parent');
+
 		$("#cropper_div").hide("slow", function(){
 			$("#cropper_div").remove();
 		});
+		$div_closest.find('.crimagify_inputs').show();
+		$div_closest.find('.crimagify_loader').hide();
 		$(".nested_uploader").val('');			
 	});
 	$body.on("click",'.cancel_crop',function(evt){
 		evt.preventDefault();
+		var $this = $(this);
+		var $div_closest = $this.closest('.global_parent');
 		$("#cropper_div").hide("slow", function(){
 			$("#cropper_div").remove();
 		});
+		$div_closest.find('.crimagify_inputs').show();
+		$div_closest.find('.crimagify_loader').hide();
 		$(".uploader").val('');			
 	});
 	/*====== Crop Image ========*/
@@ -122,45 +150,6 @@ $(function(){
 		$(this).next('img.loader_image').show();
 	});
 });
-/*
-function normal_uploader_crimagify(evt){
-	var $this = $(this);
-	var $cropper =  $("#cropper_div");
-	var parent_element_id = $this.closest('.global_parent').attr("id");
-	var name_version = $this.closest('.global_parent').attr("name");
-		
-	if($cropper.length){
-		$cropper.hide('slow', function(){
-			//$cropper.closest('div.global_parent').find('.uploader').val('');
-			$cropper.hide('slow', function(){
-				$cropper.remove();
-			});
-			
-			if (validate_image(evt) == true) {
-				var reader =  new FileReader();
-				reader.onloadend = function(e){
-					render_image_temporal(e.target.result, parent_element_id, name_version);
-					render_image = e.target.result;
-				};
-				reader.readAsDataURL(evt.target.files[0]);
-			}else{
-				$this.val('');
-			};
-		});
-	}else{
-		if (validate_image(evt) == true) {
-			var reader =  new FileReader();
-			reader.onloadend = function(e){
-				render_image_temporal(e.target.result, parent_element_id, name_version);
-				render_image = e.target.result;
-			};
-			reader.readAsDataURL(evt.target.files[0]);
-		}else{
-			$this.val('');
-		};
-	}
-}
-*/
 
 function validate_image(evt,callback){
 	var size = evt.target.files[0].size/1024;
@@ -345,6 +334,9 @@ function parameters($crop){
 					$("#cropper_div").remove();
 				});	
 			}, 600);
+			$parent_tag.find('.crimagify_inputs').show();
+			$parent_tag.find('.crimagify_loader').hide();
+			
 		},
 		error: function(a,b,c){
 			console.log("error a");

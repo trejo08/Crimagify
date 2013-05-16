@@ -197,7 +197,6 @@ module Crimagify
 		end
 
 		def create_new_images(object, params = nil, nested = false)
-			puts "esto trae params #{params}"
 			
 			if !params.nil?
 				if nested
