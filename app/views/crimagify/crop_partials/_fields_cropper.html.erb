@@ -14,15 +14,20 @@
         <div id="parent_image" class="parent_image crimagify_parent_image" style="display:block;float:left"></div>
         <div class="crimagify_default_image">
           <span>
-            <%= image_tag url_image, image_options %>
+              <%= image_tag url_image, image_options %>
           </span>
         </div>
         <div class="crimagify_clear"></div>
         <div class="crimagify_otions">
+          <div class="crimagify_inputs">
             <label class="crimagify_otions">
               <%= choose_text %>
             </label>
             <%= file_field_tag :image, :id => "uploader_#{version_name}",  :class => "uploader crimagify_simple_uploader crimagify_uploader" %>
+          </div>
+          <div class="crimagify_loader">
+            <%= image_tag "loader.jpg"%>
+          </div>
         </div>
           
         <div class="crimagify_clear"></div>

@@ -24,7 +24,12 @@ div.crimagify_item{
 
 		}
 		div.crimagify_otions{
-
+			div.crimagify_inputs{
+				position:relative;
+			}
+			div.crimagify_loader{
+				display:none;
+			}
 		}
 	}//div.crimagify_container
 }//div.crimagify_item

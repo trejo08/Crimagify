@@ -19,10 +19,15 @@
         </div>
         <div class="crimagify_clear"></div>
         <div class="crimagify_otions">
-            <label class="crimagify_otions">
-              <%= choose_text %>
-            </label>
-            <%= file_field_tag "", :name=>"crimagify_nested_uploader", :class => "nested_uploader crimagify_nested_uploader crimagify_uploader" %>
+             <div class="crimagify_inputs">
+              <label class="crimagify_otions">
+                <%= choose_text %>
+              </label>
+              <%= file_field_tag "", :name=>"crimagify_nested_uploader", :class => "nested_uploader crimagify_nested_uploader crimagify_uploader" %>
+            </div>
+            <div class="crimagify_loader">
+              <%= image_tag "loader.jpg"%>
+            </div>
         </div>
         <div class="crimagify_clear"></div>
       </div>
