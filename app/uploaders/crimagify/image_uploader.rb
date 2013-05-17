@@ -44,7 +44,6 @@ module Crimagify
     
     array_versions = enable_processing.uniq
     array_versions.each do |item|
-      puts "creando la version de imagen #{item}.."
       item = item.to_sym
       version item do
         process :crop

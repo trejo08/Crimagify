@@ -40,10 +40,8 @@ module Crimagify
 	    		image = image_url(size_image) rescue ""
 	    		if image == ""
 	    			if ENV['DEFAULT_IMAGE'].nil?
-	    				puts ENV['DEFAULT_IMAGE']
 	    				image = "/crimagify/no_selected.png"
 	    			else
-	    				puts ENV['DEFAULT_IMAGE']
 	    				image = ENV['DEFAULT_IMAGE']
 	    			end
 	    		end
