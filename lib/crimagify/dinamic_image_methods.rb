@@ -4,7 +4,24 @@ module Crimagify
 
 		extend ActiveSupport::Concern 
 
-		
+		def build_methods_images#(methods = nil)
+			puts "me llamaron sin problemas desde el otro modulo"
+			array_methods = []
+			CRIMAGIFY_ENV["#{self.name}"].each do |item|
+				array_methods << item.first
+			end
+
+			array_methods.each do |name|
+				define_method("#{name}") do
+					img = crimagify_images.find_by_image_name("#{name}")# rescue ""
+					if img == nil
+						return []
+					else
+						return img
+					end
+				end
+			end
+		end
 
 		def build_sizes_images#(methods = nil)
 			array_versions = []

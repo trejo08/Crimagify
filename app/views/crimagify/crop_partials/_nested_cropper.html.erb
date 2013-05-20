@@ -8,7 +8,7 @@
 %>
 <div class="crimagify_item">
   <div data-img="<%= id_image %>" class="global_parent <%= id_image %>" name="<%= version_name %>">
-  <%= hidden_field_tag "image_temporal_#{id_image}", {}, :value => "", :name => "image_temporal_#{id_image}", :class => "image_temporal image_temporal_#{id_image}" %>
+  <%= hidden_field_tag "#{id_image}_image_temporal", {}, :value => "", :name => "#{id_image}_image_temporal", :class => "image_temporal #{id_image}_image_temporal" %>
        <label class="crimagify_label"><%= label_title %></label>
       <div class="crimagify_container">
         <div class="parent_image crimagify_parent_image"></div>

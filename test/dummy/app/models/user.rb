@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-	extend Crimagify::DinamicImageMethods
+	# extend Crimagify::DinamicImageMethods
+  # include Crimagify::CrimagifyEnvs
 	#proximo paso que esto sea dinamico en un generate
 	has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 	has_many :products
@@ -12,6 +13,6 @@ class User < ActiveRecord::Base
 
   #===========================building methods dinamically===========================#
   #y esto tambien tiene que ser dinamico en los generators
-  build_methods_images
+  # build_methods_images
   #==================================================================================#
 end
