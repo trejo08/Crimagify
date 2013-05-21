@@ -4,17 +4,24 @@ module Crimagify
 
 		included do
 			puts "se han incluido los callbacks"
+			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
+			after_update :call_before_update_for
 			after_save :save_images
+			# after_find :build_methods_images
+			
 		end
+
+		# @parameters = {}
 
 		def generate_attrs
 	    CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
 	    		name_accesible = "#{image_name[0]}_#{attr_acc}"
-	    		self.class.send(:attr_accessible, name_accesible)
-	    		self.class.send(:attr_accessor, name_accesible)
+	    		self.class.send(:attr_accessible, "#{name_accesible}")
+	    		self.class.send(:attr_accessor, "#{name_accesible}")
+	    		# puts self.inspect
 	    	end
 	    	self.class.send(:attr_accessible, "parent")
 	    	self.class.send(:attr_accessible, "parent_id")
@@ -33,38 +40,37 @@ module Crimagify
 
 			array_methods.each do |name|
 				puts "soy el item #{name}"
-				# define_method("#{name}") do
-				# 	img = crimagify_images.find_by_image_name("#{name}")# rescue ""
-				# 	if img == nil
-				# 		return []
-				# 	else
-				# 		return img
-				# 	end
-				# end
+				define_method("#{name}") do
+					img = crimagify_images.find_by_image_name("#{name}")# rescue ""
+					if img == nil
+						return []
+					else
+						return img
+					end
+				end
 			end
 		end
 
-		def save_images			
-			params = {}
-			CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
-	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
-	    	puts self.inspect
-	    	data.each do |attr_acc|
-	    		puts "este es el valor del crop_x: #{self.imgA_crop_x}"
-	    		puts "este es el valor del crop_x: #{image_name[0]}_crop_x"
-	    		name_accesible = "#{image_name[0]}_#{attr_acc}"
-	    		params[name_accesible.to_sym] = self[name_accesible.to_sym]
-	    		# params[name_accesible.to_s] = get_attr_acc(name_accesible)
-	    	end
-	    end
-	    puts "este sera el params que voy a enviar: #{params.to_yaml}"
-			# Crimagify::ImageFunctions::update_images(self, object_params, object_has_nested)
+		def call_before_update_for
+			# self.new.build_methods_images
+			save_images
 		end
 
-		def get_attr_acc(accessor)
-			puts self["#{accessor.to_s}"].inspect
-			value = self["#{accessor.to_s}"]
-			return value
+		def save_images
+			
+			@parameters = {}
+			CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
+	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
+	    	data.each do |attr_acc|
+	    		name_accesible = "#{image_name[0]}_#{attr_acc}"
+	    		@parameters[name_accesible.to_sym] = eval("#{name_accesible}")
+	    	end
+	    	@parameters[:parent] = self.parent
+	    	@parameters[:parent_id] = self.parent_id
+	    	@parameters[:id_images] = self.id_images
+	    end
+			Crimagify::ImageFunctions::generate_image(self, @parameters)
+			puts "me llamaron esta vez, porque acabo de guardar un producto y sus imagenes imagen"
 		end
 
 	end

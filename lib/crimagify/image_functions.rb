@@ -197,84 +197,96 @@ module Crimagify
 		end
 
 		def create_new_images(object, params = nil, nested = false)
-			
 			if !params.nil?
-				if nested
+				parent = params[:parent]
+				parent_id = params[:parent_id]
+
+				id_array = []
+				params.each do |key, value|
+					if value != "" && !value.nil?
+						key_split = key.to_s
+						name = key_split.split("_")
+						if name.length.to_i == 3 && "#{name[1]}_#{name[2]}" == "image_temporal"
+							id_array << name[0].to_s
+						end
+					end
+				end
+				id_array.map { |image_name|
+					path = ""
 					params.each do |key, value|
-						if value[:_destroy] == 'false'
-							destroy_attribute = false
-						else
-							destroy_attribute = true
-						end
-						if !destroy_attribute
-							parent = value[:parent]
-							parent_id = value[:parent_id]
-							save_parent_values = value.clone
-							id_array = []
-
-							value.each do |key|
-								name = key[0].split("_")						
-								if name.length.to_i == 3 && "#{name[0]}_#{name[1]}" == "image_temporal"
-									id_array << name[2].to_s
-								end
-								id_array.each do |image_name|
-									if key[0].match(image_name)
-										save_parent_values.delete(key[0].to_sym)
-									end
-								end
+						if value != "" && !value.nil?
+							if key.to_s == "#{image_name}_image_temporal"
+								path = value.to_s
 							end
-							save_parent_values.delete(:parent)
-							save_parent_values.delete(:parent_id)
-							save_parent_values.delete(:id_images)
-							save_parent_values.delete(:id)
-							save_parent_values.delete(:_destroy)
-
-
-							save_parent_values["#{object.class.name.underscore}_id"] = object.id
-							parent_class = parent.constantize
-							save_parent = parent_class.new(save_parent_values)
-
-							if save_parent.save
-								id_array.map { |image_name| 
-									path = value["image_temporal_#{image_name}"]
-
-									if path.to_s != "" && File.exist?(path.to_s)
-										img = save_new_image(path.to_s,
-															 					 value["#{image_name}_crop_x"],
-															 					 value["#{image_name}_crop_y"],
-															 					 value["#{image_name}_crop_w"],
-															 					 value["#{image_name}_crop_h"],
-															 					 save_parent.class.name,
-															 					 save_parent.id,
-															 					 image_name,
-															 					 false)
-										img.save!
-										img.crop_avatar_real
-									end
-								}
-							end
-						end											
-					end				
-				else
-					id_array = params[:id_images].split(",")
-					id_array.map { |image_name|
-						path = params["image_temporal_#{image_name}"]
-						if !(path.to_s == "") && File.exist?(path.to_s)
-							img = save_new_image(path.to_s,
-												 					 params["#{image_name}_crop_x"],
-												 					 params["#{image_name}_crop_y"],
-												 					 params["#{image_name}_crop_w"],
-												 					 params["#{image_name}_crop_h"],
-												 					 object.class.name,
-												 					 object.id,
-												 					 image_name,
-												 					 false)
-							img.save!
-							img.crop_avatar_real
 						end
-					}
-				end	
+					end
+					if path.to_s != "" && File.exist?(path.to_s)
+						img = save_new_image(path.to_s,
+																 params["#{image_name}_crop_x"],
+																 params["#{image_name}_crop_y"],
+																 params["#{image_name}_crop_w"],
+																 params["#{image_name}_crop_h"],
+																 object.class.name,
+																 object.id,
+																 image_name,
+																 false)
+						img.save!
+						img.crop_avatar_real
+					end
+				}
 			end					
 		end
+
+		def generate_image(object, params = {})
+
+			puts "primero voy a evaluar si el parent tiene o no tiene imagenes"
+			images = object.crimagify_images
+			puts "esto me devuelve esa consulta"
+			puts images.inspect
+
+			puts object.class.name
+			puts object.id
+
+			if !params.nil?
+				parent = params[:parent]
+				parent_id = params[:parent_id]
+
+				id_array = []
+				params.each do |key, value|
+					if value != "" && !value.nil?
+						key_split = key.to_s
+						name = key_split.split("_")
+						if name.length.to_i == 3 && "#{name[1]}_#{name[2]}" == "image_temporal"
+							id_array << name[0].to_s
+						end
+					end
+				end
+				id_array.map { |image_name|
+					path = ""
+					params.each do |key, value|
+						if value != "" && !value.nil?
+							if key.to_s == "#{image_name}_image_temporal"
+								path = value.to_s
+							end
+						end
+					end
+					if path.to_s != "" && File.exist?(path.to_s)
+						img = save_new_image(path.to_s,
+																 params["#{image_name}_crop_x"],
+																 params["#{image_name}_crop_y"],
+																 params["#{image_name}_crop_w"],
+																 params["#{image_name}_crop_h"],
+																 object.class.name,
+																 object.id,
+																 image_name,
+																 false)
+						img.save!
+						img.crop_avatar_real
+					end
+				}
+			end
+		end
+
+
 	end
 end
