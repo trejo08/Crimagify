@@ -1,6 +1,7 @@
 module Crimagify
 	module CrimagifyEnvs
 		extend ActiveSupport::Concern
+		extend Crimagify::DinamicImageMethods
 
 		included do
 			puts "se han incluido los callbacks"
