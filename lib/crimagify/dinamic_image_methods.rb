@@ -2,7 +2,8 @@ require 'active_support/core_ext'
 module Crimagify
 	module DinamicImageMethods
 
-		extend ActiveSupport::Concern 
+		extend ActiveSupport::Concern
+		include Crimagify::CrimagifyEnvs 
 
 		def build_methods_images#(methods = nil)
 			puts "me llamaron sin problemas desde el otro modulo"
