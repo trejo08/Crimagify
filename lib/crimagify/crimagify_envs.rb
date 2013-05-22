@@ -1,9 +1,10 @@
 module Crimagify
 	module CrimagifyEnvs
 		extend ActiveSupport::Concern
-		extend Crimagify::DinamicImageMethods
+
 
 		included do
+			extend Crimagify::DinamicImageMethods
 			puts "se han incluido los callbacks"
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
