@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	# extend Crimagify::DinamicImageMethods
-  # include Crimagify::CrimagifyEnvs
+  include Crimagify::CrimagifyEnvs
 	#proximo paso que esto sea dinamico en un generate
 	# has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 	has_many :products
