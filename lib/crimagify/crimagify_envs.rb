@@ -38,7 +38,8 @@ module Crimagify
 				puts image_name[0]
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
-	    		if !eval("#{image_name[0]}_image_temporal").blank? && !eval("#{image_name[0]}_image_temporal").nil?
+	    		puts eval("#{image_name[0]}_image_temporal")
+	    		if eval("#{image_name[0]}_image_temporal") != "" && !eval("#{image_name[0]}_image_temporal").nil?
 	    			puts "se va a agregar un atributo"
 	    			name_accesible = "#{image_name[0]}_#{attr_acc}"
 	    			parameters[name_accesible.to_sym] = eval("#{name_accesible}")
