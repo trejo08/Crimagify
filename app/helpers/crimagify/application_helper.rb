@@ -55,7 +55,7 @@ module Crimagify
 			end
 			if url_image == ""
 				if ENV['DEFAULT_IMAGE'].nil?
-					url_image = "crimagify/no_selected.jpg"
+					url_image = "crimagify/no_selected_image.jpg"
 				else
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end

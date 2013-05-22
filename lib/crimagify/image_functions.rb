@@ -240,27 +240,28 @@ module Crimagify
 		def generate_image(object, params = {})
 
 			puts "primero voy a evaluar si el parent tiene o no tiene imagenes"
-			images = object.crimagify_images
 			puts "esto me devuelve esa consulta"
-			puts images.inspect
-
+			
 			puts object.class.name
 			puts object.id
 
-			if !params.nil?
-				parent = params[:parent]
-				parent_id = params[:parent_id]
+			images = object.crimagify_images
 
-				id_array = []
-				params.each do |key, value|
-					if value != "" && !value.nil?
-						key_split = key.to_s
-						name = key_split.split("_")
-						if name.length.to_i == 3 && "#{name[1]}_#{name[2]}" == "image_temporal"
-							id_array << name[0].to_s
-						end
+			parent = params[:parent]
+			parent_id = params[:parent_id]
+			id_array = []
+			
+			params.each do |key, value|
+				if value != "" && !value.nil?
+					key_split = key.to_s
+					name = key_split.split("_")
+					if name.length.to_i == 3 && "#{name[1]}_#{name[2]}" == "image_temporal"
+						id_array << name[0].to_s
 					end
 				end
+			end
+			
+			if images.empty?
 				id_array.map { |image_name|
 					path = ""
 					params.each do |key, value|
@@ -284,9 +285,41 @@ module Crimagify
 						img.crop_avatar_real
 					end
 				}
-			end
+			else
+				id_array.map { |image_name|  
+					path = ""
+					params.each do |key, value|
+						if !value.empty? && !value.nil?
+							if key.to_s == "#{image_name}_image_temporal"
+								path = value.to_s
+							end							
+						end
+					end
+					if path.to_s != "" && FIle.exist?(path.to_s)
+						img = images.where("image_name=?", image_name).first
+						if img.nil?
+							img = save_new_image(path.to_s,
+																 params["#{image_name}_crop_x"],
+																 params["#{image_name}_crop_y"],
+																 params["#{image_name}_crop_w"],
+																 params["#{image_name}_crop_h"],
+																 object.class.name,
+																 object.id,
+																 image_name,
+																 false)
+							img.save!
+							img.crop_avatar_real
+						else
+							img.update_attributes(:image => File.open(path.to_s),
+																		:crop_x => params["#{image_name}_crop_x"],
+																		:crop_y => params["#{image_name}_crop_y"],
+																		:crop_w => params["#{image_name}_crop_w"],
+																		:crop_h => params["#{image_name}_crop_h"])
+							img.crop_avatar_real
+						end
+					end
+				}
+			end			
 		end
-
-
 	end
 end
