@@ -9,6 +9,7 @@ module Crimagify
 			after_update :call_before_update_for
 			after_save :save_images
 			# after_find :build_methods_images
+			build_methods_images
 			
 		end
 
@@ -32,24 +33,24 @@ module Crimagify
 	    end
 		end
 
-		def build_methods_images
-			array_methods = []
-			CRIMAGIFY_ENV["#{self.class.name}"].each do |item|
-				array_methods << item.first
-			end
+		# def build_methods_images
+		# 	array_methods = []
+		# 	CRIMAGIFY_ENV["#{self.class.name}"].each do |item|
+		# 		array_methods << item.first
+		# 	end
 
-			array_methods.each do |name|
-				puts "soy el item #{name}"
-				define_method("#{name}") do
-					img = crimagify_images.find_by_image_name("#{name}")# rescue ""
-					if img == nil
-						return []
-					else
-						return img
-					end
-				end
-			end
-		end
+		# 	array_methods.each do |name|
+		# 		puts "soy el item #{name}"
+		# 		define_method("#{name}") do
+		# 			img = crimagify_images.find_by_image_name("#{name}")# rescue ""
+		# 			if img == nil
+		# 				return []
+		# 			else
+		# 				return img
+		# 			end
+		# 		end
+		# 	end
+		# end
 
 		def call_before_update_for
 			# self.new.build_methods_images
