@@ -8,7 +8,7 @@ module Crimagify
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
 			after_validation :save_images
-			after_save :save_images
+			after_save! :save_images
 			build_methods_images			
 		end
 
