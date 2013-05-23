@@ -295,7 +295,7 @@ module Crimagify
 							end							
 						end
 					end
-					if path.to_s != "" && FIle.exist?(path.to_s)
+					if path.to_s != "" && File.exist?(path.to_s)
 						img = images.where("image_name=?", image_name).first
 						if img.nil?
 							img = save_new_image(path.to_s,
