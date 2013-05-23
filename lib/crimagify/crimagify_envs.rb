@@ -13,7 +13,6 @@ module Crimagify
 		end
 
 		def generate_attrs
-			puts "me estan llamando"
 	    CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
@@ -31,22 +30,20 @@ module Crimagify
 		end
 
 		def save_images
-			puts "si llama a la funcion en upodate tambien"			
 			parameters = {}
 			CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
 				puts eval("#{image_name[0]}_image_temporal")
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
-	    		puts eval("#{image_name[0]}_image_temporal")
 	    		if eval("#{image_name[0]}_image_temporal") != "" && !eval("#{image_name[0]}_image_temporal").nil?
-	    			puts "se va a agregar un atributo"
+	    			puts "se va a agregar un atributo #{image_name[0]}_#{attr_acc}"
+	    			puts eval("#{image_name[0]}_#{attr_acc}")
 	    			name_accesible = "#{image_name[0]}_#{attr_acc}"
 	    			parameters[name_accesible.to_sym] = eval("#{name_accesible}")
 	    		end
 	    	end
 	    end
 	    if !parameters.empty?
-	    	puts "me llamaron despues de actualizar"
 	    	parameters[:parent] = self.parent
 	    	parameters[:parent_id] = self.parent_id
 	    	parameters[:id_images] = self.id_images

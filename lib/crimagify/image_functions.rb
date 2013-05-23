@@ -238,19 +238,11 @@ module Crimagify
 		end
 
 		def generate_image(object, params = {})
-
 			puts "primero voy a evaluar si el parent tiene o no tiene imagenes"
-			# puts "esto me devuelve esa consulta"
-			
-			# puts object.class.name
-			# puts object.id
-
 			puts params.inspect
-
+			# parent = params[:parent]
+			# parent_id = params[:parent_id]
 			images = object.crimagify_images
-
-			parent = params[:parent]
-			parent_id = params[:parent_id]
 			id_array = []
 			
 			params.each do |key, value|
