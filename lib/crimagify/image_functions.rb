@@ -39,12 +39,12 @@ module Crimagify
 
 		def save_new_image(path, x, y, w, h, parent_type, parent_id, image_name, temporal)
 			data = {:crop_x => x,
-					:crop_y => y,
-					:crop_w => w,
-					:crop_h => h,
-					:parent_type => parent_type,
-					:parent_id => parent_id,
-					:image_name => image_name
+							:crop_y => y,
+							:crop_w => w,
+							:crop_h => h,
+							:parent_type => parent_type,
+							:parent_id => parent_id,
+							:image_name => image_name
 			}
 			data[(temporal ? :image_temporal : :image)] = File.open(path)
 
@@ -299,14 +299,14 @@ module Crimagify
 						img = images.where("image_name=?", image_name).first
 						if img.nil?
 							img = save_new_image(path.to_s,
-																 params["#{image_name}_crop_x"],
-																 params["#{image_name}_crop_y"],
-																 params["#{image_name}_crop_w"],
-																 params["#{image_name}_crop_h"],
-																 object.class.name,
-																 object.id,
-																 image_name,
-																 false)
+																	 params["#{image_name}_crop_x"],
+																	 params["#{image_name}_crop_y"],
+																	 params["#{image_name}_crop_w"],
+																	 params["#{image_name}_crop_h"],
+																	 object.class.name,
+																	 object.id,
+																	 image_name,
+																	 false)
 							img.save!
 							img.crop_avatar_real
 						else

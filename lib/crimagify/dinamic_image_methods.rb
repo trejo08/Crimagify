@@ -3,10 +3,8 @@ module Crimagify
 	module DinamicImageMethods
 
 		extend ActiveSupport::Concern
-		# include Crimagify::CrimagifyEnvs 
 
 		def build_methods_images#(methods = nil)
-			puts "me llamaron sin problemas desde el otro modulo"
 			array_methods = []
 			CRIMAGIFY_ENV["#{self.name}"].each do |item|
 				array_methods << item.first
@@ -42,7 +40,7 @@ module Crimagify
 	    		image = image_url(size_image) rescue ""
 	    		if image == ""
 	    			if ENV['DEFAULT_IMAGE'].nil?
-	    				image = "/crimagify/no_selected.png"
+	    				image = "/crimagify/no_selected_image.jpg"
 	    			else
 	    				image = ENV['DEFAULT_IMAGE']
 	    			end

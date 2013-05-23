@@ -1,4 +1,4 @@
-<%= form_for(@user, :html => {:class => "nested_crimagify_images", :data => {parentobject: @user.class.name.underscore, parent: @user.products.first.class.name.underscore.pluralize} }) do |f| %>
+<%= form_for(@user, :html => {:class => "nested_crimagify_images", :data => {parentobject: "user", parent: "products"} }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -12,6 +12,7 @@
   <% end %>
 
   <%#= CRIMAGIFY_ENV.to_yaml %>
+  <%= @user.products %>
 
   <div class="field">
     <%= f.label :name %><br />
