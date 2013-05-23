@@ -239,11 +239,13 @@ module Crimagify
 
 		def generate_image(object, params = {})
 
-			# puts "primero voy a evaluar si el parent tiene o no tiene imagenes"
+			puts "primero voy a evaluar si el parent tiene o no tiene imagenes"
 			# puts "esto me devuelve esa consulta"
 			
 			# puts object.class.name
 			# puts object.id
+
+			puts params.inspect
 
 			images = object.crimagify_images
 
