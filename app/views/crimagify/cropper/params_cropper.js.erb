@@ -1,4 +1,3 @@
-console.dir($.parseJSON("<%=j @img.to_json.html_safe %>"));	
 <% if @img.has_key?(:parent_fieldset)  %>	
 	if ($("#<%=j @img[:parent_fieldset] %>").find(".<%=j @img[:parent_element_id] %>").find(".parent_image").length) {
 		var $fieldset = $("#<%=j @img[:parent_fieldset] %>");
