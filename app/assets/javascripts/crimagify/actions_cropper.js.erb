@@ -113,6 +113,7 @@ $(function(){
 	/*===== Cancel Crop ======*/
 	$body.on("click",".cancel_crop",function(evt){
 		evt.preventDefault();
+		onCropSuccess();
 		var $this = $(this);
 		var $div_closest = $this.closest('.global_parent');
 
