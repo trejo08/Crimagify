@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :products_attributes
 
   accepts_nested_attributes_for :products, allow_destroy: true
+  # self.assign_attributes(params[:producs_attributes], :create)
 
   #===========================building methods dinamically===========================#
   #y esto tambien tiene que ser dinamico en los generators

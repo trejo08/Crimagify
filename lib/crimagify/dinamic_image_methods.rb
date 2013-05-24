@@ -39,7 +39,11 @@ module Crimagify
 	    	define_method("#{name_size}") do
 	    		image = image_url(size_image) rescue ""
 	    		if image == ""
-	    			image = "rails.png"
+	    			if ENV['DEFAULT_IMAGE'].nil?
+	    				image = "/crimagify/no_selected.png"
+	    			else
+	    				image = ENV['DEFAULT_IMAGE']
+	    			end
 	    		end
 	    		return image
 	    	end

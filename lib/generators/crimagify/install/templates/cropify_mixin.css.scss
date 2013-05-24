@@ -1,0 +1,107 @@
+@mixin opacity($n:1,$ie:100){
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity="$n")";
+	moz-opacity:$n;
+	filter: alpha(opacity=$ie);
+	opacity:$n;
+}
+@mixin textShadow($px:2px 1px 1px,$color:#000000){
+	text-shadow: $px $color;
+	filter: dropshadow(color=$color, offx=2, offy=2);
+}
+@mixin rounded($rounded:5px){
+	-webkit-border-radius:$rounded;
+	-khtml-border-radius:$rounded;
+	-moz-border-radius:$rounded;
+	-o-border-radius:$rounded;
+	border-radius:$rounded;
+}
+@mixin spriteImages($padding:10px,$position:-10px -10px,$color:transparent){
+	padding:$padding;
+	background:$color url('/assets/sprite.png') $position no-repeat;
+}
+
+@mixin sampleSprite($x){
+	background:transparent image-url('/assets/sprite.png') $x no-repeat;
+}
+
+/**/
+@mixin backgroundImage($imageName:no-logo,$format:png, $repeat:no-repeat,$color:transparent){
+	background:$color url(/assets/system/$imageName$format) $repeat !important;
+}
+/*store.scc.scss*/
+@mixin tableCell(){
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+@mixin animation($position:all, $time:0.5s, $move:ease-in-out){
+  -webkit-transition: $position $time $move;
+  -moz-transition: $position $time $move;
+  -o-transition: $position $time $move;
+  -ms-transition: $position $time $move;
+  transition: $position $time $move;
+}
+@mixin transformAnimation($scale:1.2){
+	-webkit-transform: scale($scale);
+	-moz-transform: scale($scale);
+	-o-transform: scale($scale);
+	-ms-transform: scale($scale);
+	transform: scale($scale);
+}
+@mixin animationdelay($time:0.1s){
+	-webkit-transition-delay: $time;
+	-moz-transition-delay: $time;
+	-o-transition-delay: $time;
+	-ms-transition-delay: $time;
+	transition-delay: $time;
+
+}
+@mixin boxShadow($size:1px 1px 1px, $color:#333){
+	-webkit-box-shadow: $size $color;
+	-moz-box-shadow: $size $color;
+	box-shadow: $size $color;
+}
+@mixin rotate($rotate:-180deg){
+	-webkit-transform:rotate($rotate);
+	-moz-transform:rotate($rotate);
+	-o-transform:rotate($rotate);
+	-ms-transform:rotate($rotate);
+	transform:rotate($rotate);
+}
+@mixin boderRadius($rad){
+	-webkit-border-radius:$rad;
+	-moz-border-radius:$rad;
+	border-radius:$rad;
+}
+@mixin dropShadow($size:2px 2px 12px,$op:0.8){
+	filter: drop-shadow($size rgba(0,0,0,$op));
+	-webkit-filter: drop-shadow($size rgba(0,0,0,$op));
+	-moz-filter: drop-shadow($size rgba(0,0,0,$op));
+	-o-filter: drop-shadow($size rgba(0,0,0,$op));
+	ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='rgba(0,0,0,"$op")')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5,Direction=135,Color='rgba(0,0,0,$op)');
+	//filter: url(#drop-shadow);
+}
+/*Degradiants*/
+
+@mixin blue_skye_to_blue_hard_vert(){
+	background: #3399ff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #3399ff 0%, #2268ff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3399ff), color-stop(100%,#2268ff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #3399ff 0%,#2268ff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #3399ff 0%,#2268ff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #3399ff 0%,#2268ff 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #3399ff 0%,#2268ff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3399ff', endColorstr='#2268ff',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin black_easy_to_black_dark(){
+	background: #828c95; /* Old browsers */
+	background: -moz-linear-gradient(top,  #828c95 0%, #28343b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#828c95), color-stop(100%,#28343b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #828c95 0%,#28343b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #828c95 0%,#28343b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #828c95 0%,#28343b 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #828c95 0%,#28343b 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#828c95', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+}

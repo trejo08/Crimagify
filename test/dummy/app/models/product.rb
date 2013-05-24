@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 	has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 	belongs_to :user
   attr_accessible :description, :name, :user_id
-  attr_accessor :user_id
+
   #===========================building methods dinamically===========================#
   #y esto tambien tiene que ser dinamico en los generators
   build_methods_images

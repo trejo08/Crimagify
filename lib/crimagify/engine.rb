@@ -1,7 +1,7 @@
 module Crimagify
 
 	require 'rubygems'
-	require 'rmagick'
+	require 'RMagick'
 	require 'carrierwave'
 
 	class Engine < ::Rails::Engine

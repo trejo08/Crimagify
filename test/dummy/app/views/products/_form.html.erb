@@ -21,8 +21,8 @@
   </div>
   <!--StartCropperImagesSection-->
   <%= images_id(@product) %>
-  <%= image_cropper(@product, { image_name: "imgA", ratio: :user }) %><br/>
-  <%= image_cropper(@product, { image_name: "imgB", ratio: :big }) %><br/>
+  <%= image_cropper(@product, { image_name: "imgA", ratio: :user , :label_title => "tralalal", :choose_text => "Elegir Imagen"}) %><br/>
+  <%= image_cropper(@product, { image_name: "imgB", ratio: :big , :choose_text => "Cambiar Imagen"}) %><br/>
   <%#= image_cropper(@product, { image_name: "imgC", ratio: :gigant }) %><br/>
   <%#= image_tag @product.imgA.user %>
   <!--StartCropperImagesSection-->

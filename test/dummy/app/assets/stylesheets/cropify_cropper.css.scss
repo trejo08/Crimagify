@@ -1,0 +1,101 @@
+@import 'cropify_mixin.css.scss';
+
+div.crimagify_item{
+	display:block;
+	label{
+		display:block;
+	}
+	label.crimagify_label{
+		font-size:14px;
+		font-weight:bold;
+		line-height:25px;
+	}
+	div.crimagify_clear{
+		clear:both;
+	}
+	div.crimagify_parent_image{
+		position:relative;
+	}
+	div.crimagify_container{
+		div.crimagify_parent_image{
+
+		}
+		div.crimagify_default_image{
+
+		}
+		div.crimagify_otions{
+			div.crimagify_inputs{
+				position:relative;
+			}
+			div.crimagify_loader{
+				display:none;
+			}
+		}
+	}//div.crimagify_container
+}//div.crimagify_item
+div#cropper_div{
+	position: absolute !important;
+	top: 0 !important;
+	left: 0 !important;
+	padding:0 0 85px 0 !important;
+	z-index:500 !important;
+	div.cropper_container{
+		position:relative !important;
+		div.image_cropper{
+			@include rounded(3px 3px 0 3px);
+			background:#FFF !important;
+			//@include boxShadow(0px 0px 6px,#222) !important;
+			z-index: 1000 !important;
+			@include dropShadow();
+			border:1px solid #777 !important;
+			padding:10px !important;
+			z-index:10 !important;
+			position:relative !important;
+		}
+		div.actions{
+			padding:8px 0 !important;
+			background:#FFF !important;
+			padding:10px !important;
+			margin-top:0 !important;
+			@include rounded(0 0 3px 3px);
+			//@include boxShadow(1px 4px 6px,#666) !important;
+			position:absolute !important;
+			right:0px !important;
+			bottom:-57px !important;
+			z-index:15 !important;
+			a{
+				text-decoration:none !important;
+				font-size:12px !important;
+				font-weight:bold !important;
+				@include rounded(5px);
+				margin:0 10px 0 0  !important;
+				float:right !important;
+			}
+			a.actions_links{
+				
+			}
+			a#crop_image{
+				color:#FFFFFF !important;
+				padding:7px 10px !important;
+				@include blue_skye_to_blue_hard_vert;
+				@include boxShadow(1px 1px 4px,#000);
+			}
+			a#cancel_crop{
+				color:#FFFFFF !important;
+				padding:7px 10px !important;
+				@include black_easy_to_black_dark;
+				@include boxShadow(1px 1px 4px,#000);
+				margin:0 !important;
+			}
+			img.loader_image{
+				display:none;
+			}
+		}
+	}
+}
+.cropper_element{
+	position: relative !important;
+}
+.refresh_image{
+	position: relative !important;
+}

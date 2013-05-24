@@ -3,5 +3,5 @@ if ($("#<%=j @params[:parent_element_id] %>").find(".parent_image").length) {
 		$("#<%=j @params[:parent_element_id] %>").find(".parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => '@params' %>");
 	}	
 } else{
-	//console.log("por favor agregue el elemento")
+	console.log("Please, select one file!")
 };

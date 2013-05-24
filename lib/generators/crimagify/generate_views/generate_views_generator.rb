@@ -1,4 +1,4 @@
-module Billify
+module Crimagify
   module Generators
     class GenerateViewsGenerator < ::Rails::Generators::Base
       source_root File.expand_path("../../../../../app/views", __FILE__)
