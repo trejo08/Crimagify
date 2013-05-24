@@ -7,9 +7,8 @@ module Crimagify
 			extend Crimagify::DinamicImageMethods
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
-			after_validation :save_images
-			after_save :save_images
-			build_methods_images			
+			after_save :save_images#, :generate_attrs
+			build_methods_images
 		end
 
 		def generate_attrs
@@ -29,7 +28,7 @@ module Crimagify
 	    end
 		end
 
-		def save_images
+		def save_images#(updated)
 			parameters = {}
 			CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
 				puts eval("#{image_name[0]}_image_temporal")

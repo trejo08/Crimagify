@@ -11,6 +11,10 @@ var array_names = [];
 
 $(function(){
 
+	if ($(".crimagify_schema").length) {
+		$(".crimagify_schema").attr("value", getTime());
+	};
+
 	$body = $('body');	
 
 	// Events only for crimagify without nested models

@@ -14,6 +14,8 @@ $(function(){
             $new_fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent]');
             $new_fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][parent_id]');
             $new_fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][id_images]');
+            $new_fieldset.find(".nested_crimagify_schema").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][crimagify_schema]');
+            $new_fieldset.find(".nested_crimagify_schema").attr('value',getTime());
             // $new_fieldset.find(".remove").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][_destroy]');
             // $fieldset.find(".remove").removeAttr("id");
             var imagesTemporal = $new_fieldset.find(".image_temporal");
@@ -38,6 +40,8 @@ $(function(){
         $fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent]');
         $fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent_id]');
         $fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][id_images]');
+        $fieldset.find(".nested_crimagify_schema").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][crimagify_schema]');
+        $fieldset.find(".nested_crimagify_schema").attr('value',getTime());
         // $fieldset.find(".remove").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][_destroy]');
         // $fieldset.find(".remove").removeAttr("id");
         var imagesTemporal = $fieldset.find(".image_temporal");
@@ -70,6 +74,8 @@ function setAttributesNames($form){
     $fieldset.find(".parent").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent]");
     $fieldset.find(".parent_id").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][parent_id]");
     $fieldset.find(".id_images").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][id_images]");
+    $fieldset.find(".nested_crimagify_schema").attr('name',$form.data('parentobject')+'['+$form.data('parent')+'_attributes]['+0+'][crimagify_schema]');
+    $fieldset.find(".nested_crimagify_schema").attr('value',getTime());
     // $fieldset.find(".remove").attr("name",$form.data("parentobject")+"["+$form.data("parent")+"_attributes]["+0+"][_destroy]");
     // $fieldset.find(".remove").removeAttr("id");
     var imagesTemporal = $fieldset.find(".image_temporal");

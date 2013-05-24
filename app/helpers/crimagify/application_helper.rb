@@ -31,6 +31,7 @@ module Crimagify
 			html << content_tag(:input, nil, :id => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
 			html << content_tag(:input, nil, :id => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
 			html << content_tag(:input, nil, :id => :id_images, :name => :id_images, :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :class => :crimagify_schema, :name => :crimagify_schema, :type => :hidden, :value => "")
 			return raw html
 		end
 
@@ -64,10 +65,14 @@ module Crimagify
 		end
 
 		def nested_images_id(object)
+			# ramdon_time = Time.now.to_time
+			# puts "esta es la hora que obtengo del servidor"
+			# puts ramdon_time.strftime("%h")
 			html = ""
 			html << content_tag(:input, nil, :class => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
 			html << content_tag(:input, nil, :class => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
 			html << content_tag(:input, nil, :class => :id_images, :name => :id_images, :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :class => :nested_crimagify_schema, :name => :crimagify_schema, :type => :hidden, :value => "")
 			return raw html
 		end
 
