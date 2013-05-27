@@ -2,8 +2,10 @@
 
 <table>
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Description</th>
+    <th>URL Image</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,8 +13,10 @@
 
 <% @products.each do |product| %>
   <tr>
+    <td><%= product.id %></td>
     <td><%= product.name %></td>
     <td><%= product.description %></td>
+    <td><%= image_tag product.imgA.user %></td>
     <td><%= link_to 'Show', product %></td>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
     <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
