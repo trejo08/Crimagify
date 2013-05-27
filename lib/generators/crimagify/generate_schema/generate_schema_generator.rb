@@ -7,7 +7,8 @@ module Crimagify
 			desc "Install Crimagify"
 			
 			def read_table_fields
-				class_name = table_name.capitalize.constantize
+				# class_name = table_name.capitalize.constantize
+				class_name = table_name.constantize
 				columns = class_name.columns.collect{|c|c.name}.include?("crimagify_schema")
 
 				if !columns
