@@ -308,24 +308,40 @@ function parameters($crop){
 	var parent_tag_id = $parent_tag.attr("id")==undefined?$parent_tag.data("img"):$parent_tag.attr("id");
 	var data = {};
 	if($parent_tag.closest(".fieldset_crimagify_nested").length){
+		var parent = $parent_tag.closest(".fieldset_crimagify_nested").find(".parent").val()
+		parent_split = parent.split("/");
+		var parent_string = "";
+		if (parent_split.length>1) {
+			parent_string = parent_split[1];
+		}else{
+			parent_string = parent_split[0];
+		};
 		data = {"image": render_image, 
 				"parent_id": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent_id").val(),
 				"crop_x": $("#crop_x").val(), 
 				"crop_y": $("#crop_y").val(), 
 				"crop_w": $("#crop_w").val(),
 				"crop_h": $("#crop_h").val(),
-				"parent": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent").val(), 
+				"parent": parent_string, 
 				"parent_element_id" : parent_tag_id,
 				"parent_fieldset": $parent_tag.closest(".fieldset_crimagify_nested").attr("id")
 		};
 	}else{
+		var parent = $("#parent").val();
+		parent_split = parent.split("/");
+		var parent_string = "";
+		if (parent_split.length>1) {
+			parent_string = parent_split[1];
+		}else{
+			parent_string = parent_split[0];
+		};
 		data = {"image": render_image, 
 				"parent_id": $("#parent_id").val(),
 				"crop_x": $("#crop_x").val(), 
 				"crop_y": $("#crop_y").val(), 
 				"crop_w": $("#crop_w").val(),
 				"crop_h": $("#crop_h").val(),
-				"parent": $("#parent").val(), 
+				"parent": parent_string, 
 				"parent_element_id" : parent_tag_id
 		};
 		array_names.push(parent_tag_id);
