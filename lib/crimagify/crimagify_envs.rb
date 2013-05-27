@@ -7,7 +7,7 @@ module Crimagify
 			extend Crimagify::DinamicImageMethods
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
-			after_save :save_images#, :generate_attrs
+			after_save :save_images
 			build_methods_images
 		end
 
@@ -21,10 +21,10 @@ module Crimagify
 	    	end
 	    	self.class.send(:attr_accessible, "parent")
 	    	self.class.send(:attr_accessible, "parent_id")
-	    	# self.class.send(:attr_accessible, "id_images")
+	    	self.class.send(:attr_accessible, "id_images")
 	    	self.class.send(:attr_accessor, "parent")
 	    	self.class.send(:attr_accessor, "parent_id")
-	    	# self.class.send(:attr_accessor, "id_images")
+	    	self.class.send(:attr_accessor, "id_images")
 	    end
 		end
 
@@ -42,7 +42,7 @@ module Crimagify
 	    if !parameters.empty?
 	    	parameters[:parent] = self.parent
 	    	parameters[:parent_id] = self.parent_id
-	    	# parameters[:id_images] = self.id_images
+	    	parameters[:id_images] = self.id_images
 	    	parameters.inspect
 	    	generate_image(self, parameters)
 	    end

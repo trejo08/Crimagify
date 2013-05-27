@@ -18,12 +18,6 @@ module Crimagify
 	  end
 
 	  def crop_avatar_real
-	  	puts "entra a la funcion crop_avatar_real"
-	  	data = %w(x y w h)
-	  	data.each do |attribute|
-	  		puts "imprimiendo => #{attribute}"
-	  		puts eval("crop_#{attribute}")
-	  	end
 	    image.recreate_versions! if crop_x.present?
 	  end
 
