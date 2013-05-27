@@ -117,6 +117,7 @@ $(function(){
 	/*===== Cancel Crop ======*/
 	$body.on("click",".cancel_crop",function(evt){
 		evt.preventDefault();
+		onCropSuccess();
 		var $this = $(this);
 		var $div_closest = $this.closest('.global_parent');
 
@@ -217,6 +218,7 @@ function update_crop(coords){
 	$("#crop_y").val(coords.y);
 	$("#crop_w").val(coords.w);
 	$("#crop_h").val(coords.h);
+
 	// updatePreview(coords);
 };
 
@@ -244,8 +246,8 @@ function load_partial(parent_tag_id, name_version){
 		max_height_box = 500;
 	};
 
-	select = [0,0,ratio_vals['width'],ratio_vals['height']]
-	ratio = ratio_vals['width']/ratio_vals['height']
+	select = [0,0,ratio_vals.width,ratio_vals.height]
+	ratio = ratio_vals.width/ratio_vals.height
 
 	if ($("#cropbox").length) {
 		$('#cropbox').Jcrop({
@@ -256,6 +258,7 @@ function load_partial(parent_tag_id, name_version){
 		 	boxWidth: max_width_box,
 		 	boxHeight: max_height_box
 		}, function(){
+			onCropOpen();
 			var api = this;
 			api.ui.holder.addClass('jcrop-dark');
 			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
@@ -332,15 +335,15 @@ function parameters($crop){
 		type: "POST",
 		data: data,
 		dataType: "script",
-		success: function(){
+		success: function(){			
 			setTimeout(function() {
 				$("#cropper_div").hide("slow", function(){
 					$("#cropper_div").remove();
+					onCropSuccess();
 				});	
 			}, 600);
 			$parent_tag.find('.crimagify_inputs').show();
 			$parent_tag.find('.crimagify_loader').hide();
-			
 		},
 		error: function(a,b,c){
 			console.log("error a");
