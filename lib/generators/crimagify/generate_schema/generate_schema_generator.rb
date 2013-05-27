@@ -12,7 +12,7 @@ module Crimagify
 
 				if !has_column
 					puts "generating migration for #{class_name}"
-					generate "migration add_field_crimagify_schema_to_#{class_name_cte.class.table_name} crimagify_schema:string"
+					generate "migration add_field_crimagify_schema_to_#{class_name_cte.table_name} crimagify_schema:string"
 				else
 					puts "#{class_name} contains field crimagify_schema"
 				end
