@@ -44,7 +44,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        # Crimagify::ImageFunctions::create_new_images(@product,params)          
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -61,7 +60,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        # Crimagify::ImageFunctions::update_images(@product, params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else

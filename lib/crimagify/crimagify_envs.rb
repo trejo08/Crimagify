@@ -21,22 +21,19 @@ module Crimagify
 	    	end
 	    	self.class.send(:attr_accessible, "parent")
 	    	self.class.send(:attr_accessible, "parent_id")
-	    	self.class.send(:attr_accessible, "id_images")
+	    	# self.class.send(:attr_accessible, "id_images")
 	    	self.class.send(:attr_accessor, "parent")
 	    	self.class.send(:attr_accessor, "parent_id")
-	    	self.class.send(:attr_accessor, "id_images")
+	    	# self.class.send(:attr_accessor, "id_images")
 	    end
 		end
 
-		def save_images#(updated)
+		def save_images
 			parameters = {}
 			CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
-				puts eval("#{image_name[0]}_image_temporal")
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
 	    		if eval("#{image_name[0]}_image_temporal") != "" && !eval("#{image_name[0]}_image_temporal").nil?
-	    			puts "se va a agregar un atributo #{image_name[0]}_#{attr_acc}"
-	    			puts eval("#{image_name[0]}_#{attr_acc}")
 	    			name_accesible = "#{image_name[0]}_#{attr_acc}"
 	    			parameters[name_accesible.to_sym] = eval("#{name_accesible}")
 	    		end
@@ -45,10 +42,9 @@ module Crimagify
 	    if !parameters.empty?
 	    	parameters[:parent] = self.parent
 	    	parameters[:parent_id] = self.parent_id
-	    	parameters[:id_images] = self.id_images
+	    	# parameters[:id_images] = self.id_images
 	    	parameters.inspect
 	    	generate_image(self, parameters)
-	    	puts "me llamaron esta vez, porque acabo de guardar un producto y sus imagenes imagen"
 	    end
 		end
 

@@ -23,15 +23,15 @@ module Crimagify
 					url_image = ENV['DEFAULT_IMAGE'].to_s
 				end
 			end
-			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name, label_title: options[:label_title], choose_text: options[:choose_text] })
+			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name, label_title: options[:label_title], choose_text: options[:choose_text], parent_image: object.class.name.underscore })
 		end
 
 		def images_id(object)
 			html = ""
-			html << content_tag(:input, nil, :id => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
-			html << content_tag(:input, nil, :id => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
-			html << content_tag(:input, nil, :id => :id_images, :name => :id_images, :type => :hidden, :value => "")
-			html << content_tag(:input, nil, :class => :crimagify_schema, :name => :crimagify_schema, :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :id => :parent, :name => "#{object.class.name.underscore}[parent]", :type => :hidden, :value => "#{object.class.name}")
+			html << content_tag(:input, nil, :id => :parent_id, :name => "#{object.class.name.underscore}[parent_id]",  :type => :hidden, :value => "#{object.id}")
+			html << content_tag(:input, nil, :id => :id_images, :name => "#{object.class.name.underscore}[id_images]", :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :class => :crimagify_schema, :name => "#{object.class.name.underscore}[crimagify_schema]", :type => :hidden, :value => "")
 			return raw html
 		end
 
@@ -65,9 +65,6 @@ module Crimagify
 		end
 
 		def nested_images_id(object)
-			# ramdon_time = Time.now.to_time
-			# puts "esta es la hora que obtengo del servidor"
-			# puts ramdon_time.strftime("%h")
 			html = ""
 			html << content_tag(:input, nil, :class => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
 			html << content_tag(:input, nil, :class => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
@@ -78,7 +75,6 @@ module Crimagify
 
 		def link_to_add_fields(name, f, association)
 		  new_object = f.object.send(association).klass.new
-		  #data variables
 		  parent_object = f.object.class.name.underscore
 		  id = new_object.object_id
 		  tag_parent = association.to_s

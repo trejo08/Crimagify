@@ -5,10 +5,11 @@
   version_name ||= {}
   label_title ||= "Image"
   choose_text ||= "Choose image"
+  parent_image ||= ""
 %>
 <div class="crimagify_item">
     <div id="<%= id_image %>" class="global_parent" name="<%= version_name %>">
-      <%= hidden_field_tag "#{id_image}_image_temporal", {}, :class => "#{id_image}_image_temporal", :value => "" %>
+      <%= hidden_field_tag "#{id_image}_image_temporal", {}, :name => "#{parent_image}[#{id_image}_image_temporal]", :class => "#{id_image}_image_temporal", :value => "" %>
       <label class="crimagify_label"><%= label_title %></label>
       <div class="crimagify_container">
         <div id="parent_image" class="parent_image crimagify_parent_image" style="display:block;float:left"></div>

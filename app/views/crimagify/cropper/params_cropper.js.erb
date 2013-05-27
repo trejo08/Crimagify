@@ -45,10 +45,10 @@
 			$parent.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
 			$parent.find(".<%=j @img[:parent_element_id] %>_image_temporal").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
-			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='<%=j @img[:parent_element_id] %>_crop_x' type='hidden' value='<%= @img[:crop_x] %>'>");
-			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='<%=j @img[:parent_element_id] %>_crop_y' type='hidden' value='<%= @img[:crop_y] %>'>");
-			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='<%=j @img[:parent_element_id] %>_crop_w' type='hidden' value='<%= @img[:crop_w] %>'>");
-			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='<%=j @img[:parent_element_id] %>_crop_h' type='hidden' value='<%= @img[:crop_h] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='<%=j @img[:data_parent].class.name.underscore %>[<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='<%=j @img[:data_parent].class.name.underscore %>[<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='<%=j @img[:data_parent].class.name.underscore %>[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
+			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='<%=j @img[:data_parent].class.name.underscore %>[<%=j @img[:parent_element_id] %>_crop_h]' type='hidden' value='<%= @img[:crop_h] %>'>");
 		}
 		$parent.find(".uploader").val('');
 	}

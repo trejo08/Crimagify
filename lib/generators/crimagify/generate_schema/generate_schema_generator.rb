@@ -7,8 +7,6 @@ module Crimagify
 			desc "Install Crimagify"
 			
 			def read_table_fields
-				puts "llama bien al generador"
-				puts "se genera bien la migracion a esta tabla #{table_name}"
 				class_name = table_name.capitalize.constantize
 				columns = class_name.columns.collect{|c|c.name}.include?("crimagify_schema")
 
