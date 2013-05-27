@@ -3,19 +3,18 @@ module Crimagify
 		class GenerateSchemaGenerator < ::Rails::Generators::Base
 
 			source_root File.expand_path("../templates", __FILE__)
-			argument :table_name, :type => :string, :default => "User"
+			argument :class_name, :type => :string, :default => "User"
 			desc "Install Crimagify"
 			
 			def read_table_fields
-				# class_name = table_name.capitalize.constantize
-				class_name = table_name.constantize
-				columns = class_name.columns.collect{|c|c.name}.include?("crimagify_schema")
+				class_name_cte = class_name.constantize
+				has_column = class_name_cte.columns.collect{|c|c.name}.include?("crimagify_schema")
 
-				if !columns
-					puts "generating migration for #{table_name}"
-					generate "migration add_field_crimagify_schema_to_#{table_name} crimagify_schema:string"
+				if !has_column
+					puts "generating migration for #{class_name}"
+					generate "migration add_field_crimagify_schema_to_#{class_name_cte.class.table_name} crimagify_schema:string"
 				else
-					puts "#{table_name} contain field crimagify_schema"
+					puts "#{class_name} contains field crimagify_schema"
 				end
 			end
 
