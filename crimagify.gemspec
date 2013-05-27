@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
   s.add_dependency "rmagick", "~> 2.13.1"
   s.add_dependency "carrierwave", "~> 0.8.0"
 
-  s.add_development_dependency "sqlite3"
+  # s.add_development_dependency "sqlite3"
+  s.add_development_dependency "mysql2"
   s.add_development_dependency "sass-rails"
 
 end

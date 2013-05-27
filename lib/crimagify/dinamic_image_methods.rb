@@ -2,9 +2,9 @@ require 'active_support/core_ext'
 module Crimagify
 	module DinamicImageMethods
 
-		extend ActiveSupport::Concern 
+		extend ActiveSupport::Concern
 
-		def build_methods_images(methods = nil)
+		def build_methods_images
 			array_methods = []
 			CRIMAGIFY_ENV["#{self.name}"].each do |item|
 				array_methods << item.first
@@ -12,17 +12,16 @@ module Crimagify
 
 			array_methods.each do |name|
 				define_method("#{name}") do
-					img = crimagify_images.find_by_image_name("#{name}")# rescue ""
+					img = crimagify_images.find_by_image_name("#{name}")
 					if img == nil
-						return []
-					else
-						return img
+						img = Crimagify::Image.all.first						
 					end
+					return img
 				end
 			end
 		end
 
-		def build_sizes_images#(methods = nil)
+		def build_sizes_images
 			array_versions = []
 	    CRIMAGIFY_ENV.each do |image_name|
 	    	image_name[1].each do |name|
@@ -37,10 +36,10 @@ module Crimagify
 	    array_versions.each do |name_size|
 	    	size_image = name_size.to_sym
 	    	define_method("#{name_size}") do
-	    		image = image_url(size_image) rescue ""
-	    		if image == ""
+	    		image = image_url(size_image)
+	    		if image.blank?
 	    			if ENV['DEFAULT_IMAGE'].nil?
-	    				image = "/crimagify/no_selected.png"
+	    				image = "crimagify/no_selected_image.jpg"
 	    			else
 	    				image = ENV['DEFAULT_IMAGE']
 	    			end

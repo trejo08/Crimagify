@@ -1,17 +1,10 @@
 class User < ActiveRecord::Base
-	extend Crimagify::DinamicImageMethods
-	#proximo paso que esto sea dinamico en un generate
-	has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
+
 	has_many :products
 
   attr_accessible :email, :lastname, :name
   attr_accessible :products_attributes
 
-  accepts_nested_attributes_for :products, allow_destroy: true
-  # self.assign_attributes(params[:producs_attributes], :create)
+  accepts_nested_attributes_for :products, allow_destroy: true, :reject_if => proc { |attributes| attributes['name'].blank? }
 
-  #===========================building methods dinamically===========================#
-  #y esto tambien tiene que ser dinamico en los generators
-  build_methods_images
-  #==================================================================================#
 end

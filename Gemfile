@@ -9,3 +9,4 @@ gem 'rmagick'
 #development
 gem "jquery-rails"
 gem 'sass-rails'
+gem 'mysql2'

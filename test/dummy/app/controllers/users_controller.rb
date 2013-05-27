@@ -42,14 +42,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    #separando los atributos que no se necesitan al inicio de la operacion
-    products = params[:user][:products_attributes]
-    params[:user].delete(:products_attributes)
-
     @user = User.new(params[:user])
     respond_to do |format|
-      if @user.save        
-        Crimagify::ImageFunctions::create_new_images(@user,products, true)
+      if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
@@ -62,13 +57,9 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    products = params[:user][:products_attributes]
-    params[:user].delete(:products_attributes)
-    
     @user = User.find(params[:id])
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        Crimagify::ImageFunctions::update_images(@user, products, true)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
