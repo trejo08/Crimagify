@@ -38,11 +38,16 @@ module Crimagify
 		end
 
 		def images_id(object)
+			parent = object.class.name.underscore
+			parent_split = parent.split("/")
+			if parent_split.length.to_i == 2
+				parent = parent_split[1]
+			end
 			html = ""
-			html << content_tag(:input, nil, :id => :parent, :name => "#{object.class.name.underscore}[parent]", :type => :hidden, :value => "#{object.class.name}")
-			html << content_tag(:input, nil, :id => :parent_id, :name => "#{object.class.name.underscore}[parent_id]",  :type => :hidden, :value => "#{object.id}")
-			html << content_tag(:input, nil, :id => :id_images, :name => "#{object.class.name.underscore}[id_images]", :type => :hidden, :value => "")
-			html << content_tag(:input, nil, :class => :crimagify_schema, :name => "#{object.class.name.underscore}[crimagify_schema]", :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :id => :parent, :name => "#{parent}[parent]", :type => :hidden, :value => "#{parent}")
+			html << content_tag(:input, nil, :id => :parent_id, :name => "#{parent}[parent_id]",  :type => :hidden, :value => "#{object.id}")
+			html << content_tag(:input, nil, :id => :id_images, :name => "#{parent}[id_images]", :type => :hidden, :value => "")
+			html << content_tag(:input, nil, :class => :crimagify_schema, :name => "#{parent}[crimagify_schema]", :type => :hidden, :value => "")
 			return raw html
 		end
 
@@ -76,8 +81,13 @@ module Crimagify
 		end
 
 		def nested_images_id(object)
+			parent = object.class.name.underscore
+			parent_split = parent.split("/")
+			if parent_split.length.to_i == 2
+				parent = parent_split[1]
+			end
 			html = ""
-			html << content_tag(:input, nil, :class => :parent, :name => :parent, :type => :hidden, :value => "#{object.class.name}")
+			html << content_tag(:input, nil, :class => :parent, :name => :parent, :type => :hidden, :value => "#{parent}")
 			html << content_tag(:input, nil, :class => :parent_id, :name => :parent_id,  :type => :hidden, :value => "#{object.id}")
 			html << content_tag(:input, nil, :class => :id_images, :name => :id_images, :type => :hidden, :value => "")
 			html << content_tag(:input, nil, :class => :nested_crimagify_schema, :name => :crimagify_schema, :type => :hidden, :value => "")
