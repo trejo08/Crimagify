@@ -11,11 +11,11 @@ var array_names = [];
 
 $(function(){
 
+	$body = $('body');
+
 	if ($(".crimagify_schema").length) {
 		$(".crimagify_schema").attr("value", getTime());
-	};
-
-	$body = $('body');	
+	};	
 
 	// Events only for crimagify without nested models
 	$body.on("change",".uploader", function(evt){
@@ -232,6 +232,7 @@ function updatePreview(coords){
 };
 
 function load_partial(parent_tag_id, name_version){
+	$(".crimagify_schema").attr("value", getTime());
 	var select = [];
 	var ratio;
 	var parent = $("#parent").val();

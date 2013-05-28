@@ -43,7 +43,6 @@ module Crimagify
 	    	parameters[:parent] = self.parent
 	    	parameters[:parent_id] = self.parent_id
 	    	parameters[:id_images] = self.id_images
-	    	parameters.inspect
 	    	generate_image(self, parameters)
 	    end
 		end
