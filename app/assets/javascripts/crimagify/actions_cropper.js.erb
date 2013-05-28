@@ -274,6 +274,7 @@ function load_partial(parent_tag_id, name_version){
 function load_partial_nested(parent_tag_id, name_version, type_img){
 	var select = [];
 	var parent = $("#"+parent_tag_id).find(".parent").val();
+	console.log(parent);
 	var ratio_vals = ajson[parent][type_img][name_version];
 	var max_width_box = '<%= ENV["MAX_WIDTH_BOX_CROPPER"] %>';
 	var max_height_box = '<%= ENV["MAX_HEIGHT_BOX_CROPPER"] %>';
