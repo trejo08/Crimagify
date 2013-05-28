@@ -44,7 +44,7 @@ module Crimagify
 				parent = parent_split[1]
 			end
 			html = ""
-			html << content_tag(:input, nil, :id => :parent, :name => "#{parent}[parent]", :type => :hidden, :value => "#{parent}")
+			html << content_tag(:input, nil, :id => :parent, :name => "#{parent}[parent]", :type => :hidden, :value => "#{object.class.name.underscore}")
 			html << content_tag(:input, nil, :id => :parent_id, :name => "#{parent}[parent_id]",  :type => :hidden, :value => "#{object.id}")
 			html << content_tag(:input, nil, :id => :id_images, :name => "#{parent}[id_images]", :type => :hidden, :value => "")
 			html << content_tag(:input, nil, :class => :crimagify_schema, :name => "#{parent}[crimagify_schema]", :type => :hidden, :value => "")
