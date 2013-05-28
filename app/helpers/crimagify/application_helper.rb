@@ -29,10 +29,9 @@ module Crimagify
 				end
 			end
 
-			parent_image = puts object.class.name.underscore
+			parent_image = object.class.name.underscore
 			parent_split = parent_image.split("/")
-			puts parent_split
-			if parent_split.length.to_i > 1
+			if parent_split.length.to_i == 2
 				parent_image = parent_split[1]
 			end
 			render(:partial => "crimagify/crop_partials/fields_cropper", :locals => { id_image: options[:image_name], url_image: url_image, image_options: image_options, version_name: version_name, label_title: options[:label_title], choose_text: options[:choose_text], parent_image: parent_image })
