@@ -232,7 +232,8 @@ function updatePreview(coords){
 };
 
 function load_partial(parent_tag_id, name_version){
-	$(".crimagify_schema").attr("value", getTime());
+	$body = $('body');
+	$body.find(".crimagify_schema").attr("value", getTime());
 	var select = [];
 	var ratio;
 	var parent = $("#parent").val();
