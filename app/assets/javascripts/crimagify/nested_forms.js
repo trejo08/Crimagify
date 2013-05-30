@@ -40,7 +40,7 @@ $(function(){
         $fieldset.find(".parent").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent]');
         $fieldset.find(".parent_id").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][parent_id]');
         $fieldset.find(".id_images").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][id_images]');
-        $fieldset.find(".nested_crimagify_schema").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+i+'][crimagify_schema]');
+        $fieldset.find(".nested_crimagify_schema").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][crimagify_schema]');
         $fieldset.find(".nested_crimagify_schema").attr('value',getTime());
         // $fieldset.find(".remove").attr('name',$this.data('parentobject')+'['+$this.data('parent')+'_attributes]['+time+'][_destroy]');
         // $fieldset.find(".remove").removeAttr("id");

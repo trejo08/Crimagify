@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
-    @user.products.build
+    # @user.products.build
 
     respond_to do |format|
       format.html # new.html.erb

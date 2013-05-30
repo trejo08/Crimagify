@@ -12,6 +12,7 @@ module Crimagify
 		end
 
 		def generate_attrs
+
 	    CRIMAGIFY_ENV["#{self.class.name}"].each do |image_name|
 	    	data = %w(image_temporal crop_x crop_y crop_w crop_h)
 	    	data.each do |attr_acc|
@@ -27,6 +28,8 @@ module Crimagify
 	    	self.class.send(:attr_accessor, "id_images")
 	    end
 		end
+
+
 
 		def save_images
 			parameters = {}
