@@ -28,7 +28,7 @@ $(function(){
     }
 
     // function for add fields
-    $frmCrimagify.on("click",".add_nested_fields",function(e){
+    $frmCrimagify.on("click",".add_crimgify_fields",function(e){
         e.preventDefault();
         $this = $(this);
         var time = getTime();
@@ -53,7 +53,7 @@ $(function(){
     });
 
     //function for remove fields
-    $frmCrimagify.on("click", ".remove_fields", function(event){
+    $frmCrimagify.on("click", ".remove_crimagify_fields", function(event){
         event.preventDefault();
         $this = $(this);
         $this.prevAll(".remove").attr("value","true");

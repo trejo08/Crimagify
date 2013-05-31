@@ -104,7 +104,7 @@ module Crimagify
 		    render(association.to_s.singularize + "_fields", f: builder)
 		  end
 		    
-		  link_to(name, '#', class: "add_nested_fields", data: {id: id, fields: fields.gsub("\n", ""), parent: tag_parent, parentobject: parent_object})
+		  link_to(name, '#', class: "add_crimgify_fields", data: {id: id, fields: fields.gsub("\n", ""), parent: tag_parent, parentobject: parent_object})
 		end
 	end
 end
