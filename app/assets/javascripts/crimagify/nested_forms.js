@@ -28,7 +28,7 @@ $(function(){
     }
 
     // function for add fields
-    $frmCrimagify.on("click",".add_fields",function(e){
+    $frmCrimagify.on("click",".add_nested_fields",function(e){
         e.preventDefault();
         $this = $(this);
         var time = getTime();
