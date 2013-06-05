@@ -56,10 +56,10 @@
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_h]' type='hidden' value='<%= @img[:crop_h] %>'>");
 			console.log("aqui imprimo los parametros crop")
-			console.dir("#<%=j @img[:parent_element_id] %>_crop_x")
-			console.dir("#<%=j @img[:parent_element_id] %>_crop_y")
-			console.dir("#<%=j @img[:parent_element_id] %>_crop_w")
-			console.dir("#<%=j @img[:parent_element_id] %>_crop_h")
+			console.dir($("#<%=j @img[:parent_element_id] %>_crop_x"))
+			console.dir($("#<%=j @img[:parent_element_id] %>_crop_y"))
+			console.dir($("#<%=j @img[:parent_element_id] %>_crop_w"))
+			console.dir($("#<%=j @img[:parent_element_id] %>_crop_h"))
 			console.log("aqui imprimí los parametros crop")
 		}
 		$parent.find(".uploader").val('');
