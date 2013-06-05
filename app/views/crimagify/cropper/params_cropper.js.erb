@@ -45,11 +45,12 @@
 			$parent.find(".parent_image").append("<%=j render :partial => 'crimagify/crop_partials/img_final', :object => @img, :locals => { :f => 'f' } %>");
 			$parent.find(".<%=j @img[:parent_element_id] %>_image_temporal").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
-			var parent_image = "<%=j @img[:data_parent].class.name.underscore %>";
-			var parent_image_split = parent_image.split("/");
-			if (parent_image_split.length>1) {
-				parent_image = parent_image_split[1];
-			};
+			var parent_image = "<%=j @img[:data_parent].class.name.demodulize.downcase %>";
+			// var parent_image_split = parent_image.split("/");
+			// if (parent_image_split.length>1) {
+			// 	parent_image = parent_image_split[1];
+			// };
+			// console.dir(parent_image);
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
