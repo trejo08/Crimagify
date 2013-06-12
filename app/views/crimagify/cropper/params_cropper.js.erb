@@ -50,6 +50,11 @@
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_h' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_h]' type='hidden' value='<%= @img[:crop_h] %>'>");
+
+			console.log($parent.find("#parent_image").find("#<%=j @img[:parent_element_id] %>_crop_x"));
+			console.log($parent.find("#parent_image").find("#<%=j @img[:parent_element_id] %>_crop_y"));
+			console.log($parent.find("#parent_image").find("#<%=j @img[:parent_element_id] %>_crop_w"));
+			console.log($parent.find("#parent_image").find("#<%=j @img[:parent_element_id] %>_crop_h"));
 		}
 		$parent.find(".uploader").val('');
 	}

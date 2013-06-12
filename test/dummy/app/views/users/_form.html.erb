@@ -32,7 +32,7 @@
   <%= f.fields_for :products do |product| %>
     <%= render 'product_fields', f: product %>
   <% end %>
-  <%= link_to_add_fields "Add Product", f, :products %>  
+  <%= link_to_add_nested_fields "Add Product", f, :products %>  
   <!--StartCropperImagesSection-->
   <div class="actions">
     <%= f.submit %>
