@@ -8,6 +8,7 @@ var ajson = JSON.parse(ajstring);
 //========================================================================================
 var render_image = "";
 var array_names = [];
+var jcrop_api;
 
 $(function(){
 
@@ -114,7 +115,7 @@ $(function(){
 		}, 1000)
 			
 	});
-	/*===== Cancel Crop ======*/
+	/*===================Cancel Crop===================*/
 	$body.on("click",".cancel_crop",function(evt){
 		evt.preventDefault();
 		// onCropSuccess();
@@ -139,7 +140,7 @@ $(function(){
 		$div_closest.find('.crimagify_loader').hide();
 		$(".uploader").val('');			
 	});
-	/*====== Crop Image ========*/
+	/*====================Crop Image====================*/
 	
 	$body.on("click",".crop_image",function(){
 		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
@@ -153,6 +154,19 @@ $(function(){
 		parameters($(this));
 		$('a.actions_links').hide();
 		$(this).next('img.loader_image').show();
+	});
+
+	/*====================Release Selected Area on Cropper====================*/
+	$body.on("change", ".only_resizer", function(){
+		var $this = $(this);
+		if ($this.is(':checked')) {
+			$this.attr("value",true)
+			jcrop_api.release();
+			jcrop_api.disable();
+		} else{
+			$this.attr("value", false)
+			jcrop_api.enable();
+		};
 	});
 });
 
@@ -232,6 +246,10 @@ function updatePreview(coords){
 };
 
 function load_partial(parent_tag_id, name_version){
+	jcrop_api = this;
+	console.log("estas son mis variables para cargar el loader")
+	console.log(parent_tag_id)
+	console.log(name_version)
 	$body = $('body');
 	$body.find(".crimagify_schema").attr("value", getTime());
 	var select = [];
@@ -260,10 +278,12 @@ function load_partial(parent_tag_id, name_version){
 		 	boxWidth: max_width_box,
 		 	boxHeight: max_height_box
 		}, function(){
-			onCropOpen();
-			var api = this;
-			api.ui.holder.addClass('jcrop-dark');
-			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
+			// onCropOpen();
+			console.log("estos son los metodos que tiene JCrop API");
+			jcrop_api = this;
+			console.dir(jcrop_api);
+			jcrop_api.ui.holder.addClass('jcrop-dark');
+			jcrop_api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
 		});
 		
 	} else{
@@ -272,9 +292,9 @@ function load_partial(parent_tag_id, name_version){
 };
 
 function load_partial_nested(parent_tag_id, name_version, type_img){
+	var $divGlobalParent = $("#"+parent_tag_id);
 	var select = [];
-	var parent = $("#"+parent_tag_id).find(".parent").val();
-	console.log(parent);
+	var parent = $divGlobalParent.find(".parent").val();
 	var ratio_vals = ajson[parent][type_img][name_version];
 	var max_width_box = '<%= ENV["MAX_WIDTH_BOX_CROPPER"] %>';
 	var max_height_box = '<%= ENV["MAX_HEIGHT_BOX_CROPPER"] %>';
@@ -284,6 +304,7 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 	if (max_height_box == "") {
 		max_height_box = 500;
 	}
+	
 	select = [0,0,ratio_vals.width,ratio_vals.height];
 	var ratio = ratio_vals.width/ratio_vals.height;
 
@@ -296,9 +317,11 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 		 	boxWidth: max_width_box,
 		 	boxHeight: max_height_box
 		}, function(){
-			var api = this;
-			api.ui.holder.addClass('jcrop-dark');
-			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
+			console.log("estos son los metodos que tiene JCrop API");
+			jcrop_api = this;
+			console.dir(jcrop_api);
+			jcrop_api.ui.holder.addClass('jcrop-dark');
+			jcrop_api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
 		});
 		
 	} else{

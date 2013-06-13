@@ -7,9 +7,11 @@
 			<% end %>
 			<%= hidden_field_tag :cropping,{}, :value => true, :id => "temp_image" %>
 			<div class="actions">
-				<%= link_to %>
+				<br>
+				
 				<%= link_to "Cancel", "", :remote => true, :class => "cancel_crop actions_links", :id => "cancel_crop" %>
-				<%= link_to "Crop Image", "", :remote => true, :id => "crop_image", :class => "crop_image actions_links" , :disabled => 'disabled'%>
+				<%= link_to "Crop Image", "", :remote => true, :id => "crop_image", :class => "crop_image actions_links" , :disabled => 'disabled'%><br>
+				<%= check_box_tag :resizer, 0, false, :class => "only_resizer" %>Only Resize<br>
 				<%= image_tag "crimagify/loader.gif" , :class => "loader_image"%>
 				<div class="clear"></div>
 			</div>
