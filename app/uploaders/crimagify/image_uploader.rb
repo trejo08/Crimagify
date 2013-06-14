@@ -94,19 +94,37 @@ module Crimagify
 
       CRIMAGIFY_ENV["#{parent}"]["#{image_name}"].each do |size_name|
         if size_name.first == "#{version_name}"
-          if model.crop_x.present?
-            manipulate! do |img|
-              x = model.crop_x.to_i
-              y = model.crop_y.to_i
-              w = model.crop_w.to_i
-              h = model.crop_h.to_i
-              img.crop!(x, y, w, h)
-              
+          if model.crop_x.nil?
+            # manipulate! do |img|
+
               width = CRIMAGIFY_ENV["#{parent}"]["#{image_name}"]["#{version_name}"]['width'].to_i
               height = CRIMAGIFY_ENV["#{parent}"]["#{image_name}"]["#{version_name}"]['height'].to_i
-              img.resize_to_fit(width, height)
+              puts "ya paso bien de aqui, leyo las variables width: #{width}, height: #{height}"
+              img = resize_to_fit(width, height)
+              img = resize_and_pad(width, height, 'white', Magick::CenterGravity)
+              img
+            # end
+          else
+            if model.crop_x.present?
+              manipulate! do |img|
+                x = model.crop_x.to_i
+                y = model.crop_y.to_i
+                w = model.crop_w.to_i
+                h = model.crop_h.to_i
+                img.crop!(x, y, w, h)
+                data = %w(x y w h)
+                data.each do |attr_model|
+                  attribute_model = "model.crop_#{attr_model}.to_i"
+                  puts "traigo esto del modelo en #{attr_model}: #{eval(attribute_model)}"
+                end
+
+                width = CRIMAGIFY_ENV["#{parent}"]["#{image_name}"]["#{version_name}"]['width'].to_i
+                height = CRIMAGIFY_ENV["#{parent}"]["#{image_name}"]["#{version_name}"]['height'].to_i
+                img.resize_to_fit(width, height)
+              end
             end
           end
+          
         end
       end
     end

@@ -24,7 +24,7 @@
 	</fieldset>
 	<%= nested_images_id(f.object) %>
 	<%= nested_image_cropper(f.object, { image_name: "imgA", ratio: :user, :label_title => "tralalal", :choose_text => "Elegir Imagen"}, { :class => "img_start" }) %>
-	<%= nested_image_cropper(f.object, { image_name: "imgB", ratio: :user }, { :class => "img_start" }) %>
+	<%= nested_image_cropper(f.object, { image_name: "imgB", ratio: :big }, { :class => "img_start" }) %>
 	<hr>
 </div>
 

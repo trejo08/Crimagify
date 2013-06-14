@@ -127,19 +127,13 @@ $(function(){
 		});
 		$div_closest.find('.crimagify_inputs').show();
 		$div_closest.find('.crimagify_loader').hide();
-		$(".nested_uploader").val('');			
+		if ($div_closest.find('.nested_uploader').length) {
+			$(".nested_uploader").val('');
+		} else{
+			$(".uploader").val('');
+		};
 	});
-	$body.on("click",'.cancel_crop',function(evt){
-		evt.preventDefault();
-		var $this = $(this);
-		var $div_closest = $this.closest('.global_parent');
-		$("#cropper_div").hide("slow", function(){
-			$("#cropper_div").remove();
-		});
-		$div_closest.find('.crimagify_inputs').show();
-		$div_closest.find('.crimagify_loader').hide();
-		$(".uploader").val('');			
-	});
+
 	/*====================Crop Image====================*/
 	
 	$body.on("click",".crop_image",function(){
@@ -149,22 +143,18 @@ $(function(){
 		$(this).next('img.loader_image').show();
 	});
 
-	$body.on("click",'.crop_image',function(){
-		//parent_element_id is filled with the value of DIV parent closest: "imgA","imgB","imgZ"
-		parameters($(this));
-		$('a.actions_links').hide();
-		$(this).next('img.loader_image').show();
-	});
-
 	/*====================Release Selected Area on Cropper====================*/
 	$body.on("change", ".only_resizer", function(){
+		var resizer = false;
 		var $this = $(this);
 		if ($this.is(':checked')) {
-			$this.attr("value",true)
+			resizer = true;
+			$this.attr("value",resizer);
 			jcrop_api.release();
 			jcrop_api.disable();
 		} else{
-			$this.attr("value", false)
+			resizer = false;
+			$this.attr("value", resizer);
 			jcrop_api.enable();
 		};
 	});
@@ -331,8 +321,16 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 
 function parameters($crop){
 	var $parent_tag = $crop.closest(".global_parent");
+	var $resizer = null;
+	if ($parent_tag.find('.only_resizer').is(':checked')) {
+		$resizer = true;
+	} else{
+		$resizer = false;
+	};
+
 	var parent_tag_id = $parent_tag.attr("id")==undefined?$parent_tag.data("img"):$parent_tag.attr("id");
 	var data = {};
+
 	if($parent_tag.closest(".fieldset_crimagify_nested").length){
 		var parent = $parent_tag.closest(".fieldset_crimagify_nested").find(".parent").val()
 		parent_split = parent.split("/");
@@ -343,15 +341,16 @@ function parameters($crop){
 			parent_string = parent_split[0];
 		};
 		data = {"image": render_image, 
-				"parent_id": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent_id").val(),
-				"crop_x": $("#crop_x").val(), 
-				"crop_y": $("#crop_y").val(), 
-				"crop_w": $("#crop_w").val(),
-				"crop_h": $("#crop_h").val(),
-				"parent": parent_string, 
-				"parent_element_id" : parent_tag_id,
-				"parent_fieldset": $parent_tag.closest(".fieldset_crimagify_nested").attr("id")
-		};
+						"parent_id": $parent_tag.closest(".fieldset_crimagify_nested").find(".parent_id").val(),
+						"crop_x": $("#crop_x").val(), 
+						"crop_y": $("#crop_y").val(), 
+						"crop_w": $("#crop_w").val(),
+						"crop_h": $("#crop_h").val(),
+						"parent": parent_string, 
+						"parent_element_id" : parent_tag_id,
+						"parent_fieldset": $parent_tag.closest(".fieldset_crimagify_nested").attr("id"),
+						"resizer":$resizer
+					};
 	}else{
 		var parent = $("#parent").val();
 		parent_split = parent.split("/");
@@ -362,16 +361,17 @@ function parameters($crop){
 			parent_string = parent_split[0];
 		};
 		data = {"image": render_image, 
-				"parent_id": $("#parent_id").val(),
-				"crop_x": $("#crop_x").val(), 
-				"crop_y": $("#crop_y").val(), 
-				"crop_w": $("#crop_w").val(),
-				"crop_h": $("#crop_h").val(),
-				"parent": parent_string, 
-				"parent_element_id" : parent_tag_id
-		};
-		array_names.push(parent_tag_id);
-	}
+						"parent_id": $("#parent_id").val(),
+						"crop_x": $("#crop_x").val(), 
+						"crop_y": $("#crop_y").val(), 
+						"crop_w": $("#crop_w").val(),
+						"crop_h": $("#crop_h").val(),
+						"parent": parent_string, 
+						"parent_element_id" : parent_tag_id,
+						"resizer":$resizer
+					};
+					array_names.push(parent_tag_id);
+	};
 	$.ajax({
 		url: "/crimagify/params_cropper",
 		type: "POST",
@@ -381,7 +381,7 @@ function parameters($crop){
 			setTimeout(function() {
 				$("#cropper_div").hide("slow", function(){
 					$("#cropper_div").remove();
-					onCropSuccess();
+					// onCropSuccess();
 				});	
 			}, 600);
 			$parent_tag.find('.crimagify_inputs').show();
