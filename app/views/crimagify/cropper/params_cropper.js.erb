@@ -46,7 +46,7 @@
 			$parent.find(".<%=j @img[:parent_element_id] %>_image_temporal").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
 			var parent_image = "";
-			if ("<%=j @img[:data_parent] %>" == "0") {
+			if (parseInt("<%=j @img[:data_parent] %>") == 0) {
 				parent_image = "<%= @img[:parent].demodulize.underscore %>";
 			} else{
 				parent_image = "<%=j @img[:data_parent].class.name.demodulize.underscore %>";
