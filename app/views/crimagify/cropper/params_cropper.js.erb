@@ -46,11 +46,12 @@
 			$parent.find(".<%=j @img[:parent_element_id] %>_image_temporal").attr("value", "<%= @img[:path_image] %>");
 			$("#id_images").attr("value", array_names);
 			var parent_image = "";
-			if ("<%=j @img[:data_parent].class.name.demodulize.underscore %>" == "0") {
+			if ("<%=j @img[:data_parent] %>" == "0") {
 				parent_image = "<%= @img[:parent].demodulize.underscore %>";
 			} else{
 				parent_image = "<%=j @img[:data_parent].class.name.demodulize.underscore %>";
 			};
+			console.log("<%=j @img[:data_parent] %>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
