@@ -51,7 +51,6 @@
 			// } else{
 				// parent_image = "<%#=j @img[:data_parent].class.name.demodulize.underscore %>";
 			// };
-			console.log("<%=j @img[:data_parent] %>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_x' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_x]' type='hidden' value='<%= @img[:crop_x] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_y' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_y]' type='hidden' value='<%= @img[:crop_y] %>'>");
 			$parent.find("#parent_image").append("<input id='<%=j @img[:parent_element_id] %>_crop_w' name='"+parent_image+"[<%=j @img[:parent_element_id] %>_crop_w]' type='hidden' value='<%= @img[:crop_w] %>'>");
