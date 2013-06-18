@@ -28,7 +28,11 @@
             <%= file_field_tag :image, :id => "uploader_#{version_name}",  :class => "uploader crimagify_simple_uploader crimagify_uploader" %>
           </div>
           <div class="crimagify_loader">
-            <%= image_tag "crimagify/loader.gif"%>
+              <div class="loader_container">
+                <span class="image">
+                  <%= image_tag "crimagify/loader.gif"%>
+                </span>
+              </div>
           </div>
         </div>
           
