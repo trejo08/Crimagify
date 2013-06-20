@@ -1,3 +1,3 @@
 module Crimagify
-  VERSION = "0.0.5.5"
+  VERSION = "0.0.5.6"
 end

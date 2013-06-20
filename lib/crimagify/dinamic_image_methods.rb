@@ -6,10 +6,12 @@ module Crimagify
 
 		def build_methods_images
 			array_methods = []
-			CRIMAGIFY_ENV["#{self.name}"].each do |item|
-				array_methods << item.first
-			end if !CRIMAGIFY_ENV.empty?
-
+			if !CRIMAGIFY_ENV.nil?
+				CRIMAGIFY_ENV["#{self.name}"].each do |item|
+					array_methods << item.first
+				end if !CRIMAGIFY_ENV.empty?				
+			end
+			
 			array_methods.each do |name|
 				define_method("#{name}") do
 					img = crimagify_images.find_by_image_name("#{name}")
@@ -18,7 +20,7 @@ module Crimagify
 					end
 					return img
 				end
-			end
+			end if !array_methods.empty?
 		end
 
 		def build_sizes_images
