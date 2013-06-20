@@ -8,7 +8,9 @@ module Crimagify
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
 			after_save :save_images
-			build_methods_images
+			if !CRIMAGIFY_ENV.empty && !CRIMAGIFY_ENV["#{self.class.name}"].nil?
+				build_methods_images				
+			end
 		end
 
 		def generate_attrs
