@@ -11,7 +11,7 @@ module Crimagify
 			begin
 			# if !CRIMAGIFY_ENV.empty && !CRIMAGIFY_ENV["#{self.class.name}"].nil?
 				build_methods_images
-			rescue NoMethodError
+			rescue# NoMethodError
 				puts "aun no se encuentra"
 			end
 		end
