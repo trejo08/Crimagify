@@ -38,21 +38,11 @@ module Crimagify
             array_versions << item.first
           end      
         end
-      end if !CRIMAGIFY_ENV.empty?
-      
-      if CRIMAGIFY_ENV.empty?
-        puts "el CRIMAGIFY_ENV esta vacio"
-      else
-        puts "el CRIMAGIFY_ENV tiene datos"
-      end
-      
+      end if !CRIMAGIFY_ENV.empty?      
       return array_versions
-
     end 
     
     array_versions = enable_processing.uniq
-    puts "esto vale array_versions: #{array_versions}"
-
     array_versions.each do |item|
       item = item.to_sym
       version item do
