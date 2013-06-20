@@ -19,7 +19,7 @@ module Crimagify
 	    		name_accesible = "#{image_name[0]}_#{attr_acc}"
 	    		self.class.send(:attr_accessible, "#{name_accesible}")
 	    		self.class.send(:attr_accessor, "#{name_accesible}")
-	    	end
+	    	end if !CRIMAGIFY_ENV.empty?
 	    	self.class.send(:attr_accessible, "parent")
 	    	self.class.send(:attr_accessible, "parent_id")
 	    	self.class.send(:attr_accessible, "id_images")

@@ -8,7 +8,7 @@ module Crimagify
 			array_methods = []
 			CRIMAGIFY_ENV["#{self.name}"].each do |item|
 				array_methods << item.first
-			end
+			end if !CRIMAGIFY_ENV.empty?
 
 			array_methods.each do |name|
 				define_method("#{name}") do
@@ -30,22 +30,34 @@ module Crimagify
 	    			array_versions << item.first
 	    		end
 	    	end
-	    end
+	    end if !CRIMAGIFY_ENV.empty?
 
 	    array_versions = array_versions.uniq
 	    array_versions.each do |name_size|
 	    	size_image = name_size.to_sym
 	    	define_method("#{name_size}") do
-	    		image = image_url(size_image)
-	    		if image.blank?
+	    		image_path_return = image_url(size_image)
+	    		if image_path_return.blank?
 	    			if ENV['DEFAULT_IMAGE'].nil?
-	    				image = "crimagify/no_selected_image.jpg"
+	    				image_path_return = "crimagify/no_selected_image.jpg"
 	    			else
-	    				image = ENV['DEFAULT_IMAGE']
+	    				image_path_return = ENV['DEFAULT_IMAGE']
 	    			end
 	    		end
-	    		return image
+	    		return image_path_return
 	    	end
+	    end if !array_versions.empty?
+
+	    define_method("original_picture") do
+	    	image_path_return = image_url
+	    	if image_path_return.blank?
+	    		if ENV['DEFAULT_IMAGE'].nil?
+	    			image_path_return = "crimagify/no_selected_image.jpg"
+	    		else
+	    			image_path_return = ENV['DEFAULT_IMAGE']
+	    		end
+	    	end
+	    	return image_path_return
 	    end
 	  end
 	end
