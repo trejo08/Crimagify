@@ -8,8 +8,11 @@ module Crimagify
 			has_many :crimagify_images, :as => :parent, :dependent => :destroy, :class_name => Crimagify::Image
 			after_initialize :generate_attrs
 			after_save :save_images
-			if !CRIMAGIFY_ENV.empty && !CRIMAGIFY_ENV["#{self.class.name}"].nil?
-				build_methods_images				
+			begin
+			# if !CRIMAGIFY_ENV.empty && !CRIMAGIFY_ENV["#{self.class.name}"].nil?
+				build_methods_images
+			rescue NoMethodError
+				puts "aun no se encuentra"
 			end
 		end
 
