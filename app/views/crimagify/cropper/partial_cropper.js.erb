@@ -1,7 +1,11 @@
 if ($("#<%=j @params[:parent_element_id] %>").find(".parent_image").length) {
+	console.time('appendcrop');
+	console.log('empieza a appendear');
 	if (!$("#<%=j @params[:parent_element_id] %>").find("#cropper_div").length){
 		$("#<%=j @params[:parent_element_id] %>").find(".parent_image").append("<%=j render :partial => '/crimagify/crop_partials/crop', :object => '@params' %>");
-	}	
+	}
+	console.log('termina de appendear');
+	console.timeEnd('appendcrop');
 } else{
 	console.log("Please, select one file!")
 };
