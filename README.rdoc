@@ -77,3 +77,18 @@ Add to your form view:
     <%= image_cropper(@object, { image_name: "imgB", ratio: :small}) %> #into file config/crimagify_versions.yml generated for the gem
     ...
     <% end %>
+
+
+
+
+
+
+
+
+agregar unicamente esta linea en los modelos donde va a ser utilizada la gema
+include Crimagify::CrimagifyEnvs
+[5/28/13 10:06:26 AM] Juan Trejo: agregar attr_accessible a cada modelo donde se va a utilizar:
+:crimagify_schema
+generar migracion para el agregar la columna a la tabla:
+rails g crimagify:generate_schema User
+rake db:migrate

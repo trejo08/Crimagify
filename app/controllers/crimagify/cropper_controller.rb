@@ -56,7 +56,15 @@ module Crimagify
               end
             }
             if @cond
-              img = ImageFunctions::save_new_image(@img[:path_image], @img[:crop_x], @img[:crop_y], @img[:crop_w], @img[:crop_h], params[:parent], @img[:data_parent].id, @img[:parent_element_id], true)
+              img = ImageFunctions::save_new_image(@img[:path_image], 
+                                                   @img[:crop_x], 
+                                                   @img[:crop_y], 
+                                                   @img[:crop_w], 
+                                                   @img[:crop_h], 
+                                                   params[:parent], 
+                                                   @img[:data_parent].id, 
+                                                   @img[:parent_element_id], 
+                                                   true)
               img.save!
               img.crop_avatar_temporal
               @img[:data_parent] = ImageFunctions::get_data_parent(params[:parent], params[:parent_id]) #0

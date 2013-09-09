@@ -9,10 +9,9 @@ module Crimagify
 			after_initialize :generate_attrs
 			after_save :save_images
 			begin
-			# if !CRIMAGIFY_ENV.empty && !CRIMAGIFY_ENV["#{self.class.name}"].nil?
 				build_methods_images
-			rescue# NoMethodError
-				puts "aun no se encuentra"
+			rescue
+				puts "is not charged the constant"
 			end
 		end
 

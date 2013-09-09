@@ -96,14 +96,13 @@ module Crimagify
 
 		def link_to_add_nested_fields(name, f, association, options = {})
 		  new_object = f.object.send(association).klass.new
-		  parent_object = f.object.class.name.underscore
 		  id = new_object.object_id
-		  tag_parent = association.to_s
-
 		  fields = f.fields_for(association, new_object, child_index: id) do |builder|
 		    render(association.to_s.singularize + "_fields", f: builder)
 		  end
-		    
+
+		  parent_object = f.object.class.name.underscore
+		  tag_parent = association.to_s
 		  link_to(name, '#', class: "add_crimgify_fields #{options[:class]}", data: {id: id, fields: fields.gsub("\n", ""), parent: tag_parent, parentobject: parent_object})
 		end
 	end

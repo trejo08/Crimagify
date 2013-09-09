@@ -15,6 +15,17 @@
   <%= @user.email %>
 </p>
 
+<p>
+	<% @user.products.each do |product| %>
+		<div class="image_item">
+			<b>Image</b><br>
+			<div class="image_tag">
+				<%= image_tag product.imgA.original_picture %><br>
+			</div>
+		</div>
+		<div class="clear"></div><br>
+	<% end %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
