@@ -5,9 +5,10 @@
 
 var ajstring = '<%= array_json %>';
 var ajson = JSON.parse(ajstring);
-//========================================================================================
+var apiCrimagify;
 var render_image = "";
 var array_names = [];
+//========================================================================================
 
 $(function(){
 
@@ -19,6 +20,8 @@ $(function(){
 
 	// Events only for crimagify without nested models
 	$body.on("change",".uploader", function(evt){
+		console.log("paso1");
+		console.time('startcropper');
 		var $this = $(this);
 		var $div_closest = $this.closest('.global_parent');
 		var $cropper =  $("#cropper_div");
@@ -38,8 +41,8 @@ $(function(){
 					if (validate_image(evt) == true) {
 						var reader =  new FileReader();
 						reader.onloadend = function(e){
-							render_image_temporal(e.target.result, parent_element_id, name_version);
 							render_image = e.target.result;
+							render_image_temporal(e.target.result, parent_element_id, name_version);							
 						};
 						reader.readAsDataURL(evt.target.files[0]);
 					}else{
@@ -203,7 +206,10 @@ function render_image_temporal(url, parent_element_id, name_version){
 		data: { "image": url, "parent_element_id" : parent_element_id },
 		dataType: "script",
 		complete: function(event){
+
+			console.log('paso2');
 			load_partial(parent_element_id, name_version);
+			console.timeEnd('startcropper');
 		},
 		error: function(x,y,z){
 			console.log(x);
@@ -260,10 +266,10 @@ function load_partial(parent_tag_id, name_version){
 		 	boxWidth: max_width_box,
 		 	boxHeight: max_height_box
 		}, function(){
-			onCropOpen();
-			var api = this;
-			api.ui.holder.addClass('jcrop-dark');
-			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
+			// onCropOpen();
+			apiCrimagify = this;
+			apiCrimagify.ui.holder.addClass('jcrop-dark');
+			apiCrimagify.setOptions({ bgColor: 'black', bgOpacity: 0.5});
 		});
 		
 	} else{
@@ -297,9 +303,9 @@ function load_partial_nested(parent_tag_id, name_version, type_img){
 		 	boxWidth: max_width_box,
 		 	boxHeight: max_height_box
 		}, function(){
-			var api = this;
-			api.ui.holder.addClass('jcrop-dark');
-			api.setOptions({ bgColor: 'black', bgOpacity: 0.5});
+			apiCrimagify = this;
+			apiCrimagify.ui.holder.addClass('jcrop-dark');
+			apiCrimagify.setOptions({ bgColor: 'black', bgOpacity: 0.5});
 		});
 		
 	} else{
