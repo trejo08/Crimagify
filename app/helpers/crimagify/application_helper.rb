@@ -8,11 +8,11 @@ module Crimagify
 			version_name = options[:ratio]
 
 			if options[:label_title].nil?
-				options[:label_title] == "Image"
+				options[:label_title] = "Image"
 			end
 			
 			if options[:choose_text].nil?
-				options[:choose_text] == "Choose image"
+				options[:choose_text] = "Choose image"
 			end
 			
 			if img == []
